@@ -18,13 +18,13 @@
             <?php endif; ?>
 
             <?php if(isset($_GET["msg_password"])): ?>
-                 <h3 class="danger">Mot de passe incorrect !!! Veuillez entrez un mot de passe correct et de préférence éviter les espaces inutiles.<br> NB: Ce mot de passe doit commencer par une lettre et pas d'accent. Minimum 8 à 14 caractères !!! Ex: Password@2002B</h3>
+                 <h3 class="danger">Mot de passe incorrect !!!</h3>
             <?php endif; ?>
 
             <input type="email" placeholder="Addresse électronique" name="email" value ="<?= $_GET["email"] ?? "" ?>">
             <input type="password" placeholder="Password" maxlength="14" name="password">
             <div class="remember">
-                <input type="checkbox" name="" id="" checked>Se rappeler de moi
+                <input type="checkbox" name="" id="" checked required>Se rappeler de moi
             </div>
             <button class="white" type="submit" name="validate">Valider</button>
             <div class="info flex">

@@ -1,5 +1,10 @@
 <?php
     require "header.php";
+    require "../App/Controllers/BookController.php";
+    
+    $controller = new BookController();
+    $array = $controller->verifyAll();
+
 ?>
 
 <main>
@@ -31,17 +36,9 @@
         </form>
         
         <ul class="list pad0" id="search_ul">
-          <li><a href="/book/name/show-book">White Dragon Duke: Pendragon</a></li>
-          <li><a href="#">Existence</a></li>
-          <li><a href="/book/name/show-book">Player from today onward</a></li>
-          <li><a href="#">Return of the Broken Constellation</a></li>
-          <li><a href="#">Les daltons</a></li>
-          <li><a href="#">Les petits diables</a></li>
-          <li><a href="#">Your Talent is Mine | I Copy Talents</a></li>
-          <li><a href="#">Ranker who lives a Second lives ranker</a></li>
-          <li><a href="#">Swordmaster's Youngest Son</a></li>
-          <li><a href="#">The Creator is on Hiatus</a></li>
-          <li><a href="#">I'm Not That Kind of Talent</a></li>
+            <?php for($i=0, $max=count($array); $i<$max;$i++): ?>
+                <li><a href="/book/<?= $array[$i]["book_id"] ?>/show-book"><?= $array[$i]["book_name"] ?></a></li>
+            <?php endfor; ?>
         </ul>
     </div>
 </main>

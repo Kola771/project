@@ -20,4 +20,8 @@ $router->add("{controller}/{id:\d+}/{books}/{action}");
 $router->dispatch($url);
 // var_dump($router->getmatch($url));
 
+// echo"<pre>";
+// var_dump($router->getadd($url));
+// echo"</pre>";
+
 ?>

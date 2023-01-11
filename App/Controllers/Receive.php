@@ -50,6 +50,10 @@ class Receive {
         require "../App/Views/Users/update-profil.php";
     }
     
+    public function updatePassword() {
+        require "../App/Views/Users/update-password.php";
+    }
+    
 }
 
 ?>

@@ -1,5 +1,6 @@
 
 <?php
+require "../App/Controllers/Connexion.php";
 require "../App/Models/UserModel.php";
 class LoginController {
 
@@ -114,10 +115,37 @@ class LoginController {
     }
 
     public function displayInfo($username) {
-        
         $this->usermodel = new UserModel();
         $array = $this->usermodel->verifyUsername($username);
         return $array;
+    }
+
+    public function verifyWordKey() {
+        if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["validate"])) {
+        $this->email = $this->sanitaze($_POST["email"]);
+        $this->wordkey = $_POST["wordkey"];
+        $this->usermodel = new UserModel();
+        $res = $this->usermodel->verifyAccount($this->email);
+        $this->result = $res[0]["user_username"];
+        var_dump($res);
+        $count = count($res);
+         if($count>0) {
+
+            if($this->wordkey === $res[0]["user_wordkey"]) {
+                header("Location:/receive/$this->result/update-password");
+                exit();
+            }
+            else {
+                header("Location:/receive/forget?msg_word=wordkey_error&email=$this->email&wordkey=$this->wordkey");
+                exit();
+            }
+            
+        } 
+        else {
+            header("Location:/receive/forget?msg_email=email_error&wordkey=$this->email");
+            exit();
+        }
+    }
     }
 
 

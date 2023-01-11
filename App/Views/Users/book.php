@@ -2,9 +2,12 @@
 
 <?php
 
-
 require "header.php";
-// require "../App/Controllers/Control.php";
+require "../App/Controllers/BookController.php";
+
+$controller = new BookController();
+$array = $controller->verifyUrlAll();
+$array0 = $controller->selectAllComment();
 
 // $_SESSION["role"] = "admin";
 ?>
@@ -33,26 +36,38 @@ require "header.php";
     </section>
 
     <div class="container flex bloc">
-        <div class="road">
-            <a href="/receive/home">Home</a> ->
-            <a href="#">Nom du livre</a>
-        </div>
-        <section class="flex section-book">
-            <div class ="order2">
-                <h2>White Dragon Duke: Pendragon</h2>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nam quaerat dolorem doloribus adipisci perspiciatis non. Laborum, cum vero commodi corporis et nulla consectetur magni, ratione, dolore quod perspiciatis nihil. Maiores!</p>
+        <?php foreach($array as $key => $values): ?>
+            <div class="road">
+                <a href="/receive/home">Home</a> ->
+                <a href="#"><?= $values["book_name"] ?></a>
             </div>
-            <img class="order1" src="/ressources/assets/Medias-book/gojo.jpg" alt="White Dragon Duke: Pendragon">
+        <?php endforeach; ?>
+        <section class="flex section-book">
+            <?php foreach($array as $key => $values): ?>
+                <div class ="order2">
+                    <h2><?= $values["book_name"] ?></h2>
+                    <p><?= $values["book_description"] ?></p>
+                </div>
+                <img class="order1" src="/ressources/assets/Medias-book/<?= $values["book_image"] ?>" alt="White Dragon Duke: Pendragon">
+            <?php endforeach; ?>
             <div class="comments">
                 <h3>Laisser un commentaire</h3>
-                <article class="article">
-                    <h4 class="flex"> <img src="/ressources/assets/Medias-book/gojo.jpg" alt="Account"> Nom de l'utilisateur</h4>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, quis!</p>
-                    <p>Il y a 3 jours..</p>
-                </article>
-                <form action="#" method="post">
+                <?php foreach($array0 as $key => $values): ?>
+                    <article class="article">
+                        <h4 class="flex"> <img src="/ressources/assets/medias-users/<?= $values["user_image"] ?>" alt="Account"> <?= $values["user_username"] ?></h4>
+                        <p><?= $values["comment_comment"] ?></p>
+                        <p>Publié le <?= $values["created_at"] ?></p>
+                    </article>
+                <?php endforeach; ?>
+                <form action="/comment-controller/insert-comment" method="post">
+                    <input type="hidden" name="username" value="<?= isset($_SESSION['username']) ? $_SESSION['username'] : '' ?>">
+                    <input type="hidden" name="book_id" value="<?= $array[0]["book_id"] ?>">
                     <textarea name="comments" id="comments" cols="30" rows="10" placeholder="Laisser un commentaire" required></textarea>
-                    <button type="submit">Envoyer le commentaire</button>
+                    <?php if(isset($_SESSION["username"])): ?>
+                        <button type="submit" name="validate">Envoyer le commentaire</button>
+                    <?php else: ?>
+                            <button disabled>Envoyer le commentaire</button>
+                    <?php endif; ?>
                 </form>
             </div>
         </section>

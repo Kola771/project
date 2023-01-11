@@ -9,7 +9,7 @@
     <div class="container flex bloc">
         <div class="road">
             <a href="/receive/home">Home</a> ->
-            <a href="/book/1/show-book">Nom du livre</a> ->
+            <a href="/book/name/show-book">Nom du livre</a> ->
             <a href="#">Chapitre 1</a>
         </div>
         <?php if($type =="mangas" || $type =="comics"): ?>

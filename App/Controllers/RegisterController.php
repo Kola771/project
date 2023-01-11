@@ -1,5 +1,6 @@
 
 <?php
+require "../App/Controllers/Connexion.php";
 require "../App/Models/UserModel.php";
 class RegisterController {
 
@@ -18,7 +19,6 @@ class RegisterController {
     public $wordkey;
     public $user_role;
     public $created_at;
-    public $updated_at;
 
     
     /**
@@ -43,15 +43,15 @@ class RegisterController {
         $this->user_username = $this->ucWords($this->user_username);
 
         $this->emptyInputs();
+        
+        $this->userName($this->user_username);
 
         $this->passWord($this->password);
         $this->passWord($this->confirm_password);
 
-        $this->userName($this->user_username);
-
-        $this->wordKey($this->wordkey);
-
         $this->verifyPassword();
+        
+        $this->wordKey($this->wordkey);
 
         $this->verifyEmail();
 
@@ -97,7 +97,7 @@ class RegisterController {
         }
         
         else {
-            header("Location:/receive/register?msg_username=username_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->user_wordkey");
+            header("Location:/receive/register?msg_username=username_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->wordkey");
             exit();
         }
 
@@ -113,7 +113,7 @@ class RegisterController {
         } 
         
         else {
-            header("Location:/receive/register?msg_wordkey=username_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->user_wordkey");
+            header("Location:/receive/register?msg_wordkey=username_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->wordkey");
             exit();
         }
 
@@ -124,12 +124,12 @@ class RegisterController {
      */
     public function passWord($data) {
 
-        if(preg_match("/^[a-zA-Z-\@]+/i", $data) && strlen($data) > 8) {
+        if(preg_match("/^[a-zA-Z-\@]+/i", $data) && strlen($data) >= 8) {
             return true;
         } 
         
         else {
-            header("Location:/receive/register?msg_password=password_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->user_wordkey");
+            header("Location:/receive/register?msg_password=password_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->wordkey");
             exit();
         }
 
@@ -148,17 +148,17 @@ class RegisterController {
        if($count>0) {
 
         if($this->email == $res[0]["user_email"]) {
-            header("Location:/receive/register?msg_email=email_exist&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->user_wordkey");
+            header("Location:/receive/register?msg_email=email_exist&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->wordkey");
             exit();
         }
 
         elseif($this->user_username == $res[0]["user_username"]) {
-            header("Location:/receive/register?msg_user_username=username_exist&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->user_wordkey");
+            header("Location:/receive/register?msg_user_username=username_exist&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->wordkey");
             exit();
         }
 
         else {
-            header("Location:/receive/register?msg_user_wordkey=user_wordkey_exist&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->user_wordkey");
+            header("Location:/receive/register?msg_user_wordkey=user_wordkey_exist&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->wordkey");
             exit();
         }
 
@@ -181,72 +181,13 @@ class RegisterController {
     }
 
     
-    public function updateUserInfo() {
-
-        $this->firstname = $this->sanitaze($_POST["firstname"]);
-        $this->lastname = $this->sanitaze($_POST["lastname"]);
-        $this->email = $this->sanitaze($_POST["email"]);
-        $this->user_username = $this->sanitaze($_POST["username"]);
-        
-        //Eléments de l'image
-        $this->picture_name = $_FILES["user_image"]["name"];
-        $this->picture_tmpname = $_FILES["user_image"]["tmp_name"];
-        $this->picture_size = $_FILES["user_image"]["size"];
-        $this->picture_error = $_FILES["user_image"]["error"];
-
-
-        $this->user_image = $_FILES["user_image"];
-
-        //Heure de la modification
-        $this->updated_at = date('Y-d-m h:i:s');
-        $this->usermodel = new UserModel();
-        
-        $tabExtension = pathinfo($this->picture_name, PATHINFO_EXTENSION);
-        $extension = strtolower($tabExtension);
-        $extensions = ['jpg', 'png', 'jpeg', 'gif'];
-        $maxSize = 4000000;
-        
-        if(in_array($extension, $extensions)) {
-
-            if($this->picture_size <= $maxSize) {
-                
-                if($this->picture_error == 0) {
-
-                    $uniqueName = uniqid('img-', true);
-                    // uniqid génère quelque chose comme ca : img-63b85c9a42aac7.70071232
-
-                    $file = $uniqueName.".".$extension;
-                    // $file = img-63b85c9a42aac7.70071232.jpg
-
-                    move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
-
-                    $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->updated_at);
-                    
-                    echo "Image prise en charge";
-                    exit();
-
-                } else {
-                    echo "Image non prise en charge";
-                    exit();
-                }
-            } else {
-                echo "Taille élevée";
-                exit();
-            }
-        } else {
-            echo "Ce n'est pas la bonne extension";
-            exit();
-        }
-
-    }
-    
     /**
      * emptyInputs(), pour vérifiez si un des champs est vide
      */
     public function emptyInputs() {
 
         if(empty($this->firstname) || empty($this->lastname) || empty($this->email) || empty($this->user_username) || empty($this->password) || empty($this->confirm_password) || empty($this->wordkey)){
-            header("Location:/receive/register?msg=emptyinput&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->user_wordkey");
+            header("Location:/receive/register?msg_empty=emptyinput&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->wordkey");
             exit();
         } 
             else{
@@ -260,7 +201,7 @@ class RegisterController {
     public function verifyPassword() {
 
         if ($this->password !== $this->confirm_password) {
-            header("Location:/receive/register?msg_password=password_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->user_wordkey");
+            header("Location:/receive/register?msg_password_error=password_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->wordkey");
             exit();
        } 
        return false;
@@ -272,7 +213,7 @@ class RegisterController {
      */
     public function verifyEmail() {
         if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            header("Location:/receive/register?msg=email_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->user_wordkey");
+            header("Location:/receive/register?msg=email_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->wordkey");
             exit();
         }
         return false;

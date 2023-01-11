@@ -38,4 +38,5 @@
 
 <?php header("Location:/receive/home"); ?>
 
-<?php endif; ?>
+<?php endif; ?> 
+<!-- khjgtjhgkjhvk -->

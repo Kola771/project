@@ -252,7 +252,7 @@ header {
 */
 .form {
     position: relative;
-    max-width: 25%;
+    max-width: 20%;
     margin: 0 auto;
     padding: var(--pd_8-);
     border-radius: var(--pd_2-);
@@ -388,35 +388,37 @@ header {
 }
 
 .article {
+    align-items: center;
+    gap: .2em;
+}
+
+.article>div {
+    flex-basis: 95%;
     padding: var(--pd_5-);
-    background-color: var(--blnuitcl-);
+    background-color: var(--ddd-);
     margin-bottom: var(--px15-);
 }
 
-.article,
+.article>div,
 .comments>form>textarea,
 .comments>form>button,
 .label>textarea {
     border-radius: var(--pd_2-);
 }
 
-.article>h4 {
+.article>div>h4 {
     margin: 0;
 }
 
-.article>p {
+.article>div>p {
     margin-block: var(--px10-);
 }
 
-.article>h4 {
-    gap: .8em;
-    align-items: center;
-}
-
-.article>h4>img {
+.article>img {
     aspect-ratio: 1;
     border-radius: 50%;
     width: 50px;
+    align-self: flex-start;
 }
 
 .article>h4,

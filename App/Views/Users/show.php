@@ -43,7 +43,7 @@
         <?php endif; ?>
 
         <section class="chapter">
-            <?php if(isset($_SESSION["role"]) && $_SESSION["role"] === "admin"): ?>
+            <?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
             <p><a href="/book/1/books/update-chapter">Modifier le chapitre</a></p>
             <?php endif; ?>
             <h3>Chapitres</h3>

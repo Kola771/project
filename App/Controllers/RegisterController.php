@@ -92,7 +92,7 @@ class RegisterController {
      */
     public function userName($data) {
 
-        if(preg_match("/^[a-zA-Z-\@]+[\d]+/i", $data)) {
+        if(preg_match("/^[a-zA-Z-^\@]+[\d]+/i", $data)) {
             return true;
         }
         
@@ -108,7 +108,7 @@ class RegisterController {
      */
     public function wordKey($data) {
 
-        if(preg_match("/^[a-zA-Z-\@]+/i", $data) && strlen($data) == 12) {
+        if(preg_match("/^[a-zA-Z-\@]+/i", $data) && strlen($data) == 10) {
             return true;
         } 
         

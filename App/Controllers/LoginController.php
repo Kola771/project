@@ -107,11 +107,16 @@ class LoginController {
     public function displayUrlInfo() {
         $url = $_SERVER["QUERY_STRING"];
         
-        preg_match("/\/(?<username>\w+\d+)\//i", $url, $matches);
+        preg_match("/\/(?<username>[a-z-A-z-\-]+\d+)\//i", $url, $matches);
         $username = $matches["username"];
         $this->usermodel = new UserModel();
         $array = $this->usermodel->verifyUsername($username);
-        return $array;
+        if(count($array)>0) {
+            return $array;
+        } else {
+            header("Location: /receive/error404");
+            exit();
+        }
     }
 
     public function displayInfo($username) {

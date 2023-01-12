@@ -6,6 +6,7 @@
 class CommentModel extends Connexion {
 
     public $comment;
+    public $comment_id;
     public $user_id;
     public $book_id;
     public $created_at;
@@ -36,6 +37,9 @@ class CommentModel extends Connexion {
       ]);
     }
 
+    /**
+     * selectAll(), pour selectionner de la bdd tous les commentaires qui ont lien avec un livre donné
+     */
     public function selectAll() {
         
         $conn = $this->connect();
@@ -43,9 +47,10 @@ class CommentModel extends Connexion {
         /**
          * $sql, pour les requêtes vers la base de données
          */
-        $sql = "SELECT `comments`.comment_comment, `users`.user_username, `users`.user_image, `comments`.created_at
+        $sql = "SELECT `comments`.comment_id, `comments`.comment_comment, `users`.user_username, `users`.user_role, `users`.user_image, `books`.book_id, `comments`.created_at
         FROM comments
-        INNER JOIN users ON `comments`.user_id = `users`.user_id;";
+        INNER JOIN users ON `comments`.user_id = `users`.user_id
+        INNER JOIN books ON `comments`.book_id = `books`.book_id;";
 
         /**
          * $stmt, pour recupérer la requête préparée
@@ -53,6 +58,24 @@ class CommentModel extends Connexion {
         $stmt = $conn->query($sql);
         $result = $stmt->fetchAll();
         return $result;
+    }
+
+    /**
+     * deleteComment(), pour supprimer de la bdd le commentaire ayant cet id
+     */
+    public function deleteComment($comment_id) {
+        
+        $conn = $this->connect();
+
+        $this->comment_id = $comment_id;
+
+        /**
+         * $sql, pour les requêtes vers la base de données pour supprimer le commentaire ayant cet id
+         */
+        $sql = "DELETE FROM `comments` WHERE comment_id = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$this->comment_id]);
     }
 
 }

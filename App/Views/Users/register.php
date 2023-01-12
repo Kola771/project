@@ -22,11 +22,11 @@
             <?php endif; ?>
 
             <?php if(isset($_GET["msg_wordkey"])): ?>
-                 <h3 class="danger">Entrez un mot clé unique qui n'a aucun lien avec votre nom de famille de préférence et ayant 12 caractères.<br> NB: Ce mot doit commencer par une lettre et pas d'accent !!! Ex: Motcle@2001A | motcle@ftmy | motcledebase </h3>
+                 <h3 class="danger">Entrez un mot clé unique qui n'a aucun lien avec votre nom de famille de préférence et ayant 10 caractères.<br> NB: Ce mot doit commencer par une lettre et pas d'accent !!! Ex: Motcle@2001A | motcle@ftmy | motcledebase </h3>
             <?php endif; ?>
 
             <?php if(isset($_GET["msg_username"])): ?>
-                 <h3 class="danger">Ce nom ne respecte pas ce format => username001.<br> NB: Ce mot doit commencer par une lettre et pas d'accent !!! Ex: Float@2022 | float123 | f12ftre@14</h3>
+                 <h3 class="danger">Ce nom ne respecte pas ce format => username001.<br> NB: Ce mot doit commencer par une lettre et pas d'accent !!! Ex: Float2022 | float123 | f12ftre14</h3>
             <?php endif; ?>
 
             <?php if(isset($_GET["msg_password"])): ?>

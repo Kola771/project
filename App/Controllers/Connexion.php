@@ -21,7 +21,7 @@ class Connexion {
         $dsn = "mysql:host=$DB_HOST;dbname=$DB_NAME;charset=utf8mb4";
         try {
             /**
-             * 
+             * connexion à la bdd du nom de freek
              */
             $conn = new PDO($dsn, $USERNAME, $PASSWORD);
             return $conn;

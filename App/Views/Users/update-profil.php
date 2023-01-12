@@ -16,7 +16,7 @@
             <?php endif; ?>
 
             <?php if(isset($_GET["msg_userName"])): ?>
-                <h3 class="danger">Ce nom ne respecte pas ce format => username001.<br> NB: Ce mot doit commencer par une lettre et pas d'accent !!! Ex: Float@2022 | float123 | f12ftre@14</h3>
+                <h3 class="danger">Ce nom ne respecte pas ce format => username001.<br> NB: Ce mot doit commencer par une lettre et pas d'accent !!! Ex: Float2022 | float123 | f12ftre14</h3>
             <?php endif; ?>
 
             <input type="text" placeholder="Firstname" name="firstname" value ="<?= $tableau[0]["user_firstname"] ?>">

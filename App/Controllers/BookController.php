@@ -174,7 +174,6 @@ class BookController {
         $this->bookmodel = new BookModel();
         $array = $this->bookmodel->verifyAll();
         return $array;
-
     }
 
     /**
@@ -187,7 +186,12 @@ class BookController {
         $bookname = $matches["bookname"];
         $this->bookmodel = new BookModel();
         $array = $this->bookmodel->verify($bookname);
-        return $array;
+        if(count($array)>0) {
+            return $array;
+        } else {
+            header("Location: /receive/error404");
+            exit();
+        }
 
     }
 

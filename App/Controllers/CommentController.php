@@ -16,9 +16,11 @@ class CommentController {
      */
     public $commentmodel;
     public $comment;
+    public $comment_id;
 
 
    public function insertComment() {
+    
     if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["validate"])) {
 
         $this->comment = $_POST["comments"];
@@ -29,7 +31,7 @@ class CommentController {
         $array = $this->usermodel->verifyUsername($username);
         $user_id = $array[0]["user_id"];
 
-        echo $book_id = $_POST["book_id"];
+        $book_id = $_POST["book_id"];
 
         $created_at = date('Y-d-m h:i:s');
 
@@ -40,6 +42,25 @@ class CommentController {
         exit();
 
     }
+
+   }
+
+   public function deleteComment() {
+
+    if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["validate"])) {
+
+        $this->comment_id = $_POST["comment_id"];
+
+        $book_id = $_POST["book_id"];
+
+        $this->commentmodel = new CommentModel();
+        $this->commentmodel->deleteComment($this->comment_id);
+
+        header("Location:/book/$book_id/show-book");
+        exit();
+
+    }
+
    }
 
 }

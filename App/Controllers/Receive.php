@@ -4,7 +4,7 @@
 
 class Receive {
     public function home() {
-        require "../App/Views/Users/home.php";
+        header("Location: /book-controller/home");
     }
     
     public function dashbord() {
@@ -35,7 +35,7 @@ class Receive {
     }
 
     public function gestion() {
-        require "../App/Views/Admin/gestion.php";
+        header("Location: /book-controller/verify-all-book");
     }
 
     public function createBook() {

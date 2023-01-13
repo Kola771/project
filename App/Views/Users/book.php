@@ -53,7 +53,7 @@ $array0 = $controller->selectAllComment();
                     <h2><?= $values["book_name"] ?></h2>
                     <p><?= $values["book_description"] ?></p>
                 </div>
-                <img class="order1" src="/ressources/assets/Medias-book/<?= $values["book_image"] ?>" alt="White Dragon Duke: Pendragon">
+                <img class="order1" src="/ressources/assets/medias-book/<?= $values["book_image"] ?>" alt="<?= $values["book_name"] ?>">
 
             <?php endforeach; ?>
 
@@ -61,21 +61,13 @@ $array0 = $controller->selectAllComment();
                 <h3>Laisser un commentaire</h3>
 
                 <?php foreach($array0 as $key => $values): ?>
-
                     <?php if($values["book_id"] == $array[0]["book_id"]): ?>
 
                     <article class="flex article">
 
                         <!-- Affichage de tout les commentaires portant sur cet article -->
-                        <?php if($values["user_image"] == "") : ?>
 
-                            <img src="/ressources/assets/account.jpg ?>" alt="Account"> 
-
-                        <?php else : ?>
-
-                                <img src="/ressources/assets/medias-users/<?= $values["user_image"] ?>" alt="Account"> 
-
-                        <?php endif; ?>
+                        <img src="/ressources/assets/medias-users/<?= $values["user_image"] ?>" alt="Account"> 
 
                         <div>
 
@@ -101,7 +93,7 @@ $array0 = $controller->selectAllComment();
                                     <button type="submit" class="danger" name="validate">Supprimer le commentaire</button>
                                 </form>
 
-                            <?php endif; ?>
+                                <?php endif; ?>
                         </div>
 
                     </article>

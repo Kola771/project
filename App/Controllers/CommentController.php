@@ -18,22 +18,39 @@ class CommentController {
     public $comment;
     public $comment_id;
 
+    
+    /**
+     * sanitaze(); pour les espacements et les injections de codes
+     */
+    public function sanitaze($data) {
+        $reg = trim($data);
+        $reg = htmlspecialchars($reg);
+        $reg = stripslashes($reg);
+        $data = $reg;
+        return $data;
+    }
 
    public function insertComment() {
     
     if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["validate"])) {
 
-        $this->comment = $_POST["comments"];
-
+        $this->comment = $this->sanitaze($_POST["comments"]);
+        $this->comment = nl2br($this->comment);
+        
+        $book_id = $_POST["book_id"];
+        
         $username = $_POST["username"];
         
+        $created_at = date("Y-m-d h:i:s");
+        
+        if(empty($this->comment)){
+            header("Location: /book/$book_id/show-book");
+            exit();
+        } 
+
         $this->usermodel = new UserModel();
         $array = $this->usermodel->verifyUsername($username);
         $user_id = $array[0]["user_id"];
-
-        $book_id = $_POST["book_id"];
-
-        $created_at = date('Y-d-m h:i:s');
 
         $this->commentmodel = new CommentModel();
         $this->commentmodel->insertComment($this->comment, $user_id, $book_id, $created_at);

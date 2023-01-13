@@ -21,13 +21,18 @@ function myFunction() {
 
 let input = document.querySelector("#search");
 
-let closes1 = document.querySelector('#recherche1>div>form>.closes');
-let closes2 = document.querySelector('#recherche2>div>form>.closes');
-let closes3 = document.querySelector('#recherche3>div>form>.closes');
+let mettre = document.querySelectorAll('.mettre');
+let remettre = document.querySelector('.remettre');
 
-let remove = document.getElementById('remove');
-let inside = document.getElementById('inside');
-let put = document.getElementById('put');
+let ligne = document.querySelectorAll('.ligne');
+let attente = document.querySelector('.attente');
+
+let retirer = document.querySelectorAll('.retirer');
+let retire = document.querySelector('.retire');
+
+let closes = document.querySelector('#recherche1>div>form>.closes');
+let closes1 = document.querySelector('#recherche2>div>form>.closes');
+let closes2 = document.querySelector('#recherche3>div>form>.closes');
 
 let search1 = document.getElementById('recherche1');
 let search2 = document.getElementById('recherche2');
@@ -40,29 +45,36 @@ document.addEventListener("DOMContentLoaded", function() {
         myFunction();
     })
 
-    remove.addEventListener('click', function () {
-        search1.style = "display: block";
+    retirer.forEach((el) => {
+        el.addEventListener('click', (e) => {
+                search1.style = 'display:block';
+                retire.setAttribute('value', el.value)
+                closes.addEventListener('click', (e) => {
+                    search1.style = 'display:none';
+                })
+        })
     })
 
-    inside.addEventListener('click', function () {
-        search2.style = "display: block";
+    mettre.forEach((el) => {
+        el.addEventListener('click', (e) => {
+                search2.style = 'display:block';
+                remettre.setAttribute('value', el.value)
+                closes1.addEventListener('click', (e) => {
+                    search2.style = 'display:none';
+                })
+        })
     })
 
-    put.addEventListener('click', function () {
-        search3.style = "display: block";
+    ligne.forEach((el) => {
+        el.addEventListener('click', (e) => {
+                search3.style = 'display:block';
+                attente.setAttribute('value', el.value)
+                closes2.addEventListener('click', (e) => {
+                    search3.style = 'display:none';
+                })
+        })
     })
 
-    closes1.addEventListener('click', function () {
-        search1.style = "display: none";
-    })
-
-    closes2.addEventListener('click', function () {
-        search2.style = "display: none";
-    })
-
-    closes3.addEventListener('click', function () {
-        search3.style = "display: none";
-    })
 
 
 })

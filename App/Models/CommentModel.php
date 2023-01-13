@@ -23,7 +23,7 @@ class CommentModel extends Connexion {
       /**
        * $sql, pour les requêtes vers la base de données
        */
-      $sql = "INSERT INTO `freek`.comments VALUES(NULL, :comment, :user_id, :book_id, :created_at, NULL)";
+      $sql = "INSERT INTO `freek`.comments VALUES(NULL, :comment, :user_id, :book_id, :created_at)";
       
       /**
        * $stmt, pour recupérer la requête préparée
@@ -47,7 +47,7 @@ class CommentModel extends Connexion {
         /**
          * $sql, pour les requêtes vers la base de données
          */
-        $sql = "SELECT `comments`.comment_id, `comments`.comment_comment, `users`.user_username, `users`.user_role, `users`.user_image, `books`.book_id, `comments`.created_at
+        $sql = "SELECT `comments`.comment_id, `comments`.comment_comment, `users`.user_username, `users`.user_role, `users`.user_image, `books`.book_id, `books`.book_status, `comments`.created_at
         FROM comments
         INNER JOIN users ON `comments`.user_id = `users`.user_id
         INNER JOIN books ON `comments`.book_id = `books`.book_id;";

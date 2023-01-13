@@ -18,7 +18,7 @@ class RegisterController {
     public $confirm_password;
     public $wordkey;
     public $user_role;
-    public $created_at;
+    public $timestamps;
 
     
     /**
@@ -32,11 +32,12 @@ class RegisterController {
         $this->lastname = $this->sanitaze($_POST["lastname"]);
         $this->email = $this->sanitaze($_POST["email"]);
         $this->user_username = $this->sanitaze($_POST["username"]);
+        $this->user_image = "account.jpg";
         $this->password = $this->sanitaze($_POST["password"]);
         $this->confirm_password = $this->sanitaze($_POST["confirm_password"]);
         $this->wordkey = $this->sanitaze($_POST["word_key"]);
         $this->user_role = 1;
-        $this->created_at = date('Y-d-m h:i:s');
+        $this->timestamps = date("Y-m-d h:i:s");
 
         $this->firstname = $this->ucWords($this->firstname);
         $this->lastname = $this->capitalLetter($this->lastname);
@@ -92,7 +93,11 @@ class RegisterController {
      */
     public function userName($data) {
 
-        if(preg_match("/^[a-zA-Z-^\@]+[\d]+/i", $data)) {
+        if(preg_match("/^[a-zA-Z-^\@]+[\d]+\$/i", $data)) {
+            if(preg_match("/[\@]/i", $data)) {
+                header("Location:/receive/register?msg_username=username_error&firstname=$this->firstname&lastname=$this->lastname&email=$this->email&username=$this->user_username&word_key=$this->wordkey");
+                exit();
+            }
             return true;
         }
         
@@ -108,7 +113,7 @@ class RegisterController {
      */
     public function wordKey($data) {
 
-        if(preg_match("/^[a-zA-Z-\@]+/i", $data) && strlen($data) == 10) {
+        if(preg_match("/^[a-zA-Z-\@]+/i", $data) && strlen($data) >= 10) {
             return true;
         } 
         
@@ -165,15 +170,16 @@ class RegisterController {
         } 
 
         else {
-            $insert = $this->usermodel->insertUser($this->firstname, $this->lastname, $this->user_username, $this->email, $this->password, $this->wordkey, $this->user_role, $this->created_at);
+            $insert = $this->usermodel->insertUser($this->firstname, $this->lastname, $this->user_username, $this->email, $this->password, $this->user_image, $this->wordkey, $this->user_role, $this->timestamps);
             $_SESSION["firstname"] = $this->firstname;
             $_SESSION["lastname"] = $this->lastname;
             $_SESSION["email"] = $this->email;
             $_SESSION["username"] = $this->user_username;
+            $_SESSION["image"] = $this->user_image;
             $_SESSION["password"] = $this->password;
             $_SESSION["wordkey"] = $this->wordkey;
             $_SESSION["user_role"] = $this->user_role;
-            $_SESSION["created_at"] = $this->created_at;
+            $_SESSION["created_at"] = $this->timestamps;
             header("Location:/receive/home");
             exit();
         }

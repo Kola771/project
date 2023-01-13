@@ -42,6 +42,7 @@ class LoginController {
                 $_SESSION["lastname"] = $res[0]["user_lastname"];
                 $_SESSION["email"] = $res[0]["user_email"];
                 $_SESSION["username"] = $res[0]["user_username"];
+                $_SESSION["image"] = $res[0]["user_image"];
                 $_SESSION["password"] = $res[0]["user_password"];
                 $_SESSION["wordkey"] = $res[0]["user_wordkey"];
                 $_SESSION["user_role"] = $res[0]["user_role"];
@@ -107,7 +108,7 @@ class LoginController {
     public function displayUrlInfo() {
         $url = $_SERVER["QUERY_STRING"];
         
-        preg_match("/\/(?<username>[a-z-A-z-\-]+\d+)\//i", $url, $matches);
+        preg_match("/\/(?<username>[a-zA-Z-\-]+\d+)\//i", $url, $matches);
         $username = $matches["username"];
         $this->usermodel = new UserModel();
         $array = $this->usermodel->verifyUsername($username);

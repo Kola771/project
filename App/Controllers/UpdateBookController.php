@@ -60,35 +60,66 @@ class UpdateBookController {
     
                         $this->bookmodel = new BookModel();
 
-                        $array = $this->bookmodel->verifyRefOrName($this->ref_book, $this->name_book);
+                        $array = $this->bookmodel->verify($this->ref_book);
 
                         $array0 = $this->bookmodel->verify($ref_book0);
 
                         $lenght = count($array);
-                        $lenght0 = count($array0);
 
-                        if($lenght0>0) {
-                            if($array0[0]["book_id"] === $array[0]["book_id"]) {
-                                if($lenght>0) {
-                                    if($array0[0]["book_name"] === $array[0]["book_name"]) {
-
-                                    }
-                                }
-                            }
-
-                        } else {
-                            echo "bad";
-                            exit();
-                        }
-
-
-            echo "<pre>";
+                        echo "<pre>";
             var_dump($array);
             echo "</pre>";
 
-            echo "<pre>";
-            var_dump($array0);
-            echo "</pre>";
+            // echo "<pre>";
+            // var_dump($array0);
+            // echo "</pre>";
+
+                        if($lenght>0) {
+                            if($array0[0]["book_id"] === $array[0]["book_id"]) {
+
+                                    if($array0[0]["book_name"] === $this->name_book) {
+                                        echo $this->name_book;
+                                        echo $array0[0]["book_name"];
+                                        echo "Modif";
+                                        exit();
+                                    }
+                                    else {
+                                         echo $this->name_book;
+                                        echo "bad1";
+                                        exit();
+                                    }
+                            } else {
+                                echo "bad0";
+                                exit();
+                            }
+
+                        } else {
+                            if($array0[0]["book_id"] === $this->ref_book) {
+
+                                if($array0[0]["book_name"] === $this->name_book) {
+                                    echo $this->name_book;
+                                    echo $array0[0]["book_name"];
+                                    echo "Modif2";
+                                    exit();
+                                }
+                                else {
+                                     echo $this->name_book;
+                                    echo "bad3";
+                                    exit();
+                                }
+                        } else {
+                            if($array0[0]["book_name"] === $this->name_book) {
+                                echo "bad4";
+                                exit();
+                            } else {
+                                echo "Modification";
+                                exit();
+                            }
+                        }
+                        }
+
+
+            
                     } else {
                         echo "Image non prise en charge";
                         exit();

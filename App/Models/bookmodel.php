@@ -81,6 +81,26 @@ class Bookmodel extends Connexion {
         return $result;
     }
 
+    /**
+     * verifyAll(), affiche tous les livres de la bd
+     */
+    public function verifyAllBook() {
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT * FROM `freek`.books";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->query($sql);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
     
     
     /**
@@ -100,7 +120,7 @@ class Bookmodel extends Connexion {
         /**
          * $sql, pour les requêtes vers la base de données
          */
-        $sql = "INSERT INTO `freek`.books VALUES(:reference, :name, :image, :desc_book, :status, :created_at, NULL)";
+        $sql = "INSERT INTO `freek`.books VALUES(:reference, :name, :image, :desc_book, :status, :created_at)";
         
         /**
          * $stmt, pour recupérer la requête préparée
@@ -113,6 +133,58 @@ class Bookmodel extends Connexion {
             ":desc_book" => $this->desc_book,
             ":status" => $this->status,
             ":created_at" => $this->created_at
+        ]);
+  
+    }
+
+    /**
+     * updateStatusRemove(), pour modifier le status du livre en retirer
+     */
+    public function updateStatusRemove($book_id) {
+
+        $conn = $this->connect();
+  
+        $this->ref_book = $book_id;
+        $this->status = "Retirer";
+
+         /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "UPDATE `freek`.books SET  book_status = :status WHERE book_id = :reference";
+        
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ":reference" => $this->ref_book,
+            ":status" => $this->status
+        ]);
+  
+    }
+
+    /**
+     * updateStatusInside(), pour modifier le status du livre en en ligne
+     */
+    public function updateStatusInside($book_id) {
+
+        $conn = $this->connect();
+  
+        $this->ref_book = $book_id;
+        $this->status = "En ligne";
+
+         /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "UPDATE `freek`.books SET  book_status = :status WHERE book_id = :reference";
+        
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ":reference" => $this->ref_book,
+            ":status" => $this->status
         ]);
   
     }

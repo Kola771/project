@@ -13,8 +13,8 @@ $router->add("{controller}/{action}");
 $router->add("admin/{controller}/{action}");
 // $router->add("{controller}/{id:\d+}/{action}");
 $router->add("{controller}/{bookname}/{action}");
-$router->add("{controller}/{username:\w+\d+}/{action}");
-$router->add("{controller}/{name:[a-z-A-z-\-]+\d+}/{action}");
+// $router->add("{controller}/{username:\w+\d+}/{action}");
+$router->add("{controller}/{name:[a-zA-Z-\-]+\d+}/{action}");
 $router->add("{controller}/{id:\d+}/{books}/{action}");
 
 // var_dump($router->match($url));

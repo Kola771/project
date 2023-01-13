@@ -40,7 +40,7 @@
 
            <form action="/book-controller/validate-form" method="post" enctype="multipart/form-data">
             <div class="flex button">
-                <button type="reset">Annuler la publication</button>
+                <button><a href="/admin/receive/gestion">Annuler la modification</a></button>
                 <button type="submit" name="validate">Valider la publication</button>
             </div>
             <div class="flex radio">

@@ -1,11 +1,11 @@
 <?php
     require "header.php";
-    require "../App/Controllers/BookController.php";
+    // require "../App/Controllers/BookController.php";
 
     // instanciation de la classe BookController()
-    $controller = new BookController();
+    // $controller = new BookController();
     // tableau pour afficher tous les livres 
-    $array = $controller->verifyAll();
+    // $array = $controller->verifyAll();
 
 ?>
 

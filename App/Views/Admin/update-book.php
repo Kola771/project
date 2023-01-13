@@ -24,7 +24,7 @@
         <div class="data flex">
         <form action="/update-book-controller/update-book" method="post" enctype="multipart/form-data">
             <div class="flex button">
-                <button type="reset">Annuler la modification</button>
+                <button><a href="/admin/receive/gestion">Annuler la modification</a></button>
                 <button type="submit" name="validate">Modifier l'oeuvre</button>
             </div>
             <div class="flex radio">

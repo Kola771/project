@@ -14,7 +14,6 @@ class UpdateProfilController {
     public $email;
     public $user_username;
     public $user_image;
-    public $updated_at;
     public $user_id;
     public $user;
 
@@ -58,7 +57,11 @@ class UpdateProfilController {
         $empty = $this->usermodel->verifyUserId($this->user_id);
         $this->user = $empty[0]["user_username"];
 
-        if(preg_match("/^[a-zA-Z-\@]+[\d]+/i", $data)) {
+        if(preg_match("/^[a-zA-Z-^\@]+[\d]+\$/i", $data)) {
+            if(preg_match("/[\@]/i", $data)) {
+                header("location:/receive/$this->user/update-profil?msg_userName=error username");
+                exit();
+            }
             return true;
         }
         
@@ -120,8 +123,6 @@ class UpdateProfilController {
         $this->picture_size = $_FILES["user_image"]["size"];
         $this->picture_error = $_FILES["user_image"]["error"];
 
-        //Heure de la modification
-        $this->updated_at = date('Y-d-m h:i:s');
         $this->usermodel = new UserModel();
 
         $this->firstname = $this->ucWords($this->firstname);
@@ -168,8 +169,9 @@ class UpdateProfilController {
                             if($lenght1>0) {
                                 if($array[0]["user_username"] === $array2[0]["user_username"]) {
                                     move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+                                    $_SESSION["image"] = $file;
 
-                                    $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->updated_at, $this->user_id);
+                                    $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                                     
                                     // echo "Image prise en charge";
                                     header("Location:/receive/profil");
@@ -180,8 +182,9 @@ class UpdateProfilController {
                                  }
                             } else {
                                 move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+                                $_SESSION["image"] = $file;
 
-                                $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->updated_at, $this->user_id);
+                                $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                                 
                                 // echo "Image prise en charge";
                                 header("Location:/receive/profil");
@@ -197,8 +200,9 @@ class UpdateProfilController {
                         if($array[0]["user_email"] === $array2[0]["user_email"]) {
                             if($array[0]["user_username"] === $array2[0]["user_username"]) {
                                 move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+                                $_SESSION["image"] = $file;
 
-                                $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->updated_at, $this->user_id);
+                                $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                                 
                                 // echo "Image prise en charge";
                                 header("Location:/receive/profil");
@@ -214,8 +218,9 @@ class UpdateProfilController {
                     } 
                     else {
                         move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+                        $_SESSION["image"] = $file;
 
-                        $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->updated_at, $this->user_id);
+                        $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                         
                         // echo "Image prise en charge";
                         header("Location:/receive/profil");

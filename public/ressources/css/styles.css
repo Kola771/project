@@ -354,7 +354,7 @@ header {
 }
 
 .section-background {
-    background-image: url();
+    background-image: url(../assets/la_rosée_de_la_nuit\ -\ Copie.jpg);
 }
 
 .section-book {
@@ -881,6 +881,19 @@ header {
     aspect-ratio: 1;
     border-radius: 50%;
     width: 50%;
+}
+
+.article>.border {
+    border-top: 1px solid var(--black-);
+    color: var(--black-);
+}
+
+.article>.padding {
+    padding: var(--pd_8-);
+}
+
+.article>.padding>p:nth-of-type(2) {
+    margin-bottom: var(--px20-);
 }
 
 

@@ -24,21 +24,51 @@ let input = document.querySelector("#search");
 let mettre = document.querySelectorAll('.mettre');
 let remettre = document.querySelector('.remettre');
 
+let supprimer = document.querySelectorAll('.supprimer');
+let deletes = document.querySelector('.delete');
+
 let ligne = document.querySelectorAll('.ligne');
 let attente = document.querySelector('.attente');
 
 let retirer = document.querySelectorAll('.retirer');
 let retire = document.querySelector('.retire');
 
+let closes0 = document.querySelector('#recherche0>div>form>.closes');
 let closes = document.querySelector('#recherche1>div>form>.closes');
 let closes1 = document.querySelector('#recherche2>div>form>.closes');
 let closes2 = document.querySelector('#recherche3>div>form>.closes');
 
+let search0 = document.getElementById('recherche0');
 let search1 = document.getElementById('recherche1');
 let search2 = document.getElementById('recherche2');
 let search3 = document.getElementById('recherche3');
 
+let topnav0 = document.querySelector(".topnav0");
+let hidden = document.querySelector(".hidden");
+let x = 0;
+
+
+let task = document.querySelector('.task');
+
+let bloc_task = document.querySelector('.bloc-task');
+
+let y = 0;
+
+
 document.addEventListener("DOMContentLoaded", function() {
+
+    task.addEventListener("click", (e) => {
+        switch(y) {
+            case 0:
+                bloc_task.style="display:block";
+                y++;
+                break;
+            case 1:
+                bloc_task.style="display:none";
+                y=0
+                break;
+        }
+    })
 
     input.addEventListener("keyup", (e) => {
         e.preventDefault();
@@ -75,6 +105,27 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     })
 
+    supprimer.forEach((el) => {
+        el.addEventListener('click', (e) => {
+                search0.style = 'display:block';
+                deletes.setAttribute('value', el.value)
+                closes0.addEventListener('click', (e) => {
+                    search0.style = 'display:none';
+                })
+        })
+    })
 
+    hidden.addEventListener("click", (e) => {
+        switch(x) {
+            case 0:
+                topnav0.style="display:block";
+                x++;
+                break;
+            case 1:
+                topnav0.style="display:none";
+                x=0
+                break;
+        }
+    })
 
 })

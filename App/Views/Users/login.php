@@ -34,3 +34,5 @@
             <div class="style"></div>
         </form>
 </main>
+
+<script src="/ressources/js/navigation.js"></script>

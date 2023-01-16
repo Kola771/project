@@ -11,10 +11,11 @@
 
 <main>
     <nav class="topnav flex">
-        <ul class="topul flex list">
+        <ul class="topul flex list" id="topul2">
             <li> <a href="#">Livres</a> </li>
             <li> <a href="#">Mangas</a> </li>
             <li> <a href="#">Bandes dessinées</a> </li>
+            <li class="icon0 white">Icon</li>
         </ul>
         <form id="form" action="#" method="post">
             <input list="browsers" type="text" id="input" name="search">

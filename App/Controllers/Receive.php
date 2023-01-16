@@ -35,7 +35,7 @@ class Receive {
     }
 
     public function gestion() {
-        header("Location: /book-controller/verify-all-book");
+        require "../App/Views/Admin/gestion.php";
     }
 
     public function createBook() {

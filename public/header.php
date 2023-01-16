@@ -17,8 +17,9 @@
     <header>
         <div class="header flex white">
             <h1 class="margin0">Fre<span class="orange">ek</span> </h1>
-            <nav>
-                <ul class="topul flex list">
+            <a href="#" class="hidden">Icon</a>
+            <nav class="topnav0">
+                <ul class="topul flex list" id="topul">
                     <li><a href="/receive/home">Home</a></li>
                     <?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
                         <li><a href="/admin/receive/dashbord">Dashbord</a></li>

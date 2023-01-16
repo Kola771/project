@@ -13,14 +13,20 @@ $array = $controller->verifyUrlAll();
 // tableau pour l'affichage des commentaires 
 $array0 = $controller->selectAllComment();
 
+//tableau pour l'affichage des chapitres
+$array1 = $controller->verifyAllDistinctChapter();
+
 ?>
+
+<?php if($array[0]["book_status"] === "En ligne"): ?>
 
 <main>
         <nav class="topnav flex">
-            <ul class="topul flex list">
+            <ul class="topul flex list" id="topul2">
                 <li> <a href="#">Livres</a> </li>
                 <li> <a href="#">Mangas</a> </li>
                 <li> <a href="#">Bandes dessinées</a> </li>
+                <li class="icon0 white">Icon</li>
             </ul>
             <form id="form" action="#" method="post">
                 <input list="browsers" type="text" id="input" name="search">
@@ -38,13 +44,14 @@ $array0 = $controller->selectAllComment();
         <h2 class="text opacity">Profitez bien de cette oeuvre !!!</h2>
     </section>
 
+    <?php foreach($array as $key => $values): ?>
+        <div class="road">
+            <a href="/receive/home">Home</a> ->
+            <a href="#"><?= $values["book_name"] ?></a>
+        </div>
+    <?php endforeach; ?>
+
     <div class="container flex bloc">
-        <?php foreach($array as $key => $values): ?>
-            <div class="road">
-                <a href="/receive/home">Home</a> ->
-                <a href="#"><?= $values["book_name"] ?></a>
-            </div>
-        <?php endforeach; ?>
         <section class="flex section-book">
 
             <?php foreach($array as $key => $values): ?>
@@ -120,21 +127,34 @@ $array0 = $controller->selectAllComment();
             <?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
             <p><a href="/book/<?= $array[0]["book_id"] ?>/update-book">Modifier le livre</a></p>
             <?php endif; ?>
-            <h3>Chapitres</h3>
-            <ul>
-                <li><a href="/book/1/books/show-chapter">Chapitre1</a></li>
-                <li><a href="#">Chapitre2</a></li>
-                <li><a href="#">Chapitre3</a></li>
-                <li><a href="#">Chapitre4</a></li>
-                <li><a href="#">Chapitre5</a></li>
-            </ul>
+            <div class="flex">
+                <button class="chapter_icon">Icon</button>
+               
+                <h3>Chapitres</h3>
+            </div>
+            <?php if($array1 !== []) : ?>
+                <ul>
+                    <?php for($i=0; $i<count($array1); $i++) : ?>
+                        <li><a href="/book/<?= $array1[$i]["chapter_number"] ?>/<?= $array1[$i]["book_id"] ?>/show-chapter"> Chapitre <?= $i+1 ?> </a></li>
+                    <?php endfor; ?> 
+                </ul>
+                <?php else : ?>
+                    <ul>
+                        <li>Pas de chapitres en cours</li>
+                    </ul>
+            <?php endif; ?>
         </section>
     </div>
 
 </main>
 
-<script src="/ressources/js/search.js"></script>
+<script src="/ressources/js/navigation.js"></script>
+<script src="/ressources/js/chapter.js"></script>
 
-<?php
-    require "footer.php";
-?>
+<?php require "footer.php"; ?>
+
+<?php else: ?>
+
+<?php header("Location:/receive/home"); ?>
+
+<?php endif; ?> 

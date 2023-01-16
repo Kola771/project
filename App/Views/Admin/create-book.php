@@ -4,9 +4,12 @@
     require "header.php";
 ?>
 
+<?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
+
 <main>
 
     <div class="bloc-div flex">
+        <button class="task">Icon</button>
             <nav class="bloc-task">
                 <ul>
                     <li><a href="/admin/receive/dashbord">Acceuil</a></li>
@@ -23,11 +26,15 @@
             <?php endif; ?>
 
             <?php if(isset($_GET["msg_format_error"])): ?>
-                 <h3 class="danger">Le format pré-requis pour le dimunitif n'est pas respecté !!! Les genres de format que nous acceptons sont : mangas-dimunitif ou book-dimunitif ou comics-dimunitif.</h3>
+                 <h3 class="danger">Le format pré-requis pour le dimunitif n'est pas respecté !!! Les genres de format que nous acceptons sont : mangas-dimunitif ou book-dimunitif ou comics-dimunitif. Ne mettez pas des caractères accentués ou spéciaux !!!</h3>
             <?php endif; ?>
             
             <?php if(isset($_GET["format_error_num"])): ?>
                  <h3 class="danger">Ne mettez pas des chiffres dans le dimunitif que vous donnez à votre oeuvre !!!</h3>
+            <?php endif; ?>
+            
+            <?php if(isset($_GET["format_error_char"])): ?>
+                 <h3 class="danger">Ne mettez pas des caractères accentués ou spéciaux dans le dimunitif que vous donnez à votre oeuvre !!!</h3>
             <?php endif; ?>
 
             <?php if(isset($_GET["msg_book_name_exist"])): ?>
@@ -38,7 +45,7 @@
                  <h3 class="danger">Un livre portant ce dimunitif existe déjà !!!</h3>
             <?php endif; ?>
 
-           <form action="/book-controller/validate-form" method="post" enctype="multipart/form-data">
+           <form class="basis" action="/book-controller/validate-form" method="post" enctype="multipart/form-data">
             <div class="flex button">
                 <button><a href="/admin/receive/gestion">Annuler la modification</a></button>
                 <button type="submit" name="validate">Valider la publication</button>
@@ -83,6 +90,14 @@
 </main>
 
 
+<script src="/ressources/js/navigation.js"></script>
+<script src="/ressources/js/task.js"></script>
 <?php
     require "footer.php";
 ?>
+
+<?php else: ?>
+
+<?php header("Location:/receive/home"); ?>
+
+<?php endif; ?>

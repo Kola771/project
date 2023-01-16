@@ -33,6 +33,4 @@
         </form>
 </main>
 
-<?php
-    require "footer.php";
-?>
+<script src="/ressources/js/navigation.js"></script>

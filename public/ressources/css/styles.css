@@ -111,6 +111,19 @@ body {
     padding: 0;
 }
 
+.icon0,
+.hidden {
+    display: none;
+}
+
+.nota_biem {
+    display: none;
+}
+
+.black {
+    color: var(--black-);
+}
+
 
 /* Header du site complet */
 
@@ -164,11 +177,11 @@ header {
 
 .topnav>form {
     display: flex;
-    justify-content: end;
+    justify-content: space-between;
     border: 1px solid var(--eee-);
     border-radius: 1em;
     padding: var(--pd_2-) var(--pd_5-);
-    width: 10%;
+    width: 20%;
     margin: 0;
 }
 
@@ -252,7 +265,7 @@ header {
 */
 .form {
     position: relative;
-    max-width: 20%;
+    max-width: 35%;
     margin: 0 auto;
     padding: var(--pd_8-);
     border-radius: var(--pd_2-);
@@ -274,6 +287,7 @@ header {
 
 .form>input,
 .label>input,
+.label>select,
 .form>.password>input{
     outline: none;
     border: none;
@@ -283,6 +297,7 @@ header {
 .form>input,
 .form>button,
 .label>input,
+.label>select,
 .form>.password>input {
     padding: var(--px10-) var(--px14-);
 }
@@ -447,8 +462,13 @@ header {
     background-color: var(--orange-);
 }
 
-.chapter>h3 {
-    margin-block: var(--px5-);
+.chapter_icon {
+    display: none;
+}
+
+.chapter>div {
+    gap: var(--px10-);
+    align-items: center;
 }
 
 .chapter>p {
@@ -481,7 +501,8 @@ header {
 /* Main Show */
 
 .road {
-    flex-basis: 100%;
+    margin: var(--px20-) auto var(--px20-);
+    max-width: 1300px;
     padding: var(--pd_3-);
     background-color: var(--orange-);
     font-size: var(--px18-);
@@ -502,8 +523,8 @@ header {
 .absolute,
 .absolute>img {
     border-radius: var(--pd_2-);
-    width: 1100px;
-    height: 800px;
+    width: 1000px;
+    height: 1000px;
 }
 
 .solute {
@@ -548,11 +569,13 @@ header {
 */
 .bloc-div {
     gap: 1em;
+    position: relative;
 }
 
 .bloc-task {
     background-color: var(--ddd-);
     flex-basis: 20%;
+    height: 120vh;
 }
 
 .bloc-task,
@@ -570,6 +593,13 @@ header {
 
 .bloc-task>ul>li:not(:first-child) {
     margin-top: var(--px40-);
+}
+
+.task {
+    display: none;
+    position: fixed;
+    top: 50px;
+    left: 0;
 }
 
 .data {
@@ -639,7 +669,8 @@ header {
 */
 
 #myTable {
-    flex-basis: 98%;
+    width: 100%;
+    margin-top: var(--px20-);
 }
 
 .thead-dark {
@@ -653,6 +684,7 @@ header {
     border: 1px solid black;
     border-collapse: collapse;
     text-align: center;
+    padding: var(--px10-);
 }
 
 #myTable>tbody>tr:nth-of-type(2n+1) {
@@ -721,7 +753,7 @@ header {
     background-color: var(--blnuitcl-);
 }
 
-
+#recherche0>div,
 #recherche1>div,
 #recherche2>div,
 #recherche3>div {
@@ -749,7 +781,7 @@ header {
     background-color: var(--rgba-dark-);
     padding-top: 60px;
 }
-
+#recherche0>div>form,
 #recherche1>div>form,
 #recherche2>div>form,
 #recherche3>div>form {
@@ -813,8 +845,78 @@ header {
 
 
 /* Main create */
-.data>form {
+.data>.basis,
+.data>form:nth-of-type(2) {
     flex-basis: 98%;
+}
+
+.data>form:nth-of-type(2) {
+    display: none;
+}
+
+.all,
+.data>ul {
+    margin: 0;
+    flex-basis: 100%;
+}
+
+.data>ul {
+    list-style: none;
+    padding: 0;
+}
+
+.data>ul>li {
+    color: var(--white-);
+    background-color: var(--c33-);
+    padding: var(--px12-) var(--px14-);
+    display: flex;
+    justify-content: space-between;
+}
+
+.data>ul>li>form>a {
+    color: var(--black-);
+    background-color: var(--eee-);
+    border-radius: var(--pd_2-);
+    padding: var(--pd_2-);
+}
+
+.data>ul>li:not(:first-child) {
+    margin-top: var(--px14-);
+}
+
+
+#select {
+    flex-basis: 30%;
+    border: 2px solid var(--orange-);
+    border-radius: var(--pd_3-);
+    height: 300px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#select>select,
+#select>h3 {
+    flex-basis: 95%;
+}
+
+#select>h3 {
+    text-align: center;
+    margin: 0;
+}
+
+#select>select,
+#select>button {
+    padding: var(--px10-) var(--px12-);
+    border-radius: var(--pd_5-);
+}
+
+#select>button {
+    flex-basis: 70%;
+    border: none;
+    color: var(--white-);
+    background-color: var(--bgc-rgb-);
 }
 
 .button {
@@ -852,12 +954,14 @@ header {
 
 .radio>.flex_radio,
 .label>input,
+.label>select,
 .label>textarea {
     flex-basis: 75%;
 }
 
 .label>input[type="file"] {
     border: 1px solid var(--ddd-);
+    background-color: var(--white-);
 }
 
 /* Main profil */
@@ -925,4 +1029,159 @@ footer>div>section>h3 {
 footer>p {
     flex-basis: 100%;
     text-align: center;
+}
+
+@media screen and (max-width: 960px) {
+
+    .topnav>.topul li:not(:first-child) {
+        display: none;
+    }
+
+    .topnav0 {
+        display: none;
+    }
+    
+    .topul {
+        width: 100%;
+    }
+
+    .topnav0 {
+        width: 100%;
+    }
+
+    .topnav0>.topul {
+        flex-direction: column;
+    }
+    
+    .topnav>.topul li.icon0,
+    .hidden {
+        display: block;
+    }
+
+    .header{
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .topnav {
+        flex-direction: column;
+    }
+    
+    .topnav>.topul {
+        justify-content: space-between;
+    }
+    .topul.responsive {
+        position: relative;
+        flex-direction: column;
+    }
+
+    .topnav>.topul.responsive li {
+        display: block;
+    }
+    
+    .topul.responsive .icon0 {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    /** Main home **/
+     .topnav {
+        align-items: start;
+     }
+
+     .topnav>form {
+         width: 70%;
+         align-self: center;
+         justify-content: space-between;
+     }
+
+     .container {
+         width: 90%;
+     }
+
+     #search_ul>li {
+         flex-basis: 45%;
+     }
+
+     /**Main book **/
+     .bloc {
+         flex-direction: column-reverse;
+     }
+
+     .bloc0 {
+         order: 2;
+     }
+
+     .bloc1 {
+         order: 1;
+     }
+     
+    .section-book {
+        border-right: none;
+    }
+
+    .order2 {
+        flex-basis: 70%;
+    }
+
+    .chapter>ul {
+        display: none;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .chapter_icon{
+        display: block;
+    }
+
+    .chapter>ul>li {
+        flex-basis: 20%;
+    }
+
+    .chapter>ul>li:not(:first-child) {
+        margin-top: 0;
+    }
+     
+     .road {
+         width: 100%;
+     }
+
+     .relative,
+     .absolute,
+     .absolute>img {
+         width: 100%;
+     }
+     
+     .bloc-task {
+         display: none;
+         flex-basis: 30%;
+     }
+
+     .task {
+         display: block;
+     }
+
+     .data {
+         flex-basis: 100%;
+     }
+
+     .article-book{
+        flex-basis: 20%;
+     }
+
+     .form {
+         max-width: 50%;
+     }
+
+     .password {
+        flex-wrap: wrap;
+     }
+
+     .form>.password>input {
+         flex-basis: 100%;
+     }
+
 }

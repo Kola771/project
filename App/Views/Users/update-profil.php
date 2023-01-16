@@ -6,7 +6,7 @@
     $tableau = $array->displayUrlInfo();
 ?>
 
-<?php if(isset($_SESSION["username"])): ?>
+<?php if(isset($_SESSION["username"]) && $_SESSION["username"] === $tableau[0]["user_username"]): ?>
 
 <main>
         <form class="form flex" action="/update-profil-controller/update-user-info" method="post" enctype="multipart/form-data">
@@ -33,7 +33,7 @@
         </form>
 </main>
 
-<?php require "footer.php"; ?>
+<script src="/ressources/js/navigation.js"></script>
 
 <?php else: ?>
 

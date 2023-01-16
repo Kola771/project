@@ -15,12 +15,12 @@
 
 <main>
     <div class="container flex bloc">
-        <section class="flex_section1 title">
+        <section class="flex_section1 title bloc0">
             <img src="/ressources/assets/medias-users/<?php echo $_SESSION["image"] ?>" alt="account">
             <h2> <a href="/receive/<?php echo $_SESSION["username"] ?>/update-profil">Modifier votre profil</a></h2>
         </section>
         
-        <section class="flex_section chapter">
+        <section class="flex_section chapter bloc1">
             <h3>Vos informations personnelles</h3>
             <p>Nom : <strong><?php echo $_SESSION["lastname"];?></strong></p>
             <p>Prénoms : <strong><?php echo $_SESSION["firstname"];?></strong></p>
@@ -47,6 +47,7 @@
     
 </main>
 
+<script src="/ressources/js/navigation.js"></script>
 <?php require "footer.php"; ?>
 
 <?php else: ?>
@@ -54,4 +55,3 @@
 <?php header("Location:/receive/home"); ?>
 
 <?php endif; ?> 
-<!-- khjgtjhgkjhvk -->

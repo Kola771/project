@@ -38,6 +38,7 @@ class LoginController {
             $password = password_verify($this->password, $res[0]["user_password"]);
 
             if($password === true) {
+                $_SESSION["user_id"] = $res[0]["user_id"];
                 $_SESSION["firstname"] = $res[0]["user_firstname"];
                 $_SESSION["lastname"] = $res[0]["user_lastname"];
                 $_SESSION["email"] = $res[0]["user_email"];

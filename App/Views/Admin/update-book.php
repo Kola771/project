@@ -7,11 +7,19 @@
     $controller = new BookController();
     
     $array = $controller->verifyUrlAll();
+    
+    //variable qui contient la description du livre
+    $text = $array[0]["book_description"];
+    //remplacement des balises <br/> en vide
+    $text = preg_replace("/\<br\s\/\>/", "", $text);
 ?>
+
+<?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
 
 <main>
 
     <div class="bloc-div flex">
+            <button class="task">Icon</button>
             <nav class="bloc-task">
                 <ul>
                     <li><a href="/admin/receive/dashbord">Acceuil</a></li>
@@ -22,7 +30,16 @@
             </nav>
 
         <div class="data flex">
-        <form action="/update-book-controller/update-book" method="post" enctype="multipart/form-data">
+
+            <?php if(isset($_GET["msg_empty"])): ?>
+                 <h3 class="danger">Remplissez tout les champs !!!</h3>
+            <?php endif; ?>
+            
+            <?php if(isset($_GET["format_error"])): ?>
+                 <h3 class="danger">Le format pré-requis pour le dimunitif n'est pas respecté !!! Les genres de format que nous acceptons sont : mangas-dimunitif ou book-dimunitif ou comics-dimunitif.</h3>
+            <?php endif; ?>
+
+        <form class="basis" action="/update-book-controller/update-book" method="post" enctype="multipart/form-data">
             <div class="flex button">
                 <button><a href="/admin/receive/gestion">Annuler la modification</a></button>
                 <button type="submit" name="validate">Modifier l'oeuvre</button>
@@ -59,7 +76,7 @@
             </div>
             <div class="label flex">
                 <label for="description">Résumé de l'oeuvre</label>
-                <textarea name="desc_book" id="description" cols="30" rows="10" placeholder="Description de l'oeuvre"><?= $array[0]["book_description"] ?></textarea>
+                <textarea name="desc_book" id="description" cols="30" rows="10" placeholder="Description de l'oeuvre"><?= $text ?></textarea>
             </div>
            </form>
         </div>
@@ -68,6 +85,14 @@
 </main>
 
 
+<script src="/ressources/js/navigation.js"></script>
+<script src="/ressources/js/task.js"></script>
 <?php
     require "footer.php";
 ?>
+
+<?php else: ?>
+
+<?php header("Location:/receive/home"); ?>
+
+<?php endif; ?>

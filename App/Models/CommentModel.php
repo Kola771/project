@@ -78,4 +78,22 @@ class CommentModel extends Connexion {
         $stmt->execute([$this->comment_id]);
     }
 
+    /**
+     * deleteCommentBook(), pour supprimer de la bdd l'id du livre
+     */
+    public function deleteCommentBook($book_id) {
+        
+        $conn = $this->connect();
+
+        $this->book_id = $book_id;
+
+        /**
+         * $sql, pour les requêtes vers la base de données pour supprimer le commentaire ayant cet id
+         */
+        $sql = "DELETE FROM `comments` WHERE book_id = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$this->book_id]);
+    }
+
 }

@@ -26,7 +26,6 @@ class RegisterController {
      */
     public function register() {
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["validate"])) {
-        session_start();
 
         $this->firstname = $this->sanitaze($_POST["firstname"]);
         $this->lastname = $this->sanitaze($_POST["lastname"]);
@@ -171,16 +170,7 @@ class RegisterController {
 
         else {
             $insert = $this->usermodel->insertUser($this->firstname, $this->lastname, $this->user_username, $this->email, $this->password, $this->user_image, $this->wordkey, $this->user_role, $this->timestamps);
-            $_SESSION["firstname"] = $this->firstname;
-            $_SESSION["lastname"] = $this->lastname;
-            $_SESSION["email"] = $this->email;
-            $_SESSION["username"] = $this->user_username;
-            $_SESSION["image"] = $this->user_image;
-            $_SESSION["password"] = $this->password;
-            $_SESSION["wordkey"] = $this->wordkey;
-            $_SESSION["user_role"] = $this->user_role;
-            $_SESSION["created_at"] = $this->timestamps;
-            header("Location:/receive/home");
+            header("Location:/receive/login");
             exit();
         }
 

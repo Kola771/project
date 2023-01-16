@@ -2,11 +2,34 @@
 
 <?php
     require "header.php";
+    
+    require "../App/Controllers/BookController.php";
+
+    $bookcontroller = new BookController();
+    $array = $bookcontroller->verifyAllDistinctChapters();
+
+    foreach($array as $kay => $values) {
+        $explode= explode(" ", $values["created_at"]);
+        $date1 = $explode[0]; 
+        $date2 = date("Y-m-d");
+        $date1=date_create($date1);
+        $date2=date_create($date2);
+        $diff=date_diff($date1,$date2);
+        $t = $diff->format("%a");
+        if($t > 30) {
+            echo "ok";
+        } else {
+            echo "bad";
+        }
+    }
 ?>
+
+<?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
 
 <main>
 
     <div class="bloc-div flex">
+        <button class="task">Icon</button>
             <nav class="bloc-task">
                 <ul>
                     <li><a href="/admin/receive/dashbord">Acceuil</a></li>
@@ -66,7 +89,14 @@
 
 </main>
 
-
+<script src="/ressources/js/navigation.js"></script>
+<script src="/ressources/js/task.js"></script>
 <?php
     require "footer.php";
 ?>
+
+<?php else: ?>
+
+<?php header("Location:/receive/home"); ?>
+
+<?php endif; ?>

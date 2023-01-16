@@ -2,6 +2,7 @@
 <?php
 require "../App/Controllers/Connexion.php";
 require "../App/Models/BookModel.php";
+require "../App/Models/ChapterModel.php";
 require "../App/Models/CommentModel.php";
 
 class BookController {
@@ -10,6 +11,11 @@ class BookController {
      * $bookmodel; on va utiliser cette variable pour instancier la classe BookModel dans le controller
      */
     public $bookmodel;
+
+    /**
+     * $chaptermodel; on va utiliser cette variable pour instancier la classe ChapterModel dans le controller
+     */
+    public $chaptermodel;
 
     //déclaration des variables
     public $status;
@@ -101,7 +107,7 @@ class BookController {
 
         } 
         else {
-
+            //récupération de l'extension de l'image
             $tabExtension = pathinfo($this->image_book_name, PATHINFO_EXTENSION);
             $extension = strtolower($tabExtension);
             $extensions = ['jpg', 'png', 'jpeg', 'gif'];
@@ -114,7 +120,7 @@ class BookController {
                 if($this->image_book_error == 0) {
 
                     $uniqueName = uniqid('book-image-', true);
-                    // uniqid génère quelque chose comme ca : img-63b85c9a42aac7.70071232
+                    // uniqid génère quelque chose comme ca : book-63b85c9a42aac7.70071232
 
                     $file = $uniqueName.".".$extension;
                     move_uploaded_file($this->image_book_tmpname, '../public/ressources/assets/Medias-book/'.$file);
@@ -150,7 +156,7 @@ class BookController {
      */
     public function formatBook($data) {
 
-        if(preg_match("/^mangas-/i", $data) || preg_match("/^comics-/i", $data) || preg_match("/^book-/i", $data)) {
+        if(preg_match("/^mangas-/i", $data) || preg_match("/^comics-/i", $data) || preg_match("/^books-/i", $data)) {
 
             if(preg_match("/\d+/i", $data)) {
                 header("Location: /admin/receive/create-book?format_error_num&name_book=$this->name_book&ref_book=$this->ref_book");
@@ -158,7 +164,7 @@ class BookController {
             }
 
             if(preg_match("/\@/i", $data)) {
-                header("Location: /admin/receive/create-book?format_error&name_book=$this->name_book&ref_book=$this->ref_book");
+                header("Location: /admin/receive/create-book?format_error_char&name_book=$this->name_book&ref_book=$this->ref_book");
                 exit();
             }
 
@@ -192,8 +198,7 @@ class BookController {
         
         $this->bookmodel = new BookModel();
         $array = $this->bookmodel->verifyAllBook();
-        // return $array;
-        require "../App/Views/Admin/gestion.php";
+        return $array;
     }
 
     /**
@@ -216,6 +221,58 @@ class BookController {
     }
 
     /**
+     * verifyAllDistinctChapter(), affiche tous les chapîtres d'un livre grâce aux informations qui se trouvent dans l'url
+     */
+    public function verifyAllDistinctChapter() {
+
+        $url = $_SERVER["QUERY_STRING"];
+        preg_match("/\/(?<book_id>[a-zA-Z-\-]+)\//i", $url, $matches);
+        $book_id = $matches["book_id"];
+        $this->bookmodel = new BookModel();
+        $array = $this->bookmodel->verifyAllDistinctChapter($book_id);
+        if(count($array)>0) {
+            return $array;
+        } else {
+            return $array = [];
+        }
+
+    }
+
+    /**
+     * verifyAllDistinctChapters(), affiche tous les chapîtres d'un livre 
+     */
+    public function verifyAllDistinctChapters() {
+
+        $this->bookmodel = new BookModel();
+        $array = $this->bookmodel->verifyAllDistinctChapters();
+        if(count($array)>0) {
+            return $array;
+        } else {
+            return $array = [];
+        }
+
+    }
+
+    /**
+     * verifyAllChapter(), affiche le chapître d'un livre grâce aux informations qui se trouvent dans l'url
+     */
+    public function verifyAllChapter() {
+
+        $url = $_SERVER["QUERY_STRING"];
+        preg_match("/\/(?<number>\d+)\/(?<book_id>[a-zA-Z-\-]+)\//i", $url, $matches);
+        $number = $matches["number"];
+        $book_id = $matches["book_id"];
+        $this->bookmodel = new BookModel();
+        $array = $this->bookmodel->verifyAllChapter($number, $book_id);
+        if(count($array)>0) {
+            return $array;
+        } else {
+            return $array = [];
+        }
+
+    }
+
+    /**
      * updateBookStatus(), pour modifier le status du livre
      */
     public function updateBookStatus() {
@@ -230,7 +287,7 @@ class BookController {
         }
 
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["remettre"])) {
-            echo $book_id = $_POST["remettre"];
+            $book_id = $_POST["remettre"];
             $this->bookmodel = new BookModel();
             $this->bookmodel->updateStatusInside($book_id);
             
@@ -239,7 +296,7 @@ class BookController {
         }
 
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["attente"])) {
-            echo $book_id = $_POST["attente"];
+            $book_id = $_POST["attente"];
             $this->bookmodel = new BookModel();
             $this->bookmodel->updateStatusInside($book_id);
             
@@ -249,7 +306,30 @@ class BookController {
 
     }
 
-    
+    /**
+     * deleteBook(), pour supprimer une oeuvre
+     */
+    public function deleteBook() {
+        if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["delete"])) {
+            $book_id = $_POST["delete"];
+
+            $this->bookmodel = new BookModel();
+            $this->commentmodel = new CommentModel();
+            $this->chaptermodel = new ChapterModel();
+
+            $this->bookmodel->deleteBook($book_id);
+            $array = $this->commentmodel->deleteCommentBook($book_id);
+
+            $this->chaptermodel->deleteBook($book_id);
+
+            header("Location:/admin/receive/gestion");
+            exit();
+        }
+    }
+
+    /**
+     * selectAllComment(), pour afficher tous les commentaires des utilisateurs
+     */
     public function selectAllComment() {
         $this->commentmodel = new CommentModel();
         $array = $this->commentmodel->selectAll();

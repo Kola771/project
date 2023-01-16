@@ -9,6 +9,7 @@ class Bookmodel extends Connexion {
      */
     public $conn;
 
+    public $number;
     public $ref_book;
     public $name_book;
     public $book_image;
@@ -62,7 +63,7 @@ class Bookmodel extends Connexion {
     }
 
     /**
-     * verifyAll(), affiche tous les livres de la bd
+     * verifyAll(), affiche tous les livres de la bd qui sont lignes
      */
     public function verifyAll() {
 
@@ -82,7 +83,7 @@ class Bookmodel extends Connexion {
     }
 
     /**
-     * verifyAll(), affiche tous les livres de la bd
+     * verifyAllBooks(), affiche tous les livres de la bd
      */
     public function verifyAllBook() {
 
@@ -97,6 +98,71 @@ class Bookmodel extends Connexion {
          * $stmt, pour recupérer la requête préparée
          */
         $stmt = $conn->query($sql);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
+     * verifyAllDistinctChapter(), affiche tous les titres, numéros... d'un/des chapîtres d'un livre
+     */
+    public function verifyAllDistinctChapter($ref_book) {
+        $this->ref_book = $ref_book;
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT DISTINCT `chapters`.chapter_title, `chapters`.chapter_number, `books`.book_id, `books`.book_name FROM `books`, `chapters` WHERE `books`.book_id = `chapters`.book_id AND `books`.book_id = ?;";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$this->ref_book]);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
+     * verifyAllDistinctChapters(), affiche tous les titres d'un/des chapîtres d'un livre
+     */
+    public function verifyAllDistinctChapters() {
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT DISTINCT `chapters`.chapter_title, `chapters`.created_at FROM `chapters`;";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->query($sql);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
+     * verifyAllChapter(), affiche le chapître d'un livre 
+     */
+    public function verifyAllChapter($number, $ref_book) {
+        $this->number = $number;
+        $this->ref_book = $ref_book;
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT `chapters`.chapter_title, `chapters`.chapter_number, `chapters`.chapter_image, `chapters`.chapter_text, `books`.book_id, `books`.book_name, `books`.book_status FROM `books`, `chapters` WHERE `books`.book_id = `chapters`.book_id AND `chapters`.chapter_number = ? AND `books`.book_id = ?;";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$this->number, $this->ref_book]);
         $result = $stmt->fetchAll();
         return $result;
     }
@@ -133,6 +199,39 @@ class Bookmodel extends Connexion {
             ":desc_book" => $this->desc_book,
             ":status" => $this->status,
             ":created_at" => $this->created_at
+        ]);
+  
+    }
+
+    /**
+     * updateBook(), pour modifier un livre
+     */
+    public function updateBook($ref_book, $name_book, $book_image, $desc_book, $status, $book_id) {
+
+        $conn = $this->connect();
+  
+        $this->ref_book = $ref_book;
+        $this->name_book = $name_book;
+        $this->book_image = $book_image;
+        $this->desc_book = $desc_book;
+        $this->status = $status;
+
+         /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "UPDATE `books` SET `book_id`=:reference,`book_name`=:name,`book_image`=:image,`book_description`=:desc_book,`book_status`=:status WHERE `book_id`=:id;";
+        
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ":reference" => $this->ref_book,
+            ":name" => $this->name_book,
+            ":image" => $this->book_image,
+            ":desc_book" => $this->desc_book,
+            ":status" => $this->status,
+            ":id" => $book_id
         ]);
   
     }
@@ -185,6 +284,30 @@ class Bookmodel extends Connexion {
         $stmt->execute([
             ":reference" => $this->ref_book,
             ":status" => $this->status
+        ]);
+  
+    }
+
+    /**
+     * deleteBook(), pour supprimer un livre
+     */
+    public function deleteBook($book_id) {
+
+        $conn = $this->connect();
+  
+        $this->ref_book = $book_id;
+
+         /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "DELETE FROM `books` WHERE `books`.book_id = :reference;";
+        
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ":reference" => $this->ref_book
         ]);
   
     }

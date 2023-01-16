@@ -54,7 +54,10 @@ class Router {
             $file = $root . "/$classname" . ".php";
             if(is_readable($file)) {
                 require ("../App/Controllers/" . $classname . ".php");
-            } 
+            } else {
+                header("Location:/receive/error404");
+                exit();
+            }
         } 
         );
     }

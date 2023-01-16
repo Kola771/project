@@ -2,18 +2,19 @@
 
 <?php
     require "header.php";
-    // require "../App/Controllers/BookController.php";
+    
+    require "../App/Controllers/BookController.php";
 
-    // $bookcontroller = new BookController();
-    // $array = $bookcontroller->verifyAllBook();
-    // echo "<pre>";
-    // var_dump($array);
-    // echo "</pre>";
+    $bookcontroller = new BookController();
+    $array = $bookcontroller->verifyAllBook();
 ?>
+
+<?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
 
 <main>
 
     <div class="bloc-div flex">
+            <button class="task">Icon</button>
             <nav class="bloc-task">
                 <ul>
                     <li><a href="/admin/receive/dashbord">Acceuil</a></li>
@@ -23,7 +24,7 @@
                 </ul>
             </nav>
 
-        <div class="data flex">
+        <div class="data">
             <div class="form-search flex">
                 <form action="#" method="post">
                     <input list="browsers" type="text" id="search" placeholder="Recherche le nom..">
@@ -36,7 +37,6 @@
                     <tr>
                         <th>Statuts</th>
                         <th>Noms des Oeuvres</th>
-                        <th>Nombre de chapitres</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -45,24 +45,24 @@
                         <tr>
                             <td><?= $values["book_status"] ?></td>
                             <td><?= $values["book_name"] ?></td>
-                            <td>5</td>
                             <td>
                                 <?php if($values["book_status"] == "En ligne") : ?>
 
                                 <button type="submit" class="danger retirer" value = "<?= $values["book_id"] ?>" >Retirer</button>
-                                <button type="submit" class="update"><a href="/book/<?= $values["book_id"] ?>/update-book">Modifier l'oeuvre</a></button>
+                                <a class="update" href="/book/<?= $values["book_id"] ?>/show-book">Voir l'oeuvre</a>
 
                                 <?php elseif($values["book_status"] == "En attente") : ?>
 
                                 <button type="submit" class="success ligne" value = "<?= $values["book_id"] ?>" >Mettre en ligne</button>
-                                <button type="submit" class="update"><a href="/book/<?= $values["book_id"] ?>/update-book">Modifier l'oeuvre</a></button>
 
                                 <?php else : ?>
 
                                 <button type="submit" class="primary mettre" value = "<?= $values["book_id"] ?>" >Remettre</button>
-                                <button type="submit" class="update"><a href="/book/<?= $values["book_id"] ?>/update-book">Modifier l'oeuvre</a></button>
-
+                                
                                 <?php endif; ?>
+                                <a class="update" href="/book/<?= $values["book_id"] ?>/update-book">Modifier l'oeuvre</a>
+                                <a class="update" href="/book/<?= $values["book_id"] ?>/show-chapters">Voir les chapîtres</a>
+                                <button type="submit" class="danger supprimer" value = "<?= $values["book_id"] ?>">Supprimer l'oeuvre</button>
 
                             </td>
                         </tr>
@@ -70,6 +70,16 @@
                 </tbody>
             </table>   
         </div>
+    </div>
+
+    <div id="recherche0" class="remove modal animate">
+                <div>
+                    Voulez-vous vraiment supprimer cette oeuvre du site ?
+                    <form action="/book-controller/delete-book" method="post" class="flex">
+                        <button type="reset" class="danger closes"><i class="fa fa-close"></i> Annuler</button>
+                        <button type="submit" class="delete" name="delete">Supprimer l'oeuvre</button>
+                    </form>
+                </div>
     </div>
 
     <div id="recherche1" class="remove modal animate">
@@ -109,3 +119,9 @@
 <?php
     require "footer.php";
 ?>
+
+<?php else: ?>
+
+<?php header("Location:/receive/home"); ?>
+
+<?php endif; ?>

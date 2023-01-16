@@ -19,46 +19,42 @@ function myFunction() {
     }
 }
 
+let topul2 = document.getElementById("topul2");
+let topnav0 = document.querySelector(".topnav0");
+let hidden = document.querySelector(".hidden");
+let icon0 = document.querySelector(".icon0");
+let x = 0;
+
 let input = document.querySelector("#search");
-
-let search = document.querySelector('#input');
-let form = document.querySelector('#form');
-let closes = document.querySelector('#close');
-
-// let test = "Welcome to Freek !!!";
-// let tab = test.split("");
-// let text = document.querySelector(".text");
-// let compteur;
-// let i = 0;
 
 
 document.addEventListener("DOMContentLoaded", function() {
 
-    // compteur = setInterval(function() {
-    //     text.innerHTML += tab[i];
-    //     text.style = "background-color: #eee";
-    //     i++;
-    //     if(i === tab.length) {
-    //         clearInterval(compteur);
-    //     }
-    // }, 1000/6)
+    hidden.addEventListener("click", (e) => {
+        switch(x) {
+            case 0:
+                topnav0.style="display:block";
+                x++;
+                break;
+            case 1:
+                topnav0.style="display:none";
+                x=0
+                break;
+        }
+    })
+
+
+    icon0.addEventListener("click", (e) => {
+        e.preventDefault();
+        if(topul2.className === "topul flex list") {
+            topul2.className += " responsive";
+        } else {
+            topul2.className = "topul flex list";
+        }
+    })
 
     input.addEventListener("keyup", (e) => {
         e.preventDefault();
         myFunction();
-    })
-
-    search.addEventListener("click", (e) => {
-        e.preventDefault();
-        search.style = "width:100%";
-        form.style = "width:20%";
-        closes.style = "display:block";
-    })
-
-    closes.addEventListener("click", (e) => {
-        e.preventDefault();
-        search.style = "width:80%";
-        form.style = "width:10%";
-        closes.style = "display:none";
     })
 })

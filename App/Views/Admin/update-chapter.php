@@ -4,9 +4,12 @@
     require "header.php";
 ?>
 
+<?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
+
 <main>
 
     <div class="bloc-div flex">
+            <button class="task">Icon</button>
             <nav class="bloc-task">
                 <ul>
                     <li><a href="/admin/receive/dashbord">Acceuil</a></li>
@@ -24,6 +27,14 @@
 </main>
 
 
+<script src="/ressources/js/navigation.js"></script>
+<script src="/ressources/js/task.js"></script>
 <?php
     require "footer.php";
 ?>
+
+<?php else: ?>
+
+<?php header("Location:/receive/home"); ?>
+
+<?php endif; ?>

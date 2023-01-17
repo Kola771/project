@@ -33,7 +33,6 @@
 
         <div class="data flex">
 
-            <h4 class="nota_biem">NB: Vous ne pouvez insérez pas plus de 20 images par chapître !!!</h4>
             <form action="#" method="post" id="select">
                 <h3>Veuillez bien choisir le type du livre sur lequel vous voulez publier un chapitre</h3>
                 <select id="choose">
@@ -45,6 +44,7 @@
                 <button class="soumettre">Soumettre</button>
             </form>
            <form action="#" method="post" class="add-mc" enctype="multipart/form-data">
+            <h4 class="nota_biem">NB: Vous ne pouvez insérez pas plus de 20 images par chapître !!!</h4>
             <div class="flex button">
                 <button type="reset">Annuler la publication</button>
                 <button type="submit" name="validate">Valider la publication</button>

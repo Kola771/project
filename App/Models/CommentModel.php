@@ -96,4 +96,21 @@ class CommentModel extends Connexion {
         $stmt->execute([$this->book_id]);
     }
 
+    /**
+     * commentCount(), pour afficher le nombre de commentaires a une oeuvre
+     */
+    public function commentCount() {
+        
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données 
+         */
+        $sql = "SELECT `books`.book_id, `books`.book_name, `books`.book_status, COUNT(`comments`.comment_comment) AS Nombres FROM `comments`, `books` WHERE `books`.book_id = `comments`.book_id AND `books`.book_status = 'En ligne' GROUP BY `comments`.book_id";
+
+        $stmt = $conn->query($sql);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
 }

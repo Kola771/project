@@ -9,7 +9,6 @@ class Bookmodel extends Connexion {
      */
     public $conn;
 
-    public $number;
     public $ref_book;
     public $name_book;
     public $book_image;
@@ -40,6 +39,27 @@ class Bookmodel extends Connexion {
     }
 
     /**
+     * verifyLikesBook(), pour vérifier si il y a un livre dans la bd ayant déjà ses éléments là
+     */
+    public function verifyLikesBook($ref_book) {
+        $this->ref_book = $ref_book;
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT * FROM `books` WHERE book_id like '$this->ref_book%'";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->query($sql);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
      * verifyRefOrName(), pour vérifier si il y a un livre dans la bd ayant déjà ce genre de dimunitif ou de nom
      */
     public function verifyRefOrName($ref_book, $name_book) {
@@ -58,6 +78,28 @@ class Bookmodel extends Connexion {
          */
         $stmt = $conn->prepare($sql);
         $stmt->execute([$this->ref_book, $this->name_book]);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
+     * verifyName(), pour vérifier si il y a un livre dans la bd ayant déjà ce genre de nom
+     */
+    public function verifyName($name_book) {
+        $this->name_book = $name_book;
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT * FROM `freek`.books WHERE book_name = ?;";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$this->name_book]);
         $result = $stmt->fetchAll();
         return $result;
     }
@@ -83,7 +125,27 @@ class Bookmodel extends Connexion {
     }
 
     /**
-     * verifyAllBooks(), affiche tous les livres de la bd
+     * verifyAllDesc(), affiche tous les livres de la bd du plus grand au plus petit 
+     */
+    public function verifyAllDesc() {
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT * FROM `freek`.books ORDER BY created_at DESC";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->query($sql);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
+     * verifyAllBook(), affiche tous les livres de la bd
      */
     public function verifyAllBook() {
 
@@ -101,73 +163,6 @@ class Bookmodel extends Connexion {
         $result = $stmt->fetchAll();
         return $result;
     }
-
-    /**
-     * verifyAllDistinctChapter(), affiche tous les titres, numéros... d'un/des chapîtres d'un livre
-     */
-    public function verifyAllDistinctChapter($ref_book) {
-        $this->ref_book = $ref_book;
-
-        $conn = $this->connect();
-
-        /**
-         * $sql, pour les requêtes vers la base de données
-         */
-        $sql = "SELECT DISTINCT `chapters`.chapter_title, `chapters`.chapter_number, `books`.book_id, `books`.book_name FROM `books`, `chapters` WHERE `books`.book_id = `chapters`.book_id AND `books`.book_id = ?;";
-
-        /**
-         * $stmt, pour recupérer la requête préparée
-         */
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$this->ref_book]);
-        $result = $stmt->fetchAll();
-        return $result;
-    }
-
-    /**
-     * verifyAllDistinctChapters(), affiche tous les titres d'un/des chapîtres d'un livre
-     */
-    public function verifyAllDistinctChapters() {
-
-        $conn = $this->connect();
-
-        /**
-         * $sql, pour les requêtes vers la base de données
-         */
-        $sql = "SELECT DISTINCT `chapters`.chapter_title, `chapters`.created_at FROM `chapters`;";
-
-        /**
-         * $stmt, pour recupérer la requête préparée
-         */
-        $stmt = $conn->query($sql);
-        $result = $stmt->fetchAll();
-        return $result;
-    }
-
-    /**
-     * verifyAllChapter(), affiche le chapître d'un livre 
-     */
-    public function verifyAllChapter($number, $ref_book) {
-        $this->number = $number;
-        $this->ref_book = $ref_book;
-
-        $conn = $this->connect();
-
-        /**
-         * $sql, pour les requêtes vers la base de données
-         */
-        $sql = "SELECT `chapters`.chapter_title, `chapters`.chapter_number, `chapters`.chapter_image, `chapters`.chapter_text, `books`.book_id, `books`.book_name, `books`.book_status FROM `books`, `chapters` WHERE `books`.book_id = `chapters`.book_id AND `chapters`.chapter_number = ? AND `books`.book_id = ?;";
-
-        /**
-         * $stmt, pour recupérer la requête préparée
-         */
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$this->number, $this->ref_book]);
-        $result = $stmt->fetchAll();
-        return $result;
-    }
-
-    
     
     /**
      * insertBook(), pour insérer dans la bd des livres

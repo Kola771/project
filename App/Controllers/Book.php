@@ -22,6 +22,10 @@ class Book {
     public function showChapters() {
         require "../App/Views/Admin/show.php";
     }
+
+    public function showType() {
+        require "../App/Views/Users/show-element.php";
+    }
 }
 
 ?>

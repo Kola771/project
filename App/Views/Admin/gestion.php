@@ -49,7 +49,6 @@
                                 <?php if($values["book_status"] == "En ligne") : ?>
 
                                 <button type="submit" class="danger retirer" value = "<?= $values["book_id"] ?>" >Retirer</button>
-                                <a class="update" href="/book/<?= $values["book_id"] ?>/show-book">Voir l'oeuvre</a>
 
                                 <?php elseif($values["book_status"] == "En attente") : ?>
 
@@ -60,9 +59,10 @@
                                 <button type="submit" class="primary mettre" value = "<?= $values["book_id"] ?>" >Remettre</button>
                                 
                                 <?php endif; ?>
+                                <button type="submit" class="danger supprimer" value = "<?= $values["book_id"] ?>">Supprimer l'oeuvre</button>
+                                <button class="update white watch" value = "<?= $values["book_id"] ?>">Voir l'oeuvre</button>
                                 <a class="update" href="/book/<?= $values["book_id"] ?>/update-book">Modifier l'oeuvre</a>
                                 <a class="update" href="/book/<?= $values["book_id"] ?>/show-chapters">Voir les chapîtres</a>
-                                <button type="submit" class="danger supprimer" value = "<?= $values["book_id"] ?>">Supprimer l'oeuvre</button>
 
                             </td>
                         </tr>
@@ -111,6 +111,29 @@
                     </form>
                 </div>
     </div>
+
+    <?php foreach($array as $key => $values) : ?>
+        <div class="put modal animate recherche4 <?= $values["book_id"] ?>">
+                    <div>
+                            <div>
+                                <img src="/ressources/assets/medias-book/<?= $values["book_image"] ?>" alt="<?= $values["book_name"] ?>">
+                                <div>
+                                    <h4>Nom de l'oeuvre :</h4>
+                                    <p><?= $values["book_name"] ?></p>
+                                </div>
+                                <div>
+                                    <h4>Description de l'oeuvre :</h4>
+                                    <p><?= $values["book_description"] ?></p>
+                                </div>
+                                <div>
+                                    <h4>Status :</h4>
+                                    <p><?= $values["book_status"] ?></p>
+                                </div>
+                            </div>
+                            <button type="reset" class="danger closes"><i class="fa fa-close"></i> Annuler</button>
+                    </div>
+        </div>
+    <?php endforeach; ?>
 
 </main>
 

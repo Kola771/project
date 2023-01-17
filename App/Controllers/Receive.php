@@ -4,7 +4,7 @@
 
 class Receive {
     public function home() {
-        header("Location: /book-controller/home");
+        require "../App/Views/Users/home.php";
     }
     
     public function dashbord() {
@@ -52,6 +52,14 @@ class Receive {
     
     public function updatePassword() {
         require "../App/Views/Users/update-password.php";
+    }
+    
+    public function errorSearch() {
+        require "../App/Views/SearchError.php";
+    }
+    
+    public function PageError() {
+        require "../App/Views/PageError.php";
     }
     
 }

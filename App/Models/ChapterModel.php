@@ -156,4 +156,92 @@ class ChapterModel extends Connexion {
         $stmt->execute([$this->name]);
       }
 
+      
+    /**
+     * verifyAllDistinctChapter(), affiche tous les titres, numéros... d'un/des chapîtres d'un livre
+     */
+    public function verifyAllDistinctChapter($book_id) {
+      $this->book_id = $book_id;
+
+      $conn = $this->connect();
+
+      /**
+       * $sql, pour les requêtes vers la base de données
+       */
+      $sql = "SELECT DISTINCT `chapters`.chapter_title, `chapters`.chapter_number, `books`.book_id, `books`.book_name FROM `books`, `chapters` WHERE `books`.book_id = `chapters`.book_id AND `books`.book_id = ?;";
+
+      /**
+       * $stmt, pour recupérer la requête préparée
+       */
+      $stmt = $conn->prepare($sql);
+      $stmt->execute([$this->book_id]);
+      $result = $stmt->fetchAll();
+      return $result;
+  }
+
+  /**
+   * verifyAllDistinctChapters(), affiche tous les titres d'un/des chapîtres d'un livre
+   */
+  public function verifyAllDistinctChapters() {
+
+      $conn = $this->connect();
+
+      /**
+       * $sql, pour les requêtes vers la base de données
+       */
+      $sql = "SELECT DISTINCT `chapters`.chapter_title, `chapters`.created_at FROM `chapters`;";
+
+      /**
+       * $stmt, pour recupérer la requête préparée
+       */
+      $stmt = $conn->query($sql);
+      $result = $stmt->fetchAll();
+      return $result;
+  }
+
+  /**
+   * verifyAllChapter(), affiche le chapître d'un livre ayant ces attributs
+   */
+  public function verifyAllChapter($number, $book_id) {
+      $this->number = $number;
+      $this->book_id = $book_id;
+
+
+      $conn = $this->connect();
+
+      /**
+       * $sql, pour les requêtes vers la base de données
+       */
+      $sql = "SELECT `chapters`.chapter_title, `chapters`.chapter_number, `chapters`.chapter_image, `chapters`.chapter_text, `books`.book_id, `books`.book_name, `books`.book_status FROM `books`, `chapters` WHERE `books`.book_id = `chapters`.book_id AND `chapters`.chapter_number = ? AND `books`.book_id = ?;";
+
+      /**
+       * $stmt, pour recupérer la requête préparée
+       */
+      $stmt = $conn->prepare($sql);
+      $stmt->execute([$this->number, $this->book_id]);
+      $result = $stmt->fetchAll();
+      return $result;
+  }
+
+  /**
+   * verifyAllChapters(), affiche le chapître d'un livre 
+   */
+  public function verifyAllChapters() {
+
+      $conn = $this->connect();
+
+      /**
+       * $sql, pour les requêtes vers la base de données
+       */
+      $sql = "SELECT `chapters`.chapter_title, `chapters`.chapter_number, `chapters`.chapter_image, `chapters`.chapter_text, `books`.book_id, `books`.book_name, `books`.book_status FROM `books`, `chapters` WHERE `books`.book_id = `chapters`.book_id;";
+
+      /**
+       * $stmt, pour recupérer la requête préparée
+       */
+      $stmt = $conn->query($sql);
+      $result = $stmt->fetchAll();
+      return $result;
+  }
+
+
 }

@@ -33,8 +33,8 @@ let attente = document.querySelector('.attente');
 let retirer = document.querySelectorAll('.retirer');
 let retire = document.querySelector('.retire');
 
-let closes0 = document.querySelector('#recherche0>div>form>.closes');
 let closes = document.querySelector('#recherche1>div>form>.closes');
+let closes0 = document.querySelector('#recherche0>div>form>.closes');
 let closes1 = document.querySelector('#recherche2>div>form>.closes');
 let closes2 = document.querySelector('#recherche3>div>form>.closes');
 
@@ -53,6 +53,9 @@ let task = document.querySelector('.task');
 let bloc_task = document.querySelector('.bloc-task');
 
 let y = 0;
+
+let watch = document.querySelectorAll('.watch');
+let modal = document.querySelectorAll('.recherche4');
 
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -111,6 +114,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 deletes.setAttribute('value', el.value)
                 closes0.addEventListener('click', (e) => {
                     search0.style = 'display:none';
+                })
+        })
+    })
+
+    watch.forEach((element) => {
+        element.addEventListener('click', (e) => {
+                element_value = element.value
+                modal.forEach((el) => {
+                    className = el.className;
+                    split = className.split(" ");
+                    if(split.includes(element_value)) {
+                        el.style = 'display:block'
+                        clos = el.childNodes[1].childNodes[3];
+                        clos.addEventListener('click', (e) => {
+                            el.style = 'display:none';
+                        })
+                    }
                 })
         })
     })

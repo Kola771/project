@@ -55,7 +55,7 @@ class Router {
             if(is_readable($file)) {
                 require ("../App/Controllers/" . $classname . ".php");
             } else {
-                header("Location:/receive/error404");
+                header("Location:/receive/page-error");
                 exit();
             }
         } 
@@ -79,11 +79,11 @@ class Router {
                    exit();
                 }
             } else {
-                header("Location:/receive/error404");
+                header("Location:/receive/page-error");
                 exit();
             }
         } else {
-            header("Location:/receive/error404");
+            header("Location:/receive/page-error");
             exit();
         }
     }

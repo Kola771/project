@@ -6,22 +6,28 @@
     require "../App/Controllers/BookController.php";
 
     $bookcontroller = new BookController();
-    $array = $bookcontroller->verifyAllDistinctChapters();
 
-    foreach($array as $kay => $values) {
-        $explode= explode(" ", $values["created_at"]);
-        $date1 = $explode[0]; 
-        $date2 = date("Y-m-d");
-        $date1=date_create($date1);
-        $date2=date_create($date2);
-        $diff=date_diff($date1,$date2);
-        $t = $diff->format("%a");
-        if($t > 30) {
-            echo "ok";
-        } else {
-            echo "bad";
-        }
-    }
+    //tableau contenant les users
+    $stockage = $bookcontroller->verifyAllUsers();
+    $stockage_one = $bookcontroller->temporaire_moins($stockage);
+    $stockage_two = $bookcontroller->temporaire_more($stockage);
+    $count_five = count($stockage_one);
+    $count_six = count($stockage_two);
+
+    //tableau contenant les oeuvres
+    $tableau = $bookcontroller->verifyAllBook();
+    $tableau_one = $bookcontroller->temporaire_moins($tableau);
+    $tableau_two = $bookcontroller->temporaire_more($tableau);
+    $count_three = count($tableau_one);
+    $count_four = count($tableau_two);
+
+    //tableau contenant les chapitres des oeuvres
+    $array = $bookcontroller->verifyAllDistinctChapters();
+    $array_one = $bookcontroller->temporaire_moins($array);
+    $array_two = $bookcontroller->temporaire_more($array);
+    $count_one = count($array_one);
+    $count_two = count($array_two);
+
 ?>
 
 <?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
@@ -43,43 +49,37 @@
             <section class="history flex">
                 <h2>Historiques de ce mois</h2>
                 <article class="article-book flex">
-                    <img src="/ressources/assets/Medias-book/gojo.jpg" alt="Image de l'oeuvre">
+                    <img src="/ressources/assets/medias-users/account.jpg" alt="Utilisateurs">
                     <h3>Nombre d'utilisateur inscrit ce mois-ci</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima odio veritatis ratione exercitationem inventore sunt nisi dicta non facilis nulla.</p>
-                    <a href="#">30</a>
+                    <span><?= $count_five ?></span>
                 </article>
                 <article class="article-book flex">
-                    <img src="/ressources/assets/Medias-book/gojo.jpg" alt="Image de l'oeuvre">
+                    <img src="/ressources/assets/Medias-book/livre.jpg" alt="Image de l'oeuvre">
                     <h3>Nombre d'oeuvres publiées dans ce mois</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima odio veritatis ratione exercitationem inventore sunt nisi dicta non facilis nulla.</p>
-                    <a href="#">30</a>
+                    <span><?= $count_three ?></span>
                 </article>
                 <article class="article-book flex">
-                    <img src="/ressources/assets/Medias-book/gojo.jpg" alt="Image de l'oeuvre">
+                    <img src="/ressources/assets/Medias-book/chapter.jpg" alt="Image de l'oeuvre">
                     <h3>Nombre de chapitres publiés dans ce mois</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima odio veritatis ratione exercitationem inventore sunt nisi dicta non facilis nulla.</p>
-                    <a href="#">30</a>
+                    <span><?= $count_one ?></span>
                 </article>
             </section>
             <section class="history flex">
-                <h2>Historiques du mois passé</h2>
+                <h2>Historiques passées</h2>
                 <article class="article-book flex">
-                    <img src="/ressources/assets/Medias-book/gojo.jpg" alt="Image de l'oeuvre">
-                    <h3>Nombre d'utilisateur inscrit le mois passé</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima odio veritatis ratione exercitationem inventore sunt nisi dicta non facilis nulla.</p>
-                    <a href="#">30</a>
+                    <img src="/ressources/assets/medias-users/account.jpg" alt="Utilisateurs">
+                    <h3>Nombre d'utilisateur inscrit entre-temps</h3>
+                    <span><?= $count_six ?></span>
                 </article>
                 <article class="article-book flex">
-                    <img src="/ressources/assets/Medias-book/gojo.jpg" alt="Image de l'oeuvre">
-                    <h3>Nombre d'oeuvres publiées dans le mois passé</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima odio veritatis ratione exercitationem inventore sunt nisi dicta non facilis nulla.</p>
-                    <a href="#">30</a>
+                    <img src="/ressources/assets/Medias-book/livre.jpg" alt="Image de l'oeuvre">
+                    <h3>Nombre d'oeuvres publiées qu'il y avait</h3>
+                    <span><?= $count_four ?></span>
                 </article>
             <article class="article-book flex">
-                <img src="/ressources/assets/Medias-book/gojo.jpg" alt="Image de l'oeuvre">
-                <h3>Nombre de chapitres publiés dans le mois passé</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima odio veritatis ratione exercitationem inventore sunt nisi dicta non facilis nulla.</p>
-                <a href="#">30</a>
+                <img src="/ressources/assets/Medias-book/chapter.jpg"" alt="Image de l'oeuvre">
+                <h3>Nombre de chapitres publiés qu'il y avait</h3>
+                <span><?= $count_two ?></span>
             </article>
             </section>
            

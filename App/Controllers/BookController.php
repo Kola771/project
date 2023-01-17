@@ -2,6 +2,7 @@
 <?php
 require "../App/Controllers/Connexion.php";
 require "../App/Models/BookModel.php";
+require "../App/Models/UserModel.php";
 require "../App/Models/ChapterModel.php";
 require "../App/Models/CommentModel.php";
 
@@ -16,6 +17,11 @@ class BookController {
      * $chaptermodel; on va utiliser cette variable pour instancier la classe ChapterModel dans le controller
      */
     public $chaptermodel;
+
+    /**
+     * $usermodel; on va utiliser cette variable pour instancier la classe UserModel dans le controller
+     */
+    public $usermodel;
 
     //déclaration des variables
     public $status;
@@ -120,7 +126,7 @@ class BookController {
                 if($this->image_book_error == 0) {
 
                     $uniqueName = uniqid('book-image-', true);
-                    // uniqid génère quelque chose comme ca : book-63b85c9a42aac7.70071232
+                    // uniqid génère quelque chose comme ca : book-image-63b85c9a42aac7.70071232
 
                     $file = $uniqueName.".".$extension;
                     move_uploaded_file($this->image_book_tmpname, '../public/ressources/assets/Medias-book/'.$file);
@@ -182,22 +188,40 @@ class BookController {
     /**
      * verifyAll(), pour afficher tous les livres de la bd ayant pour status : En ligne
      */
-    public function home() {
+    public function verifyAll() {
         
         $this->bookmodel = new BookModel();
         $array = $this->bookmodel->verifyAll();
-        // return $array;
-
-        require "../App/Views/Users/home.php";
+        return $array;
     }
 
     /**
-     * verifyAll(), pour afficher tous les livres de la bd
+     * verifyAllDesc(), affiche tous les livres de la bd du plus grand au plus petit 
+     */
+    public function verifyAllDesc() {
+        
+        $this->bookmodel = new BookModel();
+        $array = $this->bookmodel->verifyAllDesc();
+        return $array;
+    }
+
+    /**
+     * verifyAllBook(), pour afficher tous les livres de la bd
      */
     public function verifyAllBook() {
         
         $this->bookmodel = new BookModel();
         $array = $this->bookmodel->verifyAllBook();
+        return $array;
+    }
+
+    /**
+     * verifyAllUsers(), pour afficher tous les utilisateurs de la bd
+     */
+    public function verifyAllUsers() {
+        
+        $this->usermodel = new UserModel();
+        $array = $this->usermodel->verifyAllUsers();
         return $array;
     }
 
@@ -228,8 +252,8 @@ class BookController {
         $url = $_SERVER["QUERY_STRING"];
         preg_match("/\/(?<book_id>[a-zA-Z-\-]+)\//i", $url, $matches);
         $book_id = $matches["book_id"];
-        $this->bookmodel = new BookModel();
-        $array = $this->bookmodel->verifyAllDistinctChapter($book_id);
+        $this->chaptermodel = new ChapterModel();
+        $array = $this->chaptermodel->verifyAllDistinctChapter($book_id);
         if(count($array)>0) {
             return $array;
         } else {
@@ -243,14 +267,78 @@ class BookController {
      */
     public function verifyAllDistinctChapters() {
 
-        $this->bookmodel = new BookModel();
-        $array = $this->bookmodel->verifyAllDistinctChapters();
+        $this->chaptermodel = new ChapterModel();
+        $array = $this->chaptermodel->verifyAllDistinctChapters();
         if(count($array)>0) {
             return $array;
         } else {
             return $array = [];
         }
 
+    }
+
+    /**
+     * temporaire_moins(), pour afficher que les éléments récemments créés
+     */
+    public function temporaire_moins($array) {
+        $tableau = [];
+        foreach($array as $key => $values) {
+
+            //je transforme en tableau la date de création du chapitre
+            $explode= explode(" ", $values["created_at"]);
+
+            //date de création
+            $date1 = $explode[0]; 
+
+            //date aujourd'hui
+            $date2 = date("Y-m-d");
+
+            $date1=date_create($date1);
+            $date2=date_create($date2);
+
+            //différence entre la date aujourd'hui et la date de création
+            $diff=date_diff($date1,$date2);
+
+            //la différence en jour entre la date aujourd'hui et la date de création
+            $difference = $diff->format("%a");
+
+            if($difference <= 30) {
+                array_push($tableau, $array[$key]);
+            }
+        }
+            return $tableau;
+    }
+
+    /**
+     * temporaire_more(), pour afficher que les éléments créés datants
+     */
+    public function temporaire_more($array) {
+        $tableau = [];
+        foreach($array as $key => $values) {
+
+            //je transforme en tableau la date de création du chapitre
+            $explode= explode(" ", $values["created_at"]);
+
+            //date de création
+            $date1 = $explode[0]; 
+
+            //date aujourd'hui
+            $date2 = date("Y-m-d");
+
+            $date1=date_create($date1);
+            $date2=date_create($date2);
+
+            //différence entre la date aujourd'hui et la date de création
+            $diff=date_diff($date1,$date2);
+
+            //la différence en jour entre la date aujourd'hui et la date de création
+            $difference = $diff->format("%a");
+
+            if($difference > 30) {
+                $tableau = $array;
+            }
+        }
+            return $tableau;
     }
 
     /**
@@ -262,8 +350,23 @@ class BookController {
         preg_match("/\/(?<number>\d+)\/(?<book_id>[a-zA-Z-\-]+)\//i", $url, $matches);
         $number = $matches["number"];
         $book_id = $matches["book_id"];
-        $this->bookmodel = new BookModel();
-        $array = $this->bookmodel->verifyAllChapter($number, $book_id);
+        $this->chaptermodel = new ChapterModel();
+        $array = $this->chaptermodel->verifyAllChapter($number, $book_id);
+        if(count($array)>0) {
+            return $array;
+        } else {
+            return $array = [];
+        }
+
+    }
+
+    /**
+     * verifyAllChapters(), affiche le chapître d'un livre 
+     */
+    public function verifyAllChapters() {
+
+        $this->chaptermodel = new ChapterModel();
+        $array = $this->chaptermodel->verifyAllChapters();
         if(count($array)>0) {
             return $array;
         } else {
@@ -318,7 +421,8 @@ class BookController {
             $this->chaptermodel = new ChapterModel();
 
             $this->bookmodel->deleteBook($book_id);
-            $array = $this->commentmodel->deleteCommentBook($book_id);
+            
+            $this->commentmodel->deleteCommentBook($book_id);
 
             $this->chaptermodel->deleteBook($book_id);
 
@@ -333,6 +437,62 @@ class BookController {
     public function selectAllComment() {
         $this->commentmodel = new CommentModel();
         $array = $this->commentmodel->selectAll();
+        return $array;
+    }
+
+    /**
+     * searchBook(), pour recherche une oeuvre à partir de son nom
+     */
+    public function searchBook() {
+        if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["recherche"])) {
+            $name_book =  $_POST["search"];
+            
+            $this->bookmodel = new BookModel();
+
+            $array = $this->bookmodel->verifyName($name_book);
+            $count = count($array);
+            if($count>0) {
+                $book_id = $array[0]["book_id"];
+                $book_id;
+    
+                header("Location:/book/$book_id/show-book");
+                exit();
+            } else {
+                header("Location:/receive/error-search");
+                exit();
+            }
+        }
+    }
+
+    /**
+     * verifyLikesBook(), pour vérifier si il y a un livre dans la bd ayant déjà ses éléments là
+     */
+    public function verifyLikesBook() {
+        
+        $url = $_SERVER["QUERY_STRING"];
+        preg_match("/\/(?<likes>[a-zA-Z-\-]+)\//i", $url, $matches);
+        $likes = $matches["likes"];
+        
+        $this->bookmodel = new BookModel();
+
+        $array = $this->bookmodel->verifyLikesBook($likes);
+        $count = count($array);
+        if($count>0) {
+            return $array;
+        } else {
+            return $array = [];
+        }
+    }
+
+    /**
+     * commentCount(), pour afficher le nombre de commentaires a une oeuvre
+     */
+    public function commentCount() {
+        
+        $this->commentmodel = new CommentModel();
+        
+        $array = $this->commentmodel->commentCount();
+
         return $array;
     }
 

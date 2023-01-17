@@ -128,7 +128,7 @@ class RegisterController {
      */
     public function passWord($data) {
 
-        if(preg_match("/^[a-zA-Z-\@]+/i", $data) && strlen($data) >= 8) {
+        if(preg_match("/^[a-zA-Z-\@]+[\d]+/i", $data) && strlen($data) >= 8) {
             return true;
         } 
         

@@ -6,7 +6,7 @@
     $controller = new BookController();
 
     //tableau pour afficher tous les livres 
-    $array = $controller->verifyAll();
+    $array = $controller->verifyLikesBook();
 
 ?>
 
@@ -41,7 +41,9 @@
         
         <ul class="list pad0" id="search_ul">
             <?php for($i=0, $max=count($array); $i<$max;$i++): ?>
-                <li><a href="/book/<?= $array[$i]["book_id"] ?>/show-book"><?= $array[$i]["book_name"] ?></a></li>
+                <?php if($array[$i]["book_status"] == "En ligne") : ?>
+                    <li><a href="/book/<?= $array[$i]["book_id"] ?>/show-book"><?= $array[$i]["book_name"] ?></a></li>
+                <?php endif; ?>
             <?php endfor; ?>
         </ul>
     </div>

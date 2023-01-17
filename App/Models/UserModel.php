@@ -136,6 +136,26 @@ class UserModel extends Connexion {
         return $result;
     }
 
+    /**
+     * verifyAllUsers(), affiche tous les utilisateurs de la bd
+     */
+    public function verifyAllUsers() {
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT * FROM `freek`.users";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->query($sql);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
     
     /**
      * insertUser(), pour insérer dans la bd des utilisateurs

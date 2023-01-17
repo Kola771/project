@@ -21,6 +21,8 @@
 
         <div class="data flex">
 
+           <form class="basis" action="/book-controller/validate-form" method="post" enctype="multipart/form-data">
+
             <?php if(isset($_GET["msg_empty"])): ?>
                  <h3 class="danger">Remplissez tout les champs !!!</h3>
             <?php endif; ?>
@@ -44,8 +46,7 @@
             <?php if(isset($_GET["msg_book_ref_exist"])): ?>
                  <h3 class="danger">Un livre portant ce dimunitif existe déjà !!!</h3>
             <?php endif; ?>
-
-           <form class="basis" action="/book-controller/validate-form" method="post" enctype="multipart/form-data">
+            
             <div class="flex button">
                 <button><a href="/admin/receive/gestion">Annuler la modification</a></button>
                 <button type="submit" name="validate">Valider la publication</button>

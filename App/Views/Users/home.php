@@ -12,13 +12,18 @@
 
 <main>
     <nav class="topnav flex">
+
         <ul class="topul flex list" id="topul2">
+
             <li> <a href="/book/books/show-type">Livres</a> </li>
             <li> <a href="/book/mangas/show-type">Mangas</a> </li>
             <li> <a href="/book/comics/show-type">Bandes dessinées</a> </li>
-            <li class="icon0 white">Icon</li>
+            <li class="icon0 white"><i class="fa fa-bars"></i></li>
+            <a href="#" class="fermer white"><i class="fa fa-search"></i></a>
+
         </ul>
-        <form id="form" action="/book-controller/search-book" method="post">
+
+        <form id="form" class="none" action="/book-controller/search-book" method="post">
             <input list="browsers" type="text" id="input" name="search">
             <datalist id="browsers">
                 <?php foreach($array as $key => $values) : ?>
@@ -45,6 +50,8 @@
             <?php endfor; ?>
         </ul>
     </div>
+
+    <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
 </main>
 
 <script src="/ressources/js/source.js"></script>

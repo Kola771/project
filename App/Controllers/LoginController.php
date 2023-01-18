@@ -106,6 +106,9 @@ class LoginController {
         return false;
     }
 
+    /**
+     * displayUrlInfo(), pour afficher les informations d'un utilisateur grâce aux informations se trouvant dans l'url
+     */
     public function displayUrlInfo() {
         $url = $_SERVER["QUERY_STRING"];
         
@@ -121,10 +124,27 @@ class LoginController {
         }
     }
 
+    /**
+     * displayInfo(), pour afficher les informations des users via certains éléments
+     */
     public function displayInfo($username) {
         $this->usermodel = new UserModel();
         $array = $this->usermodel->verifyUsername($username);
         return $array;
+    }
+
+    /**
+     * deleteUsers(), pour supprimer un/des users
+     */
+    public function deleteUsers() {
+        if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["delete"])) {
+            $user_id = $_POST["delete"];
+            $this->usermodel = new UserModel();
+            $this->usermodel->deleteUsers($user_id);
+            $this->usermodel->deleteCommentUser($user_id);
+            header("Location: /admin/receive/gestion-users");
+            exit();
+        }
     }
 
     public function verifyWordKey() {

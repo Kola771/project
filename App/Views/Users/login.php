@@ -33,6 +33,9 @@
             </div>
             <div class="style"></div>
         </form>
+
+        
+    <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
 </main>
 
 <script src="/ressources/js/navigation.js"></script>

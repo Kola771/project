@@ -25,13 +25,18 @@ $array2 = $controller->verifyAll();
 
 <main>
         <nav class="topnav flex">
+
             <ul class="topul flex list" id="topul2">
+
                 <li> <a href="/book/books/show-type">Livres</a> </li>
                 <li> <a href="/book/mangas/show-type">Mangas</a> </li>
                 <li> <a href="/book/comics/show-type">Bandes dessinées</a> </li>
-                <li class="icon0 white">Icon</li>
+                <li class="icon0 white"><i class="fa fa-bars"></i></li>
+                <a href="#" class="fermer white"><i class="fa fa-search"></i></a>
+
             </ul>
-            <form id="form" action="/book-controller/search-book" method="post">
+
+            <form id="form" class="none" action="/book-controller/search-book" method="post">
                 <input list="browsers" type="text" id="input" name="search">
                 <datalist id="browsers">
                     <?php foreach($array2 as $key => $values) : ?>
@@ -54,7 +59,7 @@ $array2 = $controller->verifyAll();
         </div>
     <?php endforeach; ?>
 
-    <div class="container flex bloc">
+    <div class="container flex bloc media_tab">
         <section class="flex section-book">
 
             <?php foreach($array as $key => $values): ?>
@@ -68,7 +73,7 @@ $array2 = $controller->verifyAll();
             <?php endforeach; ?>
 
             <div class="comments">
-                <h3>Laisser un commentaire</h3>
+                <h2>Les commentaires</h2>
 
                 <?php foreach($array0 as $key => $values): ?>
                     <?php if($values["book_id"] == $array[0]["book_id"]): ?>
@@ -92,16 +97,38 @@ $array2 = $controller->verifyAll();
                             <?php endif; ?>
 
                             <p><?= $values["comment_comment"] ?></p>
+
                             <p>Publié le <?= $values["created_at"] ?></p>
     
                             <!-- Ce code permet à l'utilisateur connecté de supprimer son commentaire -->
                             <?php if((isset($_SESSION['username'])) && $_SESSION['username'] == $values["user_username"]) : ?>
 
                                 <form action="/comment-controller/delete-comment" method="post">
+
                                     <input type="hidden" name="comment_id" value="<?= $values["comment_id"] ?>">
+
                                     <input type="hidden" name="book_id" value="<?= $array[0]["book_id"] ?>">
+
                                     <button type="submit" class="danger" name="validate">Supprimer le commentaire</button>
+                                    
                                 </form>
+                            <?php endif; ?>
+
+                                <?php if((isset($_SESSION['user_role'])) && $_SESSION['user_role'] == 0) : ?>
+
+                                    <?php if((isset($_SESSION['username'])) && $_SESSION['username'] != $values["user_username"]) : ?>
+
+                                        <form action="/comment-controller/delete-comment" method="post">
+
+                                            <input type="hidden" name="comment_id" value="<?= $values["comment_id"] ?>">
+
+                                            <input type="hidden" name="book_id" value="<?= $array[0]["book_id"] ?>">
+
+                                            <button type="submit" class="danger" name="validate">Supprimer le commentaire de cet utilisateur</button>
+
+                                        </form>
+
+                                    <?php endif; ?>
 
                                 <?php endif; ?>
                         </div>
@@ -112,43 +139,76 @@ $array2 = $controller->verifyAll();
 
                 <?php endforeach; ?>
 
-                <form action="/comment-controller/insert-comment" method="post">
-                    <input type="hidden" name="username" value="<?= isset($_SESSION['username']) ? $_SESSION['username'] : '' ?>">
-                    <input type="hidden" name="book_id" value="<?= $array[0]["book_id"] ?>">
-                    <textarea name="comments" id="comments" cols="30" rows="10" placeholder="Laisser un commentaire" required></textarea>
-                    <?php if(isset($_SESSION["username"])): ?>
-                        <button type="submit" name="validate">Envoyer le commentaire</button>
-                    <?php else: ?>
-                            <button disabled>Envoyer le commentaire</button>
-                    <?php endif; ?>
-                </form>
+                <?php if(isset($_SESSION["username"])): ?>
+
+                        <h3>Laisser un commentaire</h3>
+
+                        <form action="/comment-controller/insert-comment" method="post">
+
+                            <input type="hidden" name="username" value="<?= isset($_SESSION['username']) ? $_SESSION['username'] : '' ?>">
+                            
+                            <input type="hidden" name="book_id" value="<?= $array[0]["book_id"] ?>">
+
+                            <textarea name="comments" id="comments" cols="30" rows="10" placeholder="Laisser un commentaire" required></textarea>
+
+                            <button type="submit" name="validate">Envoyer le commentaire</button>
+
+                        </form>
+
+                <?php endif; ?>
 
             </div>
         </section>
 
-        <section class="chapter">
+        <section class="chapter chapter_media">
+
             <?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
+
             <p><a href="/book/<?= $array[0]["book_id"] ?>/update-book">Modifier le livre</a></p>
+
             <?php endif; ?>
+
             <div class="flex">
-                <button class="chapter_icon">Icon</button>
+                <button class="chapter_icon"><i class="fa fa-bars"></i></button>
                
                 <h3>Chapitres</h3>
             </div>
-            <?php if($array1 !== []) : ?>
-                <ul>
-                    <?php for($i=0; $i<count($array1); $i++) : ?>
-                        <li><a href="/book/<?= $array1[$i]["chapter_number"] ?>/<?= $array1[$i]["book_id"] ?>/show-chapter"> Chapitre <?= $i+1 ?> </a></li>
-                    <?php endfor; ?> 
-                </ul>
-                <?php else : ?>
+
+            <?php if(isset($_SESSION["user_role"])): ?>
+
+                <?php if($array1 !== []) : ?>
+
                     <ul>
-                        <li>Pas de chapitres en cours</li>
+
+                        <?php for($i=0; $i<count($array1); $i++) : ?>
+
+                            <li><a href="/book/<?= $array1[$i]["chapter_number"] ?>/<?= $array1[$i]["book_id"] ?>/show-chapter"> Chapitre <?= $i+1 ?> </a></li>
+
+                        <?php endfor; ?> 
+                        
                     </ul>
-            <?php endif; ?>
+
+                <?php else : ?>
+
+                        <ul>
+                            <li>Pas de chapitres en cours</li>
+                        </ul>
+
+                <?php endif; ?>
+
+                <?php else: ?>
+
+                    <ul>
+
+                        <li>Vous n'êtes pas connecté!!</li>
+
+                    </ul>
+
+                <?php endif; ?>
         </section>
     </div>
 
+    <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
 </main>
 
 <script src="/ressources/js/navigation.js"></script>

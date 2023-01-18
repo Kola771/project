@@ -17,7 +17,7 @@
     <header>
         <div class="header flex white">
             <h1 class="margin0">Fre<span class="orange">ek</span> </h1>
-            <a href="#" class="hidden">Icon</a>
+            <a href="#" class="hidden"><i class="fa fa-bars"></i></a>
             <nav class="topnav0">
                 <ul class="topul flex list" id="topul">
                     <li><a href="/receive/home">Home</a></li>

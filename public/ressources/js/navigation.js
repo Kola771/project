@@ -5,6 +5,9 @@ let hidden = document.querySelector(".hidden");
 let icon0 = document.querySelector(".icon0");
 let x = 0;
 
+let fermer = document.querySelector(".fermer");
+let form = document.querySelector(".none");
+let y= 0;
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -17,6 +20,19 @@ document.addEventListener("DOMContentLoaded", function() {
             case 1:
                 topnav0.style="display:none";
                 x=0
+                break;
+        }
+    })
+
+    fermer.addEventListener("click", (e) => {
+        switch(y) {
+            case 0:
+                form.style="display:block";
+                y++;
+                break;
+            case 1:
+                form.style="display:none";
+                y=0
                 break;
         }
     })

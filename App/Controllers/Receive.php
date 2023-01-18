@@ -38,6 +38,10 @@ class Receive {
         require "../App/Views/Admin/gestion.php";
     }
 
+    public function gestionUsers() {
+        require "../App/Views/Admin/gestion-users.php";
+    }
+
     public function createBook() {
         require "../App/Views/Admin/create-book.php";
     }

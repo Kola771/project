@@ -134,7 +134,7 @@ class Bookmodel extends Connexion {
         /**
          * $sql, pour les requêtes vers la base de données
          */
-        $sql = "SELECT * FROM `freek`.books ORDER BY created_at DESC";
+        $sql = "SELECT * FROM `freek`.books ORDER BY created_at DESC LIMIT 5";
 
         /**
          * $stmt, pour recupérer la requête préparée

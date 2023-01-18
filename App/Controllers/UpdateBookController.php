@@ -16,6 +16,7 @@ class UpdateBookController {
     public $name_book;
     public $ref_book;
     public $image_book;
+    public $image;
     public $desc_book;
     public $update_at;
 
@@ -67,6 +68,7 @@ class UpdateBookController {
             $this->ref_book = $_POST["ref_book"];
 
             $ref_book0 = $_POST["ref_book0"];
+            $this->image = $_POST["image"];
 
             $this->image_book_name = $_FILES["image_book"]["name"];
             $this->image_book_tmpname = $_FILES["image_book"]["tmp_name"];
@@ -104,10 +106,6 @@ class UpdateBookController {
 
                         $lenght = count($array);
 
-                        echo "<pre>";
-            var_dump($array);
-            echo "</pre>";
-
                         if($lenght>0) {
                             if($id === $array[0]["book_id"]) {
 
@@ -118,6 +116,8 @@ class UpdateBookController {
 
                                         $file = $uniqueName.".".$extension;
                                         move_uploaded_file($this->image_book_tmpname, '../public/ressources/assets/Medias-book/'.$file);
+
+                                        unlink("../public/ressources/assets/Medias-book/$this->image");
 
                                         $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
                                         header("Location: /admin/receive/gestion");
@@ -130,6 +130,8 @@ class UpdateBookController {
 
                                         $file = $uniqueName.".".$extension;
                                         move_uploaded_file($this->image_book_tmpname, '../public/ressources/assets/Medias-book/'.$file);
+                                        
+                                        unlink("sources/assets/Medias-book/$this->image");
                                         
                                         $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
                                         header("Location: /admin/receive/gestion");
@@ -149,7 +151,9 @@ class UpdateBookController {
 
                                 $file = $uniqueName.".".$extension;
                                 move_uploaded_file($this->image_book_tmpname, '../public/ressources/assets/Medias-book/'.$file);
-                                
+
+                                unlink("../public/ressources/assets/Medias-book/$this->image");
+
                                 $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
                                 header("Location: /admin/receive/gestion");
                                 exit();
@@ -160,7 +164,9 @@ class UpdateBookController {
 
                                 $file = $uniqueName.".".$extension;
                                 move_uploaded_file($this->image_book_tmpname, '../public/ressources/assets/Medias-book/'.$file);
-                                
+
+                                unlink("../public/ressources/assets/Medias-book/$this->image");
+
                                 $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
                                 header("Location: /admin/receive/gestion");
                                 exit();

@@ -14,6 +14,7 @@ class UpdateProfilController {
     public $email;
     public $user_username;
     public $user_image;
+    public $image;
     public $user_id;
     public $user;
 
@@ -116,6 +117,7 @@ class UpdateProfilController {
         $this->user_username = $this->sanitaze($_POST["username"]);
         
         $this->user_id = $_POST["user_id"];
+        $this->image = $_POST["image"];
 
         //Eléments de l'image
         $this->picture_name = $_FILES["user_image"]["name"];
@@ -169,6 +171,9 @@ class UpdateProfilController {
                             if($lenght1>0) {
                                 if($array[0]["user_username"] === $array2[0]["user_username"]) {
                                     move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+
+                                    unlink("../public/ressources/assets/medias-users/$this->image");
+
                                     $_SESSION["image"] = $file;
 
                                     $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
@@ -200,6 +205,9 @@ class UpdateProfilController {
                         if($array[0]["user_email"] === $array2[0]["user_email"]) {
                             if($array[0]["user_username"] === $array2[0]["user_username"]) {
                                 move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+
+                                unlink("../public/ressources/assets/medias-users/$this->image");
+
                                 $_SESSION["image"] = $file;
 
                                 $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
@@ -218,6 +226,9 @@ class UpdateProfilController {
                     } 
                     else {
                         move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+                        
+                        unlink("../public/ressources/assets/medias-users/$this->image");
+                        
                         $_SESSION["image"] = $file;
 
                         $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);

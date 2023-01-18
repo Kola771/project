@@ -150,6 +150,17 @@ body {
     gap: .8em;
 }
 
+.top {
+    position: fixed;
+    bottom: 100px;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--c33-);
+    aspect-ratio: 1;
+    width: 50px;
+}
 
 /* Header du site complet */
 
@@ -443,6 +454,10 @@ header {
     border-radius: var(--pd_2-);
 }
 
+.article {
+    margin-top: var(--px15-);
+}
+
 .article>div>h4 {
     margin: 0;
 }
@@ -620,8 +635,14 @@ header {
 .task {
     display: none;
     position: fixed;
-    top: 50px;
+    top: 50%;
     left: 0;
+    background-color: var(--c33-);
+    border: none;
+    padding: var(--pd_8-);
+    text-align: center;
+    color: var(--white-);
+    font-size: var(--px20-);
 }
 
 .data {
@@ -650,7 +671,7 @@ header {
 }
 
 .article-book {
-    flex-basis: 25%;
+    flex-basis: 20%;
     justify-content: center;
     flex-wrap: wrap;
     border: 2px solid var(--black-);
@@ -1167,10 +1188,10 @@ footer>p {
     .topnav {
         flex-direction: column;
     }
-    
     .topnav>.topul {
-        justify-content: space-between;
+        gap: 1em;
     }
+
     .topul.responsive {
         position: relative;
         flex-direction: column;
@@ -1192,7 +1213,8 @@ footer>p {
      }
 
      .topnav>form {
-         width: 70%;
+        display: none;
+         width: 50%;
          align-self: center;
          justify-content: space-between;
      }
@@ -1207,41 +1229,77 @@ footer>p {
 
      /**Main book **/
      .bloc {
-         flex-direction: column-reverse;
+         flex-wrap: wrap;
      }
 
-     .bloc0 {
-         order: 2;
+     .flex_section1 {
+        display: flex; 
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: .5em;
      }
 
-     .bloc1 {
-         order: 1;
+     .flex_section1,
+     .flex_section { 
+        flex-basis: 100%;
+        border: none;
+     }
+
+     .flex_section1>img {
+        width: 40%;
+     }
+
+     .flex_section1>h2 {
+        flex-basis: 70%;
      }
      
     .section-book {
         border-right: none;
+        width: 90%;
+    }
+
+    .media_tab {
+        justify-content: center;
     }
 
     .order2 {
-        flex-basis: 70%;
+        flex-basis: 50%;
     }
 
-    .chapter>ul {
+    .chapter_media {
+        position: fixed;
+        top: 25%;
+        left: 0;
+        background-color: var(--c33-);
+        color: var(--white-);
+        padding: var(--pd_3-);
+    }
+
+    .chapter_media>ul {
         display: none;
         flex-wrap: wrap;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+
+    .chapter_media>p {
+        margin: 0;
+    }
+
+    .chapter_media>p>a {
+        color: var(--white-);
     }
 
     .chapter_icon{
         display: block;
     }
 
-    .chapter>ul>li {
-        flex-basis: 20%;
+    .chapter_media>ul>li>a {
+        color: var(--white-);
     }
 
-    .chapter>ul>li:not(:first-child) {
+    .chapter_media>ul>li:not(:first-child) {
         margin-top: 0;
     }
      
@@ -1265,11 +1323,12 @@ footer>p {
      }
 
      .data {
-         flex-basis: 100%;
+         margin: 5% auto;
+         flex-basis: 90%;
      }
 
      .article-book{
-        flex-basis: 20%;
+        flex-basis: 25%;
      }
 
      .form {
@@ -1283,5 +1342,46 @@ footer>p {
      .form>.password>input {
          flex-basis: 100%;
      }
+
+     .z-index {
+        z-index: -1;
+     }
+
+     
+    #myTable td:last-child {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5em;
+        /* flex-direction: column; */
+        justify-content: center;
+        align-items: center;
+    }
+        
+    #recherche0>div,
+    #recherche1>div,
+    #recherche2>div,
+    #recherche3>div{
+        max-width: 50%;
+        margin: 5% 0 0 25%;
+    }
+        
+    .recherche4>div{
+        padding: 2em;
+        max-width: 70%;
+        margin: 0 0 0 15%;
+    }
+        
+    .recherche4>div>div>div>p{
+        flex-basis: 40%;
+    }
+
+    footer>div {
+        flex-direction: column;
+    }
+
+    footer>div>section:nth-of-type(2) {
+        border-inline: none;
+        border-block: 1px dashed var(--eee-);
+    }
 
 }

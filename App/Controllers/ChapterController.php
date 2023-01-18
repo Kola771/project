@@ -86,40 +86,48 @@ class ChapterController {
                     exit;
                 } 
                 else { 
-                    
-                    for($i=0; $i<$count; $i++) {
-                        //récupération de l'extension de l'image
-                        $tabExtension = pathinfo($this->file_name[$i], PATHINFO_EXTENSION);
-                        $extension = strtolower($tabExtension);
-                        $extensions = ['jpg', 'png', 'jpeg', 'gif'];
-                        $maxSize = 4000000;
-                        if(in_array($extension, $extensions)) {
-                            if($this->file_size[$i] <= $maxSize) {
-                                if($this->file_error[$i] == 0) {
-                    
-                                    $uniqueName = uniqid('mangas-image-', true);
-                                    // uniqid génère quelque chose comme ca : mangas-63b85c9a42aac7.70071232
-                    
-                                    $file = $uniqueName.".".$extension;
-                                    move_uploaded_file($this->file_tmpname[$i], '../public/ressources/assets/medias-chapters/medias-mangas/'.$file);
-                                    
-                                    $this->chaptermodel->insertChapter($this->number, $this->name, $file, $this->text, $this->book_id, $this->created_at);
-                                    
-                    
-                                } else {
-                                    echo "Images non téléchargées \n";
+                    try {
+                        for($i=0; $i<$count; $i++) {
+
+                            //récupération de l'extension de l'image
+                            $tabExtension = pathinfo($this->file_name[$i], PATHINFO_EXTENSION);
+                            $extension = strtolower($tabExtension);
+                            $extensions = ['jpg', 'png', 'jpeg', 'gif'];
+                            $maxSize = 4000000;
+                            
+                            if(in_array($extension, $extensions)) {
+    
+                                if($this->file_size[$i] <= $maxSize) {
+    
+                                    if($this->file_error[$i] == 0) {
+                        
+                                        $uniqueName = uniqid('mangas-image-', true);
+                                        // uniqid génère quelque chose comme ca : mangas-63b85c9a42aac7.70071232
+                        
+                                        $file = $uniqueName.".".$extension;
+                                        move_uploaded_file($this->file_tmpname[$i], '../public/ressources/assets/medias-chapters/medias-mangas/'.$file);
+                                        
+                                        $this->chaptermodel->insertChapter($this->number, $this->name, $file, $this->text, $this->book_id, $this->created_at);
+                                        
+                        
+                                    } else {
+                                        echo "Images non téléchargées \n";
+                                        exit();
+                                    }
+                        
+                                } else{
+                                    echo "La taille de l'image est très élevée \n";
                                     exit();
                                 }
-                    
-                            } else{
-                                echo "La taille de l'image est très élevée \n";
+                            } else {
+                                echo "Mauvaise extension \n";
                                 exit();
                             }
-                        } else {
-                            echo "Mauvaise extension \n";
-                            exit();
                         }
+                    } catch(PDOException $e) {
+                        die('Erreur! trop d\'images:'.$e->getMessage());
                     }
+                    
                     header("Location: /admin/receive/create-chapter?validate");
                     exit();
             }
@@ -172,14 +180,19 @@ class ChapterController {
                 } 
                 else { 
 
+                    try {
                     for($i=0; $i<$count; $i++) {
+
                         //récupération de l'extension de l'image
                         $tabExtension = pathinfo($this->file_name[$i], PATHINFO_EXTENSION);
                         $extension = strtolower($tabExtension);
                         $extensions = ['jpg', 'png', 'jpeg', 'gif'];
                         $maxSize = 4000000;
+
                         if(in_array($extension, $extensions)) {
+                            
                             if($this->file_size[$i] <= $maxSize) {
+
                                 if($this->file_error[$i] == 0) {
                     
                                     $uniqueName = uniqid('comics-image-', true);
@@ -205,6 +218,9 @@ class ChapterController {
                             exit();
                         }
                     }
+                } catch(PDOException $e) {
+                    die('Erreur! trop d\'images:'.$e->getMessage());
+                }
                     header("Location: /admin/receive/create-chapter?validate");
                     exit();
             }

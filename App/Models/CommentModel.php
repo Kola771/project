@@ -106,7 +106,7 @@ class CommentModel extends Connexion {
         /**
          * $sql, pour les requêtes vers la base de données 
          */
-        $sql = "SELECT `books`.book_id, `books`.book_name, `books`.book_status, COUNT(`comments`.comment_comment) AS Nombres FROM `comments`, `books` WHERE `books`.book_id = `comments`.book_id AND `books`.book_status = 'En ligne' GROUP BY `comments`.book_id";
+        $sql = "SELECT `books`.book_id, `books`.book_name, `books`.book_status, COUNT(`comments`.comment_comment) AS Nombres FROM `comments`, `books` WHERE `books`.book_id = `comments`.book_id AND `books`.book_status = 'En ligne' GROUP BY `comments`.book_id ORDER BY Nombres DESC LIMIT 5";
 
         $stmt = $conn->query($sql);
         $result = $stmt->fetchAll();

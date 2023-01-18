@@ -93,6 +93,28 @@ class UserModel extends Connexion {
     }
 
     /**
+     * deleteUsers(), pour supprimer un/des users
+     */
+    public function deleteUsers($user_id) {
+        $this->user_id = $user_id;
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "DELETE FROM `freek`.users WHERE user_id = ?;";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$this->user_id]);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
      * verifyUsername(), pour vérifier si il y a un utilisateur dans la bd ayant déjà cet username
      */
     public function verifyUsername($user_username) {
@@ -155,6 +177,25 @@ class UserModel extends Connexion {
         $result = $stmt->fetchAll();
         return $result;
     }
+
+    
+    /**
+     * deleteCommentUser(), pour supprimer de la bdd le commentaire de l'utilisateur
+     */
+    public function deleteCommentUser($user_id) {
+        
+      $conn = $this->connect();
+
+      $this->user_id = $user_id;
+
+      /**
+       * $sql, pour les requêtes vers la base de données pour supprimer le commentaire ayant cet id
+       */
+      $sql = "DELETE FROM `comments` WHERE user_id = ?";
+
+      $stmt = $conn->prepare($sql);
+      $stmt->execute([$this->user_id]);
+  }
 
     
     /**

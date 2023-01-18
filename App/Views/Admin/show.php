@@ -16,11 +16,12 @@
 <main>
 
     <div class="bloc-div flex">
-            <button class="task">Icon</button>
+        <button class="task"><i class="fa fa-bars"></i></button>
             <nav class="bloc-task">
                 <ul>
                     <li><a href="/admin/receive/dashbord">Acceuil</a></li>
                     <li><a href="/admin/receive/gestion">Gestion des oeuvres</a></li>
+                    <li><a href="/admin/receive/gestion-users">Gestion des users</a></li>
                     <li><a href="/admin/receive/create-book">Publier une oeuvre</a></li>
                     <li><a href="/admin/receive/create-chapter">Publier un chapitre</a></li>
                 </ul>
@@ -54,16 +55,19 @@
 
                                             <div class="flex-image flex">
                                                 <?php foreach($array0 as $key => $value) : ?>
-
+                                                        
                                                         <?php if($value["chapter_title"] == $values["chapter_title"]) : ?>
-
+                                                            
                                                             <?php if(preg_match("/^mangas/i", $value["book_id"])) : ?>
+
                                                                 <img src="/ressources/assets/medias-chapters/medias-mangas/<?= $value["chapter_image"] ?>">
 
                                                             <?php elseif(preg_match("/^comics/i", $value["book_id"])) : ?>
+
                                                                 <img src="/ressources/assets/medias-chapters/medias-comics/<?= $value["chapter_image"] ?>">
                                                             
                                                             <?php else : ?>
+                                                                
                                                                 <div class="justify"><?= $value["chapter_text"] ?></div>
                                                             
                                                             <?php endif; ?>
@@ -74,7 +78,7 @@
                                             </div>
 
                                         </div>
-                                        <button type="reset" class="danger closes"><i class="fa fa-close"></i> Annuler</button>
+                                        <button type="reset" class="danger closes"><i class="fa fa-close"></i>Fermer</button>
                             </div>
                 </div>
             <?php endforeach; ?>

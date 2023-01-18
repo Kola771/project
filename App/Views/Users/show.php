@@ -15,15 +15,22 @@
         $data = $match[0];
     }
 ?>
+
+<?php if(isset($_SESSION["user_role"])): ?>
+    
 <?php if($array[0]["book_status"] === "En ligne"): ?>
 
 <main>
+
     <div class="road">
+
         <a href="/receive/home">Home</a> ->
         <a href="/book/<?= $array[0]["book_id"] ?>/show-book"><?= $array[0]["book_name"] ?></a> ->
         <a href="#">Chapitre <?= $array[0]["chapter_number"] ?></a>
+
     </div>
-    <div class="container flex bloc">
+
+    <div class="container flex bloc media_tab">
         <?php if($data =="mangas"): ?>
 
             <section class="section-book title">
@@ -44,7 +51,7 @@
 
         <?php elseif($data =="comics"): ?>
 
-            <section class="section-book title">
+            <section class="section-book title z-index">
                 <h2>Chapitre <?= $array[0]["chapter_number"] ?>: <?= $array[0]["chapter_title"] ?></h2>
                     <h4>Petit résumé : </h4>
                     <p><?= $array[0]["chapter_text"] ?></p>
@@ -60,17 +67,19 @@
                 </section>
 
         <?php else : ?>
+
         <section class="section-book title">
                 <h2>Chapitre <?= $array[0]["chapter_number"] ?>: <?= $array[0]["chapter_title"] ?></h2>
                     <div class="book">
                         <?= $array[0]["chapter_text"] ?>
                     </div>
         </section>
+
         <?php endif; ?>
 
-        <section class="chapter">
+        <section class="chapter chapter_media">
             <div class="flex">
-                <button class="chapter_icon">Icon</button>
+                <button class="chapter_icon"><i class="fa fa-bars"></i></button>
                 <h3>Chapitres</h3>
             </div>
                 <ul>
@@ -79,12 +88,13 @@
                     <?php endfor; ?> 
                 </ul>
         </section>
+
     </div>
 
+    <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
 </main>
 
     <script src="/ressources/js/show.js"></script>
-    <script src="/ressources/js/navigation.js"></script>
     <script src="/ressources/js/chapter.js"></script>
 
 
@@ -96,3 +106,8 @@
 <h2>Cet article n'est pas disponible actuellement !!!</h2>
 
 <?php endif; ?> 
+<?php else: ?>
+
+<?php header("Location:/receive/home"); ?>
+
+<?php endif; ?>

@@ -19,11 +19,12 @@
 <main>
 
     <div class="bloc-div flex">
-            <button class="task">Icon</button>
+        <button class="task"><i class="fa fa-bars"></i></button>
             <nav class="bloc-task">
                 <ul>
                     <li><a href="/admin/receive/dashbord">Acceuil</a></li>
                     <li><a href="/admin/receive/gestion">Gestion des oeuvres</a></li>
+                    <li><a href="/admin/receive/gestion-users">Gestion des users</a></li>
                     <li><a href="/admin/receive/create-book">Publier une oeuvre</a></li>
                     <li><a href="/admin/receive/create-chapter">Publier un chapitre</a></li>
                 </ul>
@@ -67,8 +68,9 @@
             </div>
             <div class="label flex">
                 <label for="reference">Dimunitif</label>
-                <input type="text" id="reference" name="ref_book" placeholder="comics/book/mangas-MHA" value ="<?= $array[0]["book_id"] ?>">
-                <input type="hidden" id="reference" name="ref_book0" placeholder="comics/book/mangas-MHA" value ="<?= $array[0]["book_id"] ?>">
+                <input type="text" name="ref_book" placeholder="comics/book/mangas-MHA" value ="<?= $array[0]["book_id"] ?>">
+                <input type="hidden" name="ref_book0" value ="<?= $array[0]["book_id"] ?>">
+                <input type="hidden" name="image" value ="<?= $array[0]["book_image"] ?>">
             </div>
             <div class="label flex">
                 <label for="img">L'image de l'oeuvre</label>
@@ -85,8 +87,7 @@
 </main>
 
 
-<script src="/ressources/js/navigation.js"></script>
-<script src="/ressources/js/task.js"></script>
+<script src="/ressources/js/admin.js"></script>
 <?php
     require "footer.php";
 ?>

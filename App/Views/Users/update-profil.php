@@ -25,6 +25,7 @@
             <input type="text" placeholder="Username" name="username" value ="<?= $tableau[0]["user_username"] ?>">
             <input type="file" name="user_image" required>
             <input type="hidden" name="user_id" value ="<?= $tableau[0]["user_id"] ?>">
+            <input type="hidden" name="image" value ="<?= $tableau[0]["user_image"] ?>">
             <button class="white" type="submit" name="validate">Modifier votre profil</button>
             <div class="info flex">
                 <a href="/receive/profil">Retourner sur votre profil</a>

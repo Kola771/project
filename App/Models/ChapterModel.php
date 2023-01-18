@@ -233,7 +233,7 @@ class ChapterModel extends Connexion {
       /**
        * $sql, pour les requêtes vers la base de données
        */
-      $sql = "SELECT `chapters`.chapter_title, `chapters`.chapter_number, `chapters`.chapter_image, `chapters`.chapter_text, `books`.book_id, `books`.book_name, `books`.book_status FROM `books`, `chapters` WHERE `books`.book_id = `chapters`.book_id;";
+      $sql = "SELECT `chapters`.chapter_title, `chapters`.chapter_number, `chapters`.chapter_image, `chapters`.chapter_text, `books`.book_id, `books`.book_name, `books`.book_status, `chapters`.created_at FROM `books`, `chapters` WHERE `books`.book_id = `chapters`.book_id;";
 
       /**
        * $stmt, pour recupérer la requête préparée

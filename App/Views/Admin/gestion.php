@@ -14,11 +14,12 @@
 <main>
 
     <div class="bloc-div flex">
-            <button class="task">Icon</button>
+        <button class="task"><i class="fa fa-bars"></i></button>
             <nav class="bloc-task">
                 <ul>
                     <li><a href="/admin/receive/dashbord">Acceuil</a></li>
                     <li><a href="/admin/receive/gestion">Gestion des oeuvres</a></li>
+                    <li><a href="/admin/receive/gestion-users">Gestion des users</a></li>
                     <li><a href="/admin/receive/create-book">Publier une oeuvre</a></li>
                     <li><a href="/admin/receive/create-chapter">Publier un chapitre</a></li>
                 </ul>
@@ -60,7 +61,7 @@
                                 
                                 <?php endif; ?>
                                 <button type="submit" class="danger supprimer" value = "<?= $values["book_id"] ?>">Supprimer l'oeuvre</button>
-                                <button class="update white watch" value = "<?= $values["book_id"] ?>">Voir l'oeuvre</button>
+                                <button class="update white watch" value = "<?= $values["book_id"] ?>">Plus de détails</button>
                                 <a class="update" href="/book/<?= $values["book_id"] ?>/update-book">Modifier l'oeuvre</a>
                                 <a class="update" href="/book/<?= $values["book_id"] ?>/show-chapters">Voir les chapîtres</a>
 
@@ -129,8 +130,12 @@
                                     <h4>Status :</h4>
                                     <p><?= $values["book_status"] ?></p>
                                 </div>
+                                <div>
+                                    <h4>Publiée le :</h4>
+                                    <p><?= $values["created_at"] ?></p>
+                                </div>
                             </div>
-                            <button type="reset" class="danger closes"><i class="fa fa-close"></i> Annuler</button>
+                            <button type="reset" class="danger closes"><i class="fa fa-close"></i> Fermer</button>
                     </div>
         </div>
     <?php endforeach; ?>

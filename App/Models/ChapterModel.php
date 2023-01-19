@@ -34,7 +34,6 @@ class ChapterModel extends Connexion {
         $result = $stmt->fetchAll();
         return $result;
     }
-
     
     /**
      * verifyNum(), pour vérifier si un livre a déjà un chapître portant ce numéro
@@ -243,5 +242,27 @@ class ChapterModel extends Connexion {
       return $result;
   }
 
+    
+    /**
+     * verifyChapterBook(), pour vérifier si il y a un chapitre ayant ce book_id
+     */
+    public function verifyChapterBook($book_id) {
+      $this->book_id = $book_id;
+
+      $conn = $this->connect();
+
+      /**
+       * $sql, pour les requêtes vers la base de données
+       */
+      $sql = "SELECT * FROM `freek`.chapters WHERE book_id = ?;";
+
+      /**
+       * $stmt, pour recupérer la requête préparée
+       */
+      $stmt = $conn->prepare($sql);
+      $stmt->execute([$this->book_id]);
+      $result = $stmt->fetchAll();
+      return $result;
+  }
 
 }

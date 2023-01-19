@@ -53,8 +53,8 @@ $array2 = $controller->verifyAll();
     </section>
 
     <?php foreach($array as $key => $values): ?>
-        <div class="road">
-            <a href="/receive/home">Home</a> ->
+        <div class="road flex">
+            <a href="/receive/home">Home</a> 
             <a href="#"><?= $values["book_name"] ?></a>
         </div>
     <?php endforeach; ?>
@@ -73,7 +73,7 @@ $array2 = $controller->verifyAll();
             <?php endforeach; ?>
 
             <div class="comments">
-                <h2>Les commentaires</h2>
+                <h2 class="click">Voir les commentaires <button class="button_comment"><i class="fas fa-comment-dots"></i></button></h2>
 
                 <?php foreach($array0 as $key => $values): ?>
                     <?php if($values["book_id"] == $array[0]["book_id"]): ?>
@@ -211,8 +211,7 @@ $array2 = $controller->verifyAll();
     <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
 </main>
 
-<script src="/ressources/js/navigation.js"></script>
-<script src="/ressources/js/chapter.js"></script>
+<script src="/ressources/js/comments.js"></script>
 
 <?php require "footer.php"; ?>
 

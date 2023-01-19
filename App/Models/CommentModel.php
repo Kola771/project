@@ -50,7 +50,8 @@ class CommentModel extends Connexion {
         $sql = "SELECT `comments`.comment_id, `comments`.comment_comment, `users`.user_username, `users`.user_role, `users`.user_image, `books`.book_id, `books`.book_status, `comments`.created_at
         FROM comments
         INNER JOIN users ON `comments`.user_id = `users`.user_id
-        INNER JOIN books ON `comments`.book_id = `books`.book_id;";
+        INNER JOIN books ON `comments`.book_id = `books`.book_id
+        ORDER BY `comments`.created_at DESC;";
 
         /**
          * $stmt, pour recupérer la requête préparée

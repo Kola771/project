@@ -169,7 +169,100 @@ class UpdateProfilController {
                     if($lenght>0) {
                         if($array[0]["user_email"] === $array1[0]["user_email"]) {
                             if($lenght1>0) {
+
                                 if($array[0]["user_username"] === $array2[0]["user_username"]) {
+                                    
+                                    if($this->image == "account.jpg") {
+
+                                        move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+
+                                        $_SESSION["image"] = $file;
+
+                                        $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
+                                        
+                                        // echo "Image prise en charge";
+                                        header("Location:/receive/profil");
+                                        exit();
+                                    } else {
+
+                                        move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+
+                                        unlink("../public/ressources/assets/medias-users/$this->image");
+
+                                        $_SESSION["image"] = $file;
+
+                                        $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
+                                        
+                                        // echo "Image prise en charge";
+                                        header("Location:/receive/profil");
+                                        exit();
+
+                                    }
+
+                                 } else {
+
+                                    echo "Vous ne pouvez pas faire cette modification car il existe déjà quelqu'un ayant déjà ce nom d'utilisateur que vous venez d'entrer !!!";
+                                    exit();
+
+                                 }
+                            } else {
+                                  
+                                    if($this->image == "account.jpg") {
+
+                                        move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+
+                                        $_SESSION["image"] = $file;
+
+                                        $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
+                                        
+                                        // echo "Image prise en charge";
+                                        header("Location:/receive/profil");
+                                        exit();
+
+                                    } else {
+
+                                        move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+
+                                        unlink("../public/ressources/assets/medias-users/$this->image");
+
+                                        $_SESSION["image"] = $file;
+
+                                        $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
+                                        
+                                        // echo "Image prise en charge";
+                                        header("Location:/receive/profil");
+                                        exit();
+
+                                    }
+                             }
+                        } else {
+
+                            echo "Email existant !!!";
+                            exit();
+
+                        }
+                    } 
+                    
+                    elseif($lenght1>0) {
+
+                        if($array[0]["user_email"] === $array2[0]["user_email"]) {
+
+                            if($array[0]["user_username"] === $array2[0]["user_username"]) {
+                                 
+                                if($this->image == "account.jpg") {
+
+                                    move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+                                    
+                                    $_SESSION["image"] = $file;
+
+                                    $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
+                                    
+                                    // echo "Image prise en charge";
+                                    header("Location:/receive/profil");
+                                    exit();
+
+                                } else {
+
                                     move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
 
                                     unlink("../public/ressources/assets/medias-users/$this->image");
@@ -181,40 +274,9 @@ class UpdateProfilController {
                                     // echo "Image prise en charge";
                                     header("Location:/receive/profil");
                                     exit();
-                                 } else {
-                                    echo "Vous ne pouvez pas faire cette modification car il existe déjà quelqu'un ayant déjà ce nom d'utilisateur que vous venez d'entrer !!!";
-                                    exit();
-                                 }
-                            } else {
-                                move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
-                                $_SESSION["image"] = $file;
 
-                                $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
-                                
-                                // echo "Image prise en charge";
-                                header("Location:/receive/profil");
-                                exit();
-                             }
-                        } else {
-                            echo "Email existant !!!";
-                            exit();
-                        }
-                    } 
-                    
-                    elseif($lenght1>0) {
-                        if($array[0]["user_email"] === $array2[0]["user_email"]) {
-                            if($array[0]["user_username"] === $array2[0]["user_username"]) {
-                                move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+                                }
 
-                                unlink("../public/ressources/assets/medias-users/$this->image");
-
-                                $_SESSION["image"] = $file;
-
-                                $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
-                                
-                                // echo "Image prise en charge";
-                                header("Location:/receive/profil");
-                                exit();
                              } else {
                                 echo "Vous ne pouvez pas faire cette modification car il existe déjà quelqu'un ayant déjà ce nom d'utilisateur que vous venez d'entrer !!!";
                                 exit();
@@ -225,30 +287,51 @@ class UpdateProfilController {
                         }
                     } 
                     else {
-                        move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
-                        
-                        unlink("../public/ressources/assets/medias-users/$this->image");
-                        
-                        $_SESSION["image"] = $file;
+                         
+                        if($this->image == "account.jpg") {
 
-                        $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
-                        
-                        // echo "Image prise en charge";
-                        header("Location:/receive/profil");
-                        exit();
+                            move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+
+                            $_SESSION["image"] = $file;
+
+                            $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
+                            
+                            // echo "Image prise en charge";
+                            header("Location:/receive/profil");
+                            exit();
+
+                        } else {
+
+                            move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
+
+                            unlink("../public/ressources/assets/medias-users/$this->image");
+
+                            $_SESSION["image"] = $file;
+
+                            $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
+                            
+                            // echo "Image prise en charge";
+                            header("Location:/receive/profil");
+                            exit();
+
+                        }
                     }
 
                 } else {
+
                     echo "Image non prise en charge";
                     exit();
                 }
             } else {
+
                 echo "Taille élevée";
                 exit();
             }
         } else {
+
             echo "Ce n'est pas la bonne extension";
             exit();
+            
         }
 
     }

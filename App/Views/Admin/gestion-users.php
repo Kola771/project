@@ -108,6 +108,7 @@
         </div>
     <?php endforeach; ?>
 
+    <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
 </main>
 
 

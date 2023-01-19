@@ -355,7 +355,8 @@ class BookController {
         if(count($array)>0) {
             return $array;
         } else {
-            return $array = [];
+            header("Location:/receive/home");
+            exit();
         }
 
     }
@@ -369,9 +370,7 @@ class BookController {
         $array = $this->chaptermodel->verifyAllChapters();
         if(count($array)>0) {
             return $array;
-        } else {
-            return $array = [];
-        }
+        } 
 
     }
 
@@ -419,6 +418,27 @@ class BookController {
             $this->bookmodel = new BookModel();
             $this->commentmodel = new CommentModel();
             $this->chaptermodel = new ChapterModel();
+
+            $array = $this->bookmodel->verify($book_id);
+
+            unlink('../public/ressources/assets/Medias-book/'.$array[0]["book_image"]);
+
+            $array1 = $this->chaptermodel->verifyChapterBook($book_id);
+
+            for($i=0; $i<count($array1); $i++) {
+
+                if(preg_match("/^mangas/i", $array1[$i]["book_id"])) {
+
+                    unlink('../public/ressources/assets/medias-chapters/medias-mangas/'.$array1[$i]["chapter_image"]);
+
+                } 
+                elseif(preg_match("/^comics/i", $array1[$i]["book_id"])) {
+
+                    unlink('../public/ressources/assets/medias-chapters/medias-comics/'.$array1[$i]["chapter_image"]);
+
+                } 
+
+            }
 
             $this->bookmodel->deleteBook($book_id);
             
@@ -479,9 +499,7 @@ class BookController {
         $count = count($array);
         if($count>0) {
             return $array;
-        } else {
-            return $array = [];
-        }
+        } 
     }
 
     /**

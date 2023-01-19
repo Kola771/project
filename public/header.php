@@ -16,7 +16,7 @@
 <body>
     <header>
         <div class="header flex white">
-            <h1 class="margin0">Fre<span class="orange">ek</span> </h1>
+            <h1 class="margin0"><a href="/">Fre<span class="orange">ek</span></a></h1>
             <a href="#" class="hidden"><i class="fa fa-bars"></i></a>
             <nav class="topnav0">
                 <ul class="topul flex list" id="topul">

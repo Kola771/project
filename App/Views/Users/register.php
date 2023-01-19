@@ -54,4 +54,4 @@
     <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
 </main>
 
-<script src="/ressources/js/navigation.js"></script>
+<script src="/ressources/js/task.js"></script>

@@ -24,8 +24,8 @@
 
     <div class="road">
 
-        <a href="/receive/home">Home</a> ->
-        <a href="/book/<?= $array[0]["book_id"] ?>/show-book"><?= $array[0]["book_name"] ?></a> ->
+        <a href="/receive/home">Home</a> 
+        <a href="/book/<?= $array[0]["book_id"] ?>/show-book"><?= $array[0]["book_name"] ?></a> 
         <a href="#">Chapitre <?= $array[0]["chapter_number"] ?></a>
 
     </div>
@@ -51,7 +51,7 @@
 
         <?php elseif($data =="comics"): ?>
 
-            <section class="section-book title z-index">
+            <section class="section-book title">
                 <h2>Chapitre <?= $array[0]["chapter_number"] ?>: <?= $array[0]["chapter_title"] ?></h2>
                     <h4>Petit résumé : </h4>
                     <p><?= $array[0]["chapter_text"] ?></p>

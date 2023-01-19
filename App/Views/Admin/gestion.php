@@ -69,7 +69,10 @@
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-            </table>   
+            </table>  
+            
+    <button class="previous">Previous</button> 
+    <button class="next">Next</button> 
         </div>
     </div>
 
@@ -140,10 +143,12 @@
         </div>
     <?php endforeach; ?>
 
+    <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
 </main>
 
 
 <script src="/ressources/js/admin_search.js"></script>
+<script src="/ressources/js/text.js"></script>
 <?php
     require "footer.php";
 ?>

@@ -36,15 +36,10 @@ class UpdatePasswordController {
     public function emptyInputs() {
 
         if(empty($this->email)){
-            header("Location:/receive/forget?msg_email_empty=email_error&email=$this->email&wordkey=$this->wordkey");
+            header("Location:/receive/forget?msg_email_empty&email=$this->email");
             exit();
         } 
-
-        if(empty($this->wordkey)){
-            header("Location:/receive/forget?msg_wordkey_empty=email_error&email=$this->email&wordkey=$this->wordkey");
-            exit();
-        } 
-            else{
+        else{
             return false;
         }
     }
@@ -54,8 +49,8 @@ class UpdatePasswordController {
      */
     public function verifyWordKey() {
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["validate"])) {
+
         $this->email = $this->sanitaze($_POST["email"]);
-        $this->wordkey = $_POST["wordkey"];
 
         $this->emptyInputs();
 
@@ -65,19 +60,11 @@ class UpdatePasswordController {
 
         $count = count($res);
          if($count>0) {
-
-            if($this->wordkey === $res[0]["user_wordkey"]) {
                 header("Location:/receive/$this->result/update-password");
                 exit();
-            }
-            else {
-                header("Location:/receive/forget?msg_word=wordkey_error&email=$this->email&wordkey=$this->wordkey");
-                exit();
-            }
-            
         } 
         else {
-            header("Location:/receive/forget?msg_email=email_error&email=$this->email&wordkey=$this->wordkey");
+            header("Location:/receive/forget?msg_email&email=$this->email");
             exit();
         }
     }
@@ -91,23 +78,35 @@ class UpdatePasswordController {
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["validate"])) {
         $this->password = $this->sanitaze($_POST["password"]);
         $this->confirm_password = $this->sanitaze($_POST["confirm_password"]);
-
+        $this->wordkey = $this->sanitaze($_POST["wordkey"]);
         
         $this->user_id = $_POST["user_id"];
-        
+
         $this->usermodel = new UserModel();
         
+        $user = $this->usermodel->verifyUserId($this->user_id);
+        $user = $user[0]["user_username"];
+        
+        $wordkey = $this->usermodel->verifyWordkey($this->wordkey);
+        
         $this->emptyInput();
-
+        
         $this->password($this->password);
         $this->password($this->confirm_password);
-
+        
         $this->verifyPass();
 
-        $this->usermodel->updatePasswordUser($this->password, $this->user_id);
-
-        header("Location:/receive/login");
-        exit();
+        if(count($wordkey)>0) {
+            if($wordkey[0]["user_id"] == $this->user_id) {
+                $this->usermodel->updatePasswordUser($this->password, $this->user_id);
+                header("Location:/receive/login");
+                exit();
+            } 
+        }else {
+            header("Location:/receive/$user/updatePassword?wordkey_error");
+            exit();
+        }
+        
         }
 
     }
@@ -116,9 +115,6 @@ class UpdatePasswordController {
      * verifyPass(), pour vérifiez si les deux mot de passe que l'utilisateur entre sont corrects
      */
     public function verifyPass() {
-
-        $empty = $this->usermodel->verifyUserId($this->user_id);
-        $this->user = $empty[0]["user_username"];
 
         if($this->password !== $this->confirm_password) {
             header("Location:/receive/$this->user/updatePassword?password_error");
@@ -140,6 +136,10 @@ class UpdatePasswordController {
             header("Location:/receive/$this->user/updatePassword?password_empty");
             exit();
         } 
+        elseif(empty($this->wordkey)) {
+            header("Location:/receive/$this->user/updatePassword?wordkey_empty");
+            exit();
+        }
             else{
             return false;
         }

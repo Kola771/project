@@ -34,7 +34,7 @@
         </form>
 </main>
 
-<script src="/ressources/js/navigation.js"></script>
+<script src="/ressources/js/task.js"></script>
 
 <?php else: ?>
 

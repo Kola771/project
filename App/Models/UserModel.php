@@ -93,6 +93,28 @@ class UserModel extends Connexion {
     }
 
     /**
+     * verifyWordkey(), pour vérifier si il y a un utilisateur dans la bd ayant déjà cet mot clé
+     */
+    public function verifyWordkey($wordkey) {
+        $this->wordkey = $wordkey;
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT * FROM `freek`.users WHERE user_wordkey = ?;";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$this->wordkey]);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
      * deleteUsers(), pour supprimer un/des users
      */
     public function deleteUsers($user_id) {

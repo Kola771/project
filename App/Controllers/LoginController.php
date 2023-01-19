@@ -139,9 +139,20 @@ class LoginController {
     public function deleteUsers() {
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["delete"])) {
             $user_id = $_POST["delete"];
+
             $this->usermodel = new UserModel();
+
+            $array = $this->usermodel->verifyUserId($user_id);
+
+            if($array[0]["user_image"] !== "account.jpg") {
+
+                unlink('../public/ressources/assets/medias-users/'.$array[0]["user_image"]);
+
+            }
+
             $this->usermodel->deleteUsers($user_id);
             $this->usermodel->deleteCommentUser($user_id);
+
             header("Location: /admin/receive/gestion-users");
             exit();
         }

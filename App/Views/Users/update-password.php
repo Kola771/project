@@ -21,11 +21,25 @@
             <?php if(isset($_GET["password_empty"])): ?>
                  <h3 class="danger">Remplissez tous les champs !!!</h3>
             <?php endif; ?>
+            
+            <?php if(isset($_GET["wordkey_error"])): ?>
+                 <h3 class="danger">Le mot clé n'est pas correct !!!</h3>
+            <?php endif; ?>
+
+            <?php if(isset($_GET["wordkey_empty"])): ?>
+                 <h3 class="danger">Veuillez entrer votre mot clé !!!</h3>
+            <?php endif; ?>
 
             <input type="password" name="password" placeholder="Entrez votre nouveau password">
+
             <input type="password" name="confirm_password" placeholder="Confirm password">
+
+            <input type="text" name="wordkey" placeholder="Mettez votre mot clé">
+
             <input type="hidden" name="user_id" value ="<?= $tableau[0]["user_id"] ?>">
+
             <button class="white" type="submit" name="validate">Valider</button>
+            
             <div class="info flex">
                 <a href="/receive/login">Retour</a>
             </div>
@@ -33,4 +47,4 @@
         </form>
 </main>
 
-<script src="/ressources/js/navigation.js"></script>
+<script src="/ressources/js/task.js"></script>

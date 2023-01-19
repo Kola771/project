@@ -82,6 +82,20 @@ body {
     background-color: var(--eee-);
 }
 
+::-webkit-scrollbar {
+    width: var(--px10-);
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: var(--orangepur-);
+    border-radius: .5em;
+}
+
+::-webkit-scrollbar-track {
+    /* background-color: blue; */
+
+}
+
 /*  */
 .flex {
     display: flex;
@@ -154,12 +168,22 @@ body {
     position: fixed;
     bottom: 100px;
     right: 0;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     background-color: var(--c33-);
     aspect-ratio: 1;
     width: 50px;
+}
+
+.fermer {
+    display: none;
+}
+
+.button_comment {
+    border: none;
+    font-size: var(--px20-);
+    background-color: var(--eee-);
 }
 
 /* Header du site complet */
@@ -409,7 +433,7 @@ header {
     flex-wrap: wrap;
     padding: var(--pd_5-);
     gap: .8em;
-    flex-basis: 85%;
+    flex-basis: 80%;
     border-right: 1px solid var(--black-);
 }
 
@@ -501,6 +525,10 @@ header {
 
 .chapter_icon {
     display: none;
+    border: none;
+    background-color: var(--c33-);
+    color: var(--white-);
+    font-size: var(--px20-);
 }
 
 .chapter>div {
@@ -534,15 +562,27 @@ header {
     color: var(--blnuitcl-);
 }
 
+.chapter_media {
+    overflow-y: scroll;
+    flex-basis: 10%;
+    height: 400px;
+}
+
 
 /* Main Show */
 
 .road {
     margin: var(--px20-) auto var(--px20-);
     max-width: 1300px;
-    padding: var(--pd_3-);
+    gap: var(--pd_3-);
+}
+
+.road>a {
     background-color: var(--orange-);
+    padding: var(--pd_3-);
     font-size: var(--px18-);
+    border-top-right-radius: var(--pd_8-);
+    border-bottom-right-radius: var(--pd_8-);
 }
 
 .relative {
@@ -1273,6 +1313,7 @@ footer>p {
         background-color: var(--c33-);
         color: var(--white-);
         padding: var(--pd_3-);
+        height: auto;
     }
 
     .chapter_media>ul {
@@ -1343,8 +1384,8 @@ footer>p {
          flex-basis: 100%;
      }
 
-     .z-index {
-        z-index: -1;
+     .fermer {
+        display: block;
      }
 
      
@@ -1373,6 +1414,10 @@ footer>p {
         
     .recherche4>div>div>div>p{
         flex-basis: 40%;
+    }
+
+    .top {
+        display: flex;
     }
 
     footer>div {

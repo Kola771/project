@@ -20,13 +20,13 @@
             <a href="#" class="hidden"><i class="fa fa-bars"></i></a>
             <nav class="topnav0">
                 <ul class="topul flex list" id="topul">
-                    <li><a href="/receive/home">Home</a></li>
+                    <li><a href="/book-controller/view-home">Home</a></li>
                     <?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
                         <li><a href="/admin/receive/dashbord">Dashbord</a></li>
-                        <li><a href="/receive/profil"><i class="fa fa-account"></i>Profil</a></li>
+                        <li><a href="/book-controller/view-profil"><i class="fa fa-account"></i>Profil</a></li>
                         <li><a href="/receive/logout">Deconnexion</a></li>
                     <?php elseif(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 1): ?>
-                        <li><a href="/receive/profil"><i class="fa fa-account"></i>Profil</a></li>
+                        <li><a href="/book-controller/view-profil"><i class="fa fa-account"></i>Profil</a></li>
                         <li><a href="/receive/logout">Deconnexion</a></li>
                     <?php else: ?>
                         <li><a href="/receive/login">Login</a></li>

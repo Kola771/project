@@ -3,18 +3,11 @@
 <?php
 
 class Receive {
-    public function home() {
-        require "../App/Views/Users/home.php";
-    }
     
     public function dashbord() {
         require "../App/Views/Admin/index.php";
     }
 
-    public function profil() {
-       require "../App/Views/Users/profil.php";
-    }
-    
     public function register() {
         require "../App/Views/Users/register.php";
     }
@@ -48,10 +41,6 @@ class Receive {
     
     public function createChapter() {
         require "../App/Views/Admin/create-chapter.php";
-    }
-    
-    public function updateProfil() {
-        require "../App/Views/Users/update-profil.php";
     }
     
     public function updatePassword() {

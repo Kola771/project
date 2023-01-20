@@ -3,21 +3,6 @@
 <?php
 
 require "header.php";
-require "../App/Controllers/BookController.php";
-
-$controller = new BookController();
-
-// tableau pour l'affichage du livre
-$array = $controller->verifyUrlAll();
-
-// tableau pour l'affichage des commentaires 
-$array0 = $controller->selectAllComment();
-
-//tableau pour l'affichage des chapitres
-$array1 = $controller->verifyAllDistinctChapter();
-
-//tableau pour afficher tous les livres 
-$array2 = $controller->verifyAll();
 
 ?>
 
@@ -28,9 +13,9 @@ $array2 = $controller->verifyAll();
 
             <ul class="topul flex list" id="topul2">
 
-                <li> <a href="/book/books/show-type">Livres</a> </li>
-                <li> <a href="/book/mangas/show-type">Mangas</a> </li>
-                <li> <a href="/book/comics/show-type">Bandes dessinées</a> </li>
+                <li> <a href="/book-controller/books/view-show-element">Livres</a> </li>
+                <li> <a href="/book-controller/mangas/view-show-element">Mangas</a> </li>
+                <li> <a href="/book-controller/comics/view-show-element">Bandes dessinées</a> </li>
                 <li class="icon0 white"><i class="fa fa-bars"></i></li>
                 <a href="#" class="fermer white"><i class="fa fa-search"></i></a>
 
@@ -54,7 +39,7 @@ $array2 = $controller->verifyAll();
 
     <?php foreach($array as $key => $values): ?>
         <div class="road flex">
-            <a href="/receive/home">Home</a> 
+            <a href="/book-controller/view-home">Home</a> 
             <a href="#"><?= $values["book_name"] ?></a>
         </div>
     <?php endforeach; ?>
@@ -182,7 +167,7 @@ $array2 = $controller->verifyAll();
 
                         <?php for($i=0; $i<count($array1); $i++) : ?>
 
-                            <li><a href="/book/<?= $array1[$i]["chapter_number"] ?>/<?= $array1[$i]["book_id"] ?>/show-chapter"> Chapitre <?= $i+1 ?> </a></li>
+                            <li><a href="/book-controller/<?= $array1[$i]["chapter_number"] ?>/<?= $array1[$i]["book_id"] ?>/view-chapter"> Chapitre <?= $i+1 ?> </a></li>
 
                         <?php endfor; ?> 
                         

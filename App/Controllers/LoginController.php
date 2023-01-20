@@ -48,7 +48,7 @@ class LoginController {
                 $_SESSION["wordkey"] = $res[0]["user_wordkey"];
                 $_SESSION["user_role"] = $res[0]["user_role"];
                 $_SESSION["created_at"] = $res[0]["created_at"];
-                header("Location:/receive/home");
+                header("Location:/");
                 exit();
              }
              else {
@@ -131,6 +131,14 @@ class LoginController {
         $this->usermodel = new UserModel();
         $array = $this->usermodel->verifyUsername($username);
         return $array;
+    }
+
+    public function updateProfil() {
+
+    $tableau = $this->displayUrlInfo();
+
+    require_once("../App/Views/Users/update-profil.php");
+
     }
 
     /**

@@ -3,13 +3,6 @@
 <?php
 
 class Book {
-    public function showBook() {
-        require "../App/Views/Users/book.php";
-    }
-
-    public function showChapter() {
-        require "../App/Views/Users/show.php";
-    }
 
     public function updateBook() {
         require "../App/Views/Admin/update-book.php";
@@ -23,9 +16,6 @@ class Book {
         require "../App/Views/Admin/show.php";
     }
 
-    public function showType() {
-        require "../App/Views/Users/show-element.php";
-    }
 }
 
 ?>

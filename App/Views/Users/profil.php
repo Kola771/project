@@ -2,12 +2,7 @@
 
 <?php 
     require "header.php"; 
-    require "../App/Controllers/BookController.php";
     
-    $controller = new BookController();
-    
-    // tableau pour l'affichage des commentaires 
-    $array0 = $controller->selectAllComment();
     
 ?>
 
@@ -17,7 +12,7 @@
     <div class="container flex bloc">
         <section class="flex_section1 title">
             <img src="/ressources/assets/medias-users/<?php echo $_SESSION["image"] ?>" alt="account">
-            <h2> <a href="/receive/<?php echo $_SESSION["username"] ?>/update-profil">Modifier votre profil</a></h2>
+            <h2> <a href="/login-controller/<?php echo $_SESSION["username"] ?>/update-profil">Modifier votre profil</a></h2>
         </section>
         
         <section class="flex_section chapter">
@@ -29,20 +24,35 @@
             <p>Date de création du compte : <strong><?php echo $_SESSION["created_at"];?></strong></p>
 
             <article class="article">
+
                 <h4 class="border">Tout vos commentaires</h4>
+
             <?php foreach($array0 as $key => $values) : ?>
+
                 <?php if($values["book_status"] == "En ligne"): ?>
+
                     <?php if($values["user_username"] == $_SESSION["username"]) : ?>
+
                     <div class="padding">
+
                         <p><?= $values["comment_comment"] ?></p>
+
                         <p>Publié le <?= $values["created_at"] ?></p>
-                        <a href="/book/<?= $values["book_id"] ?>/show-book" class="primary">Voir article</a>
+
+                        <a href="/book-controller/<?= $values["book_id"] ?>/view-book" class="primary">Voir article</a>
+
                     </div>
+
                     <?php endif; ?>
+
                 <?php endif; ?>
+
             <?php endforeach; ?>
+
             </article>
+
         </section>
+        
     </div>
     
     <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>

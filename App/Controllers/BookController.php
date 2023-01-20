@@ -514,5 +514,46 @@ class BookController {
         return $array;
     }
 
+    public function viewBook() {
+        $array = $this->verifyUrlAll();
+        $array0 = $this->selectAllComment();
+        $array1 = $this->verifyAllDistinctChapter();
+        $array2 = $this->verifyAll();
+
+        require_once("../App/Views/Users/book.php");
+    }
+    
+    public function viewHome() {
+        $array = $this->verifyAll();
+
+        require_once("../App/Views/Users/home.php");
+    }
+
+    public function viewChapter() {
+        
+        $array = $this->verifyAllChapter();
+        $array1 = $this->verifyAllDistinctChapter();
+    
+        $data = $array[0]["book_id"];
+        if(preg_match("/^mangas/i", $data, $match) || preg_match("/^comics/i", $data, $match) || preg_match("/^books/i", $data, $match)) {
+            $data = $match[0];
+        }
+
+        require_once("../App/Views/Users/show.php");
+    }
+    
+    public function viewProfil() {
+
+        $array0 = $this->selectAllComment();
+        
+        require_once("../App/Views/Users/profil.php");
+    }
+
+    public function viewShowElement() {
+
+    $array = $this->verifyLikesBook();
+
+    require_once('../App/Views/Users/show-element.php');
+    }
 
 }

@@ -60,14 +60,14 @@ class UpdateProfilController {
 
         if(preg_match("/^[a-zA-Z-^\@]+[\d]+\$/i", $data)) {
             if(preg_match("/[\@]/i", $data)) {
-                header("location:/receive/$this->user/update-profil?msg_userName=error username");
+                header("location:/login-controller/$this->user/update-profil?msg_userName=error username");
                 exit();
             }
             return true;
         }
         
         else {
-            header("location:/receive/$this->user/update-profil?msg_userName=error username");
+            header("location:/login-controller/$this->user/update-profil?msg_userName=error username");
             exit();
         }
 
@@ -85,17 +85,17 @@ class UpdateProfilController {
         $this->user = $empty[0]["user_username"];
 
         if(empty($this->firstname)) {
-            header("location:/receive/$this->user/update-profil?msg_firstname=error firstname");
+            header("location:/login-controller/$this->user/update-profil?msg_firstname=error firstname");
             exit();
         } 
 
         if(empty($this->lastname)) {
-            header("location:/receive/$this->user/update-profil?msg_lastname=error lastname");
+            header("location:/login-controller/$this->user/update-profil?msg_lastname=error lastname");
             exit();
         } 
 
         if(empty($this->email)) {
-            header("location:/receive/$this->user/update-profil?msg_email=error email");
+            header("location:/login-controller/$this->user/update-profil?msg_email=error email");
             exit();
         } 
         else {
@@ -181,7 +181,7 @@ class UpdateProfilController {
                                         $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                                         
                                         // echo "Image prise en charge";
-                                        header("Location:/receive/profil");
+                                        header("Location:/book-controller/view-profil");
                                         exit();
                                     } else {
 
@@ -194,7 +194,7 @@ class UpdateProfilController {
                                         $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                                         
                                         // echo "Image prise en charge";
-                                        header("Location:/receive/profil");
+                                        header("Location:/book-controller/view-profil");
                                         exit();
 
                                     }
@@ -216,7 +216,7 @@ class UpdateProfilController {
                                         $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                                         
                                         // echo "Image prise en charge";
-                                        header("Location:/receive/profil");
+                                        header("Location:/book-controller/view-profil");
                                         exit();
 
                                     } else {
@@ -230,7 +230,7 @@ class UpdateProfilController {
                                         $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                                         
                                         // echo "Image prise en charge";
-                                        header("Location:/receive/profil");
+                                        header("Location:/book-controller/view-profil");
                                         exit();
 
                                     }
@@ -258,7 +258,7 @@ class UpdateProfilController {
                                     $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                                     
                                     // echo "Image prise en charge";
-                                    header("Location:/receive/profil");
+                                    header("Location:/book-controller/view-profil");
                                     exit();
 
                                 } else {
@@ -272,7 +272,7 @@ class UpdateProfilController {
                                     $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                                     
                                     // echo "Image prise en charge";
-                                    header("Location:/receive/profil");
+                                    header("Location:/book-controller/view-profil");
                                     exit();
 
                                 }
@@ -297,7 +297,7 @@ class UpdateProfilController {
                             $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                             
                             // echo "Image prise en charge";
-                            header("Location:/receive/profil");
+                            header("Location:/book-controller/view-profil");
                             exit();
 
                         } else {
@@ -311,7 +311,7 @@ class UpdateProfilController {
                             $this->usermodel->updateUser($this->firstname, $this->lastname, $this->user_username, $this->email, $file, $this->user_id);
                             
                             // echo "Image prise en charge";
-                            header("Location:/receive/profil");
+                            header("Location:/book-controller/view-profil");
                             exit();
 
                         }

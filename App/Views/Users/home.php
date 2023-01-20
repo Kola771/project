@@ -1,12 +1,5 @@
 <?php
     require "header.php";
-    require "../App/Controllers/BookController.php";
-
-    //instanciation de la classe BookController()
-    $controller = new BookController();
-
-    //tableau pour afficher tous les livres 
-    $array = $controller->verifyAll();
 
 ?>
 
@@ -15,9 +8,9 @@
 
         <ul class="topul flex list" id="topul2">
 
-            <li> <a href="/book/books/show-type">Livres</a> </li>
-            <li> <a href="/book/mangas/show-type">Mangas</a> </li>
-            <li> <a href="/book/comics/show-type">Bandes dessinées</a> </li>
+            <li> <a href="/book-controller/books/view-show-element">Livres</a> </li>
+            <li> <a href="/book-controller/mangas/view-show-element">Mangas</a> </li>
+            <li> <a href="/book-controller/comics/view-show-element">Bandes dessinées</a> </li>
             <li class="icon0 white"><i class="fa fa-bars"></i></li>
             <a href="#" class="fermer white"><i class="fa fa-search"></i></a>
 
@@ -46,7 +39,7 @@
         
         <ul class="list pad0" id="search_ul">
             <?php for($i=0, $max=count($array); $i<$max;$i++): ?>
-                <li><a href="/book/<?= $array[$i]["book_id"] ?>/show-book"><?= $array[$i]["book_name"] ?></a></li>
+                <li><a href="/book-controller/<?= $array[$i]["book_id"] ?>/view-book"><?= $array[$i]["book_name"] ?></a></li>
             <?php endfor; ?>
         </ul>
     </div>

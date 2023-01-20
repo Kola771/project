@@ -2,18 +2,6 @@
 
 <?php
     require "header.php";
-    require "../App/Controllers/BookController.php";
-    
-    $controller = new BookController();
-    
-    //tableau pour l'affichage des chapitres
-    $array = $controller->verifyAllChapter();
-    $array1 = $controller->verifyAllDistinctChapter();
-
-    $data = $array[0]["book_id"];
-    if(preg_match("/^mangas/i", $data, $match) || preg_match("/^comics/i", $data, $match) || preg_match("/^books/i", $data, $match)) {
-        $data = $match[0];
-    }
 ?>
 
 <?php if(isset($_SESSION["user_role"])): ?>
@@ -24,8 +12,8 @@
 
     <div class="road">
 
-        <a href="/receive/home">Home</a> 
-        <a href="/book/<?= $array[0]["book_id"] ?>/show-book"><?= $array[0]["book_name"] ?></a> 
+        <a href="/book-controller/view-home">Home</a> 
+        <a href="/book-controller/<?= $array[0]["book_id"] ?>/view-book"><?= $array[0]["book_name"] ?></a> 
         <a href="#">Chapitre <?= $array[0]["chapter_number"] ?></a>
 
     </div>
@@ -84,7 +72,7 @@
             </div>
                 <ul>
                     <?php for($i=0; $i<count($array1); $i++) : ?>
-                        <li><a href="/book/<?= $array1[$i]["chapter_number"] ?>/<?= $array1[$i]["book_id"] ?>/show-chapter"> Chapitre <?= $i+1 ?> </a></li>
+                        <li><a href="/book-controller/<?= $array1[$i]["chapter_number"] ?>/<?= $array1[$i]["book_id"] ?>/view-chapter"> Chapitre <?= $i+1 ?> </a></li>
                     <?php endfor; ?> 
                 </ul>
         </section>

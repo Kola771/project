@@ -1,9 +1,6 @@
 
 <?php
     require "header.php";
-    require "../App/Controllers/LoginController.php";
-    $array = new LoginController();
-    $tableau = $array->displayUrlInfo();
 ?>
 
 <?php if(isset($_SESSION["username"]) && $_SESSION["username"] === $tableau[0]["user_username"]): ?>

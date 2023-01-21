@@ -3,10 +3,6 @@
 <?php
     require "header.php";
     
-    require "../App/Controllers/BookController.php";
-
-    $bookcontroller = new BookController();
-    $array = $bookcontroller->verifyAllBook();
 ?>
 
 <?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
@@ -17,11 +13,11 @@
         <button class="task"><i class="fa fa-bars"></i></button>
             <nav class="bloc-task">
                 <ul>
-                    <li><a href="/admin/receive/dashbord">Acceuil</a></li>
-                    <li><a href="/admin/receive/gestion">Gestion des oeuvres</a></li>
-                    <li><a href="/admin/receive/gestion-users">Gestion des users</a></li>
+                    <li><a href="/admin/book-controller/view-dashbord">Acceuil</a></li>
+                    <li><a href="/admin/book-controller/redirection">Gestion des oeuvres</a></li>
+                    <li><a href="/admin/book-controller/view-gestion-users">Gestion des users</a></li>
                     <li><a href="/admin/receive/create-book">Publier une oeuvre</a></li>
-                    <li><a href="/admin/receive/create-chapter">Publier un chapitre</a></li>
+                    <li><a href="/admin/book-controller/create-chapter-admin">Publier un chapitre</a></li>
                 </ul>
             </nav>
 
@@ -62,17 +58,19 @@
                                 <?php endif; ?>
                                 <button type="submit" class="danger supprimer" value = "<?= $values["book_id"] ?>">Supprimer l'oeuvre</button>
                                 <button class="update white watch" value = "<?= $values["book_id"] ?>">Plus de détails</button>
-                                <a class="update" href="/book/<?= $values["book_id"] ?>/update-book">Modifier l'oeuvre</a>
-                                <a class="update" href="/book/<?= $values["book_id"] ?>/show-chapters">Voir les chapîtres</a>
+                                <a class="update" href="/book-controller/<?= $values["book_id"] ?>/view-update-book">Modifier l'oeuvre</a>
+                                <a class="update" href="/book-controller/<?= $values["book_id"] ?>/view-show-admin">Voir les chapîtres</a>
 
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>  
-            
-    <button class="previous">Previous</button> 
-    <button class="next">Next</button> 
+            <form action="/book-controller/redirection" method="post">
+                <?php for($i=0; $i<$division; $i++) : ?>
+                    <button class="next" value="<?= $i ?>" name="next"><?= $i+1 ?></button> 
+                <?php endfor; ?>
+            </form>
         </div>
     </div>
 
@@ -155,6 +153,6 @@
 
 <?php else: ?>
 
-<?php header("Location:/receive/home"); ?>
+<?php header("Location:/receive/page-error"); ?>
 
 <?php endif; ?>

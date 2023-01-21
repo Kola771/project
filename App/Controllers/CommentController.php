@@ -30,6 +30,9 @@ class CommentController {
         return $data;
     }
 
+    /**
+     * insertComment(), pour insérer des commentaires dans la bd
+     */
    public function insertComment() {
     
     if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["validate"])) {
@@ -44,7 +47,7 @@ class CommentController {
         $created_at = date("Y-m-d h:i:s");
         
         if(empty($this->comment)){
-            header("Location: /book/$book_id/show-book");
+            header("Location: /book-controller/$book_id/view-book");
             exit();
         } 
 
@@ -55,13 +58,16 @@ class CommentController {
         $this->commentmodel = new CommentModel();
         $this->commentmodel->insertComment($this->comment, $user_id, $book_id, $created_at);
 
-        header("Location: /book/$book_id/show-book");
+        header("Location: /book-controller/$book_id/view-book");
         exit();
 
     }
 
    }
 
+   /**
+    * deleteComment(), pour supprimer un commentaire de la bd
+    */
    public function deleteComment() {
 
     if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["validate"])) {
@@ -73,7 +79,7 @@ class CommentController {
         $this->commentmodel = new CommentModel();
         $this->commentmodel->deleteComment($this->comment_id);
 
-        header("Location:/book/$book_id/show-book");
+        header("Location:/book-controller/$book_id/view-book");
         exit();
 
     }
@@ -81,3 +87,4 @@ class CommentController {
    }
 
 }
+

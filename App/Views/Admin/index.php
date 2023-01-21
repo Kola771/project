@@ -1,33 +1,5 @@
-
-
 <?php
     require "header.php";
-    
-    require "../App/Controllers/BookController.php";
-
-    $bookcontroller = new BookController();
-
-    //tableau contenant les users
-    $stockage = $bookcontroller->verifyAllUsers();
-    $stockage_one = $bookcontroller->temporaire_moins($stockage);
-    $stockage_two = $bookcontroller->temporaire_more($stockage);
-    $count_five = count($stockage_one);
-    $count_six = count($stockage_two);
-
-    //tableau contenant les oeuvres
-    $tableau = $bookcontroller->verifyAllBook();
-    $tableau_one = $bookcontroller->temporaire_moins($tableau);
-    $tableau_two = $bookcontroller->temporaire_more($tableau);
-    $count_three = count($tableau_one);
-    $count_four = count($tableau_two);
-
-    //tableau contenant les chapitres des oeuvres
-    $array = $bookcontroller->verifyAllDistinctChapters();
-    $array_one = $bookcontroller->temporaire_moins($array);
-    $array_two = $bookcontroller->temporaire_more($array);
-    $count_one = count($array_one);
-    $count_two = count($array_two);
-
 ?>
 
 <?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
@@ -38,52 +10,61 @@
         <button class="task"><i class="fa fa-bars"></i></button>
             <nav class="bloc-task">
                 <ul>
-                    <li><a href="/admin/receive/dashbord">Acceuil</a></li>
-                    <li><a href="/admin/receive/gestion">Gestion des oeuvres</a></li>
-                    <li><a href="/admin/receive/gestion-users">Gestion des users</a></li>
+                    <li><a href="/admin/book-controller/view-dashbord">Acceuil</a></li>
+                    <li><a href="/admin/book-controller/redirection">Gestion des oeuvres</a></li>
+                    <li><a href="/admin/book-controller/view-gestion-users">Gestion des users</a></li>
                     <li><a href="/admin/receive/create-book">Publier une oeuvre</a></li>
-                    <li><a href="/admin/receive/create-chapter">Publier un chapitre</a></li>
+                    <li><a href="/admin/book-controller/create-chapter-admin">Publier un chapitre</a></li>
                 </ul>
             </nav>
 
         <div class="data">
+
             <section class="history flex">
                 <h2>Historiques de ce mois</h2>
+
                 <article class="article-book flex">
                     <img src="/ressources/assets/medias-users/account.jpg" alt="Utilisateurs">
                     <h3>Nombre d'utilisateur inscrit ce mois-ci</h3>
                     <span><?= $count_five ?></span>
                 </article>
+
                 <article class="article-book flex">
                     <img src="/ressources/assets/Medias-book/livre.jpg" alt="Image de l'oeuvre">
                     <h3>Nombre d'oeuvres publiées dans ce mois</h3>
                     <span><?= $count_three ?></span>
                 </article>
+
                 <article class="article-book flex">
                     <img src="/ressources/assets/Medias-book/chapter.jpg" alt="Image de l'oeuvre">
                     <h3>Nombre de chapitres publiés dans ce mois</h3>
                     <span><?= $count_one ?></span>
                 </article>
+
             </section>
+
             <section class="history flex">
                 <h2>Historiques passées</h2>
+
                 <article class="article-book flex">
                     <img src="/ressources/assets/medias-users/account.jpg" alt="Utilisateurs">
                     <h3>Nombre d'utilisateur inscrit entre-temps</h3>
                     <span><?= $count_six ?></span>
                 </article>
+
                 <article class="article-book flex">
                     <img src="/ressources/assets/Medias-book/livre.jpg" alt="Image de l'oeuvre">
                     <h3>Nombre d'oeuvres publiées qu'il y avait</h3>
                     <span><?= $count_four ?></span>
                 </article>
+
             <article class="article-book flex">
                 <img src="/ressources/assets/Medias-book/chapter.jpg"" alt="Image de l'oeuvre">
                 <h3>Nombre de chapitres publiés qu'il y avait</h3>
                 <span><?= $count_two ?></span>
             </article>
+
             </section>
-           
             
         </div>
     </div>
@@ -98,6 +79,6 @@
 
 <?php else: ?>
 
-<?php header("Location:/receive/home"); ?>
+<?php header("Location:/receive/page-error"); ?>
 
 <?php endif; ?>

@@ -12,11 +12,11 @@
         <button class="task"><i class="fa fa-bars"></i></button>
             <nav class="bloc-task">
                 <ul>
-                    <li><a href="/admin/receive/dashbord">Acceuil</a></li>
-                    <li><a href="/admin/receive/gestion">Gestion des oeuvres</a></li>
-                    <li><a href="/admin/receive/gestion-users">Gestion des users</a></li>
+                    <li><a href="/admin/book-controller/view-dashbord">Acceuil</a></li>
+                    <li><a href="/admin/book-controller/redirection">Gestion des oeuvres</a></li>
+                    <li><a href="/admin/book-controller/view-gestion-users">Gestion des users</a></li>
                     <li><a href="/admin/receive/create-book">Publier une oeuvre</a></li>
-                    <li><a href="/admin/receive/create-chapter">Publier un chapitre</a></li>
+                    <li><a href="/admin/book-controller/create-chapter-admin">Publier un chapitre</a></li>
                 </ul>
             </nav>
 
@@ -49,7 +49,7 @@
             <?php endif; ?>
             
             <div class="flex button">
-                <button><a href="/admin/receive/gestion">Annuler la modification</a></button>
+                <button><a href="/admin/book-controller/view-gestion">Annuler la modification</a></button>
                 <button type="submit" name="validate">Valider la publication</button>
             </div>
             <div class="flex radio">
@@ -100,6 +100,6 @@
 
 <?php else: ?>
 
-<?php header("Location:/receive/home"); ?>
+<?php header("Location:/receive/page-error"); ?>
 
 <?php endif; ?>

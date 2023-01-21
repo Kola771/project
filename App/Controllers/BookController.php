@@ -133,7 +133,7 @@ class BookController {
 
                     $this->bookmodel->insertBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $this->created_at);
 
-                    header("Location:/admin/receive/gestion");
+                    header("Location:/admin/book-controller/view-gestion");
                     exit();
                    
                 } 
@@ -213,6 +213,41 @@ class BookController {
         $this->bookmodel = new BookModel();
         $array = $this->bookmodel->verifyAllBook();
         return $array;
+    }
+
+    /**
+     * redirection(), affiche la page gestion des books et son contenu compte tenu des informations se trouvant dans l'url
+     */
+    public function redirection() {
+        if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["next"])) {
+            $id = $_POST["next"];
+            header("Location:/admin/book-controller/$id/view-gestion");
+            exit();
+
+        } else {
+            header("Location:/admin/book-controller/0/view-gestion");
+            exit();
+        }
+        
+    }
+
+    /**
+     * limitLess(), affiche des informations selon une limite donnée
+     */
+    public function limitLess() {
+        $url = $_SERVER["QUERY_STRING"];
+
+        if(preg_match("/(?<id>\d+)/", $url, $match)) {
+
+            $id = $match["id"];
+            $this->bookmodel = new BookModel();
+            $array = $this->bookmodel->verifyLimitOffsetBook($id);
+            return $array;
+        } 
+        else {
+            header("Location:/receive/page-error");
+            exit();
+        }
     }
 
     /**
@@ -362,15 +397,13 @@ class BookController {
     }
 
     /**
-     * verifyAllChapters(), affiche le chapître d'un livre 
+     * verifyAllChapters(), affiche les chapîtres d'un livre 
      */
     public function verifyAllChapters() {
 
         $this->chaptermodel = new ChapterModel();
         $array = $this->chaptermodel->verifyAllChapters();
-        if(count($array)>0) {
             return $array;
-        } 
 
     }
 
@@ -384,7 +417,7 @@ class BookController {
             $this->bookmodel = new BookModel();
             $this->bookmodel->updateStatusRemove($book_id);
             
-            header("Location:/admin/receive/gestion");
+            header("Location:/admin/book-controller/view-gestion");
             exit();
         }
 
@@ -393,7 +426,7 @@ class BookController {
             $this->bookmodel = new BookModel();
             $this->bookmodel->updateStatusInside($book_id);
             
-            header("Location:/admin/receive/gestion");
+            header("Location:/admin/book-controller/view-gestion");
             exit();
         }
 
@@ -402,7 +435,7 @@ class BookController {
             $this->bookmodel = new BookModel();
             $this->bookmodel->updateStatusInside($book_id);
             
-            header("Location:/admin/receive/gestion");
+            header("Location:/admin/book-controller/view-gestion");
             exit();
         }
 
@@ -446,7 +479,7 @@ class BookController {
 
             $this->chaptermodel->deleteBook($book_id);
 
-            header("Location:/admin/receive/gestion");
+            header("Location:/admin/book-controller/view-gestion");
             exit();
         }
     }
@@ -475,7 +508,7 @@ class BookController {
                 $book_id = $array[0]["book_id"];
                 $book_id;
     
-                header("Location:/book/$book_id/show-book");
+                header("Location:/book-controller/$book_id/view-book");
                 exit();
             } else {
                 header("Location:/receive/error-search");
@@ -514,25 +547,46 @@ class BookController {
         return $array;
     }
 
+    /**
+     * viewBook(), pour l'affichage des livres, commentaires et chapitres par rapport à ses livres dans la vue book.php
+     */
     public function viewBook() {
         $array = $this->verifyUrlAll();
         $array0 = $this->selectAllComment();
         $array1 = $this->verifyAllDistinctChapter();
-        $array2 = $this->verifyAll();
+
+        $array2 = $this->verifyAllDesc();
+        $array3 = $this->commentCount();
+        
+        $array5 = $this->verifyAll();
 
         require_once("../App/Views/Users/book.php");
     }
     
+    /**
+     * viewHome(), pour l'affichage de tous les livres de la bd dans la vue home.php
+     */
     public function viewHome() {
         $array = $this->verifyAll();
+
+        $array2 = $this->verifyAllDesc();
+
+        $array3 = $this->commentCount();
 
         require_once("../App/Views/Users/home.php");
     }
 
+    /**
+     * viewChapter(), pour l'affichage de tous les chapitres ayant rapport à un livre dans la vue show.php
+     */
     public function viewChapter() {
         
         $array = $this->verifyAllChapter();
         $array1 = $this->verifyAllDistinctChapter();
+                
+        $array2 = $this->verifyAllDesc();
+
+        $array3 = $this->commentCount();
     
         $data = $array[0]["book_id"];
         if(preg_match("/^mangas/i", $data, $match) || preg_match("/^comics/i", $data, $match) || preg_match("/^books/i", $data, $match)) {
@@ -542,18 +596,147 @@ class BookController {
         require_once("../App/Views/Users/show.php");
     }
     
+    /**
+     * viewProfil(), pour l'affichage des informations des users dans la vue profil.php
+     */
     public function viewProfil() {
 
         $array0 = $this->selectAllComment();
+                
+        $array2 = $this->verifyAllDesc();
+
+        $array3 = $this->commentCount();
         
         require_once("../App/Views/Users/profil.php");
     }
 
+    /**
+     * viewShowElement(), pour sérier les mangas, les livres, les comics dans la vue show-element.php
+     */
     public function viewShowElement() {
 
-    $array = $this->verifyLikesBook();
+        $array = $this->verifyLikesBook();
+                
+        $array2 = $this->verifyAllDesc();
 
-    require_once('../App/Views/Users/show-element.php');
+        $array3 = $this->commentCount();
+
+        require_once('../App/Views/Users/show-element.php');
+    }
+
+    /**
+     * viewDashbord(), pour l'affichage de tous les informations portant les livres dans la vue index.php de l'administrateur
+     */
+    public function viewDashbord() {
+
+        $stockage = $this->verifyAllUsers();
+        $stockage_one = $this->temporaire_moins($stockage);
+        $stockage_two = $this->temporaire_more($stockage);
+        $count_five = count($stockage_one);
+        $count_six = count($stockage_two);
+
+        //tableau contenant les oeuvres
+        $tableau = $this->verifyAllBook();
+        $tableau_one = $this->temporaire_moins($tableau);
+        $tableau_two = $this->temporaire_more($tableau);
+        $count_three = count($tableau_one);
+        $count_four = count($tableau_two);
+
+        //tableau contenant les chapitres des oeuvres
+        $array = $this->verifyAllDistinctChapters();
+        $array_one = $this->temporaire_moins($array);
+        $array_two = $this->temporaire_more($array);
+        $count_one = count($array_one);
+        $count_two = count($array_two);
+                
+        $array2 = $this->verifyAllDesc();
+
+        $array3 = $this->commentCount();
+
+        require_once('../App/Views/Admin/index.php');
+    }
+
+    /**
+     * viewGestion(), pour l'affichage de tous les livres au niveau de l'administrateur dans la vue gestion.php
+     */
+    public function viewGestion() {
+        
+        $array = $this->limitLess();
+                
+        $array2 = $this->verifyAllDesc();
+
+        $array3 = $this->commentCount();
+
+        $division = round($this->bookmodel->division());
+        $division = (int) $division;
+        require_once("../App/Views/Admin/gestion.php");
+
+    }
+
+    /**
+     * viewGestionUsers(), pour afficher tous les utilisateurs du site à l'administrateur dans la vue gestion-users.php
+     */
+    public function viewGestionUsers() {
+        
+        $array = $this->verifyAllUsers();
+                
+        $array2 = $this->verifyAllDesc();
+
+        $array3 = $this->commentCount();
+
+        require_once("../App/Views/Admin/gestion-users.php");
+
+    }
+
+    /**
+     * viewUpdateBook(), pour afficher à partir de l'url tous les informations par rapport à un livre dans la vue update-book.php
+     */
+    public function viewUpdateBook() {
+            
+        $array = $this->verifyUrlAll();
+        
+        //variable qui contient la description du livre
+        $text = $array[0]["book_description"];
+
+        //remplacement des balises <br/> en vide
+        $text = preg_replace("/\<br\s\/\>/", "", $text);
+
+        $array2 = $this->verifyAllDesc();
+
+        $array3 = $this->commentCount();
+
+        require_once("../App/Views/Admin/update-book.php");
+    }
+
+    /**
+     * viewShowAdmin(), pour afficher les différents chapitres que comporte une oeuvre au niveau de la vue show.php pour l'admin
+     */
+    public function viewShowAdmin() {
+
+        $array = $this->verifyAllDistinctChapter();
+
+        $array0 = $this->verifyAllChapters();
+
+        $array2 = $this->verifyAllDesc();
+
+        $array3 = $this->commentCount();
+
+        require_once("../App/Views/Admin/show.php");
+
+    }
+
+    /**
+     * createChapterAdmin(), pour afficher les oeuvres sous formes de select au niveau de la vue create-chapter.php
+     */
+    public function createChapterAdmin() {
+
+        $array = $this->verifyAllBook();  
+
+        $array2 = $this->verifyAllDesc();
+
+        $array3 = $this->commentCount();
+
+        require_once("../App/Views/Admin/create-chapter.php");
     }
 
 }

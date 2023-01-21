@@ -36,7 +36,7 @@ class ChapterController {
     public function emptyInputs() {
 
         if(empty($this->number) || empty($this->name) || empty($this->text)){
-            header("Location:/admin/receive/create-chapter?msg_empty");
+            header("Location:/admin/book-controller/create-chapter-admin?msg_empty");
             exit();
         } 
             else{
@@ -128,7 +128,7 @@ class ChapterController {
                         die('Erreur! trop d\'images:'.$e->getMessage());
                     }
                     
-                    header("Location: /admin/receive/create-chapter?validate");
+                    header("Location: /admin/book-controller/create-chapter-admin?validate");
                     exit();
             }
             }
@@ -221,7 +221,7 @@ class ChapterController {
                 } catch(PDOException $e) {
                     die('Erreur! trop d\'images:'.$e->getMessage());
                 }
-                    header("Location: /admin/receive/create-chapter?validate");
+                    header("Location: /admin/book-controller/create-chapter-admin?validate");
                     exit();
             }
             }
@@ -266,7 +266,7 @@ class ChapterController {
                 } 
                 else { 
                     $this->chaptermodel->insertChapterBooks($this->number, $this->name, $this->text, $this->book_id, $this->created_at);
-                    header("Location: /admin/receive/create-chapter?validate");
+                    header("Location: /admin/book-controller/create-chapter-admin?validate");
                     exit();
                 }
             }
@@ -285,7 +285,7 @@ class ChapterController {
             $this->chaptermodel = new ChapterModel();
             $this->chaptermodel->deleteChapter($title);
             
-            header("Location: /book/$id/show-chapters");
+            header("Location: /book-controller/$id/view-show-admin");
             exit();
         }
     }

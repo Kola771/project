@@ -24,7 +24,7 @@ require "header.php";
             <form id="form" class="none" action="/book-controller/search-book" method="post">
                 <input list="browsers" type="text" id="input" name="search">
                 <datalist id="browsers">
-                    <?php foreach($array2 as $key => $values) : ?>
+                    <?php foreach($array5 as $key => $values) : ?>
                     <option value="<?= $values["book_name"] ?>"></option>
                     <?php endforeach; ?>
                 </datalist>
@@ -149,7 +149,7 @@ require "header.php";
 
             <?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
 
-            <p><a href="/book/<?= $array[0]["book_id"] ?>/update-book">Modifier le livre</a></p>
+            <p><a href="/book-controller/<?= $array[0]["book_id"] ?>/view-update-book">Modifier le livre</a></p>
 
             <?php endif; ?>
 
@@ -202,6 +202,6 @@ require "header.php";
 
 <?php else: ?>
 
-<?php header("Location:/receive/home"); ?>
+<?php header("Location:/book-controller/view-home"); ?>
 
 <?php endif; ?> 

@@ -3,10 +3,6 @@
 <?php
 
 class Receive {
-    
-    public function dashbord() {
-        require "../App/Views/Admin/index.php";
-    }
 
     public function register() {
         require "../App/Views/Users/register.php";
@@ -27,20 +23,8 @@ class Receive {
         require "../App/Views/Users/forget.php";
     }
 
-    public function gestion() {
-        require "../App/Views/Admin/gestion.php";
-    }
-
-    public function gestionUsers() {
-        require "../App/Views/Admin/gestion-users.php";
-    }
-
     public function createBook() {
         require "../App/Views/Admin/create-book.php";
-    }
-    
-    public function createChapter() {
-        require "../App/Views/Admin/create-chapter.php";
     }
     
     public function updatePassword() {
@@ -51,7 +35,7 @@ class Receive {
         require "../App/Views/SearchError.php";
     }
     
-    public function PageError() {
+    public function pageError() {
         require "../App/Views/PageError.php";
     }
     

@@ -21,9 +21,9 @@ html {
 
 :root {
     --reddark-: rgb(107, 9, 9);
-    --blnuitcl-: #326da5;
+    --blnuitcl-: #245583;
     --rgb-blue-: rgb(83, 114, 218);
-    --orange-: orange;
+    --orange-: rgb(255, 132, 0);
     --orangepur-: #f50;
     --red-: red;
     --redclair-: rgb(223, 49, 49);
@@ -184,6 +184,10 @@ body {
     border: none;
     font-size: var(--px20-);
     background-color: var(--eee-);
+}
+
+.click {
+    cursor: pointer;
 }
 
 /* Header du site complet */
@@ -666,6 +670,8 @@ header {
 
 .bloc-task>ul>li {
     background-color: var(--blnuitcl-);
+    border-top-left-radius: var(--pd1-);
+    border-bottom-left-radius: var(--pd1-);
 }
 
 .bloc-task>ul>li:not(:first-child) {
@@ -1260,7 +1266,7 @@ footer>p {
      }
 
      .container {
-         width: 90%;
+         width: 100%;
      }
 
      #search_ul>li {

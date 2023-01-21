@@ -163,6 +163,48 @@ class Bookmodel extends Connexion {
         $result = $stmt->fetchAll();
         return $result;
     }
+
+
+    /**
+     * verifyLimitOffsetBook(), affiche 8 oeuvres de la bd suivant un ordre donné
+     */
+    public function verifyLimitOffsetBook($number) {
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT * FROM `books` LIMIT 5 OFFSET $number";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->query($sql);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
+     * division()
+     */
+    public function division() {
+        
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT * FROM `books`";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->query($sql);
+        $result = $stmt->fetchAll();
+        $result = count($result)/5;
+        return $result;
+    }
     
     /**
      * insertBook(), pour insérer dans la bd des livres

@@ -133,6 +133,9 @@ class LoginController {
         return $array;
     }
 
+    /**
+     * updateProfil(), pour afficher à partir de l'url les informations de l'utilisateur sur un formulaire de modification dans la vue update-profil.php
+     */
     public function updateProfil() {
 
     $tableau = $this->displayUrlInfo();
@@ -161,7 +164,7 @@ class LoginController {
             $this->usermodel->deleteUsers($user_id);
             $this->usermodel->deleteCommentUser($user_id);
 
-            header("Location: /admin/receive/gestion-users");
+            header("Location: /admin/book-controller/view-gestion-users");
             exit();
         }
     }
@@ -173,7 +176,7 @@ class LoginController {
         $this->usermodel = new UserModel();
         $res = $this->usermodel->verifyAccount($this->email);
         $this->result = $res[0]["user_username"];
-        var_dump($res);
+        
         $count = count($res);
          if($count>0) {
 
@@ -192,6 +195,16 @@ class LoginController {
             exit();
         }
     }
+    }
+
+    /**
+     * viewPass(), pour afficher certaines informations qui seront cachées à l'utilisateur dans la vue update-password.php
+     */
+    public function viewPass() {
+
+        $tableau = $this->displayUrlInfo();    
+        require_once("../App/Views/Users/update-password.php");
+
     }
 
 

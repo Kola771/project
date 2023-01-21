@@ -11,6 +11,7 @@ $router = new Router();
 $router->add('', ['controller' => 'BookController', 'action' => 'viewHome']);
 $router->add("{controller}/{action}");
 $router->add("admin/{controller}/{action}");
+$router->add("admin/{controller}/{id:\d+}/{action}");
 // $router->add("{controller}/{id:\d+}/{action}");
 $router->add("{controller}/{bookname}/{action}");
 // $router->add("{controller}/{username:\w+\d+}/{action}");

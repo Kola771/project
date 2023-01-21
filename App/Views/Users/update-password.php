@@ -1,11 +1,5 @@
-
-
-
 <?php
     require "header.php";
-    require "../App/Controllers/LoginController.php";
-    $array = new LoginController();
-    $tableau = $array->displayUrlInfo();
 ?>
 <main>
         <form class="form flex" action="/update-password-controller/verify-new-password" method="post">

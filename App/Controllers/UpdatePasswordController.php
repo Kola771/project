@@ -60,7 +60,7 @@ class UpdatePasswordController {
 
         $count = count($res);
          if($count>0) {
-                header("Location:/receive/$this->result/update-password");
+                header("Location:/login-controller/$this->result/view-pass");
                 exit();
         } 
         else {
@@ -103,7 +103,7 @@ class UpdatePasswordController {
                 exit();
             } 
         }else {
-            header("Location:/receive/$user/updatePassword?wordkey_error");
+            header("Location:/login-controller/$user/view-pass?wordkey_error");
             exit();
         }
         
@@ -117,7 +117,7 @@ class UpdatePasswordController {
     public function verifyPass() {
 
         if($this->password !== $this->confirm_password) {
-            header("Location:/receive/$this->user/updatePassword?password_error");
+            header("Location:/login-controller/$this->user/view-pass?password_error");
             exit();
         }
         return false;
@@ -133,11 +133,11 @@ class UpdatePasswordController {
         $this->user = $empty[0]["user_username"];
 
         if(empty($this->password) || empty($this->confirm_password)){
-            header("Location:/receive/$this->user/updatePassword?password_empty");
+            header("Location:/login-controller/$this->user/view-pass?password_empty");
             exit();
         } 
         elseif(empty($this->wordkey)) {
-            header("Location:/receive/$this->user/updatePassword?wordkey_empty");
+            header("Location:/login-controller/$this->user/view-pass?wordkey_empty");
             exit();
         }
             else{
@@ -159,7 +159,7 @@ class UpdatePasswordController {
         } 
         
         else {
-            header("Location:/receive/$this->user/updatePassword?not_format");
+            header("Location:/login-controller/$this->user/view-pass?not_format");
             exit();
         }
 

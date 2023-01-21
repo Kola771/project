@@ -2,8 +2,6 @@
 
 <?php 
     require "header.php"; 
-    
-    
 ?>
 
 <?php if(isset($_SESSION["username"])): ?>
@@ -25,7 +23,7 @@
 
             <article class="article">
 
-                <h4 class="border">Tout vos commentaires</h4>
+            <h4 class="border click">Tout vos commentaires <i class="fas fa-comment-dots"></i></h4>
 
             <?php foreach($array0 as $key => $values) : ?>
 
@@ -58,11 +56,11 @@
     <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
 </main>
 
-<script src="/ressources/js/task.js"></script>
+<script src="/ressources/js/profil.js"></script>
 <?php require "footer.php"; ?>
 
 <?php else: ?>
 
-<?php header("Location:/receive/home"); ?>
+<?php header("Location:/book-controller/view-home"); ?>
 
 <?php endif; ?> 

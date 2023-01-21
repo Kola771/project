@@ -40,7 +40,7 @@ class UpdateBookController {
 
         if(empty($this->name_book) || empty($this->ref_book) || empty($this->desc_book)){
             $ref_book0 = $_POST["ref_book0"];
-            header("Location:/book/$ref_book0/update-book?msg_empty");
+            header("Location:/book-controller/$ref_book0/view-update-book?msg_empty");
             exit();
         } 
             else{
@@ -120,7 +120,7 @@ class UpdateBookController {
                                         unlink("../public/ressources/assets/Medias-book/$this->image");
 
                                         $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
-                                        header("Location: /admin/receive/gestion");
+                                        header("Location: /admin/book-controller/view-gestion");
                                         exit();
                                     }
                                     else {
@@ -134,7 +134,7 @@ class UpdateBookController {
                                         unlink("sources/assets/Medias-book/$this->image");
                                         
                                         $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
-                                        header("Location: /admin/receive/gestion");
+                                        header("Location: /admin/book-controller/view-gestion");
                                         exit();
                                     }
                             } else {
@@ -155,7 +155,7 @@ class UpdateBookController {
                                 unlink("../public/ressources/assets/Medias-book/$this->image");
 
                                 $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
-                                header("Location: /admin/receive/gestion");
+                                header("Location: /admin/book-controller/view-gestion");
                                 exit();
                             } else {
                                  
@@ -168,7 +168,7 @@ class UpdateBookController {
                                 unlink("../public/ressources/assets/Medias-book/$this->image");
 
                                 $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
-                                header("Location: /admin/receive/gestion");
+                                header("Location: /admin/book-controller/view-gestion");
                                 exit();
                             }
                         
@@ -202,13 +202,13 @@ class UpdateBookController {
 
             if(preg_match("/\d+/i", $data)) {
                 
-                header("Location:/book/$ref_book0/update-book?format_error");
+                header("Location:/book-controller/$ref_book0/view-update-book?format_error");
                 exit();
             }
 
             if(preg_match("/\@/i", $data)) {
                 
-                header("Location:/book/$ref_book0/update-book?format_error");
+                header("Location:/book-controller/$ref_book0/view-update-book?format_error");
                 exit();
             }
 
@@ -218,8 +218,8 @@ class UpdateBookController {
         }
         else {
             
-                header("Location:/book/$ref_book0/update-book?format_error");
-            exit();
+                header("Location:/book-controller/$ref_book0/view-update-book?format_error");
+                exit();
         }
 
     }

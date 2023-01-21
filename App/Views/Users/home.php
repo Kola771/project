@@ -1,6 +1,5 @@
 <?php
     require "header.php";
-
 ?>
 
 <main>
@@ -19,9 +18,13 @@
         <form id="form" class="none" action="/book-controller/search-book" method="post">
             <input list="browsers" type="text" id="input" name="search">
             <datalist id="browsers">
+
                 <?php foreach($array as $key => $values) : ?>
+
                 <option value="<?= $values["book_name"] ?>"></option>
+
                 <?php endforeach; ?>
+
             </datalist>
             <button type="reset" id="close"><i class="fa fa-close"></i></button>
             <button type="submit" name="recherche"><i class="fa fa-search"></i></button>
@@ -38,9 +41,13 @@
         </form>
         
         <ul class="list pad0" id="search_ul">
+
             <?php for($i=0, $max=count($array); $i<$max;$i++): ?>
+
                 <li><a href="/book-controller/<?= $array[$i]["book_id"] ?>/view-book"><?= $array[$i]["book_name"] ?></a></li>
+            
             <?php endfor; ?>
+        
         </ul>
     </div>
 

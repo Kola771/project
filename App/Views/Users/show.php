@@ -1,5 +1,3 @@
-
-
 <?php
     require "header.php";
 ?>
@@ -96,6 +94,6 @@
 <?php endif; ?> 
 <?php else: ?>
 
-<?php header("Location:/receive/home"); ?>
+<?php header("Location:/book-controller/view-home"); ?>
 
 <?php endif; ?>

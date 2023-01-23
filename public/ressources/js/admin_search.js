@@ -57,6 +57,7 @@ let y = 0;
 let watch = document.querySelectorAll('.watch');
 let modal = document.querySelectorAll('.recherche4');
 
+let click_button = document.querySelector(".click_button");
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -148,4 +149,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     })
 
+    click_button.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.history.back();
+    })
 })

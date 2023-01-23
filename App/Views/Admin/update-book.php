@@ -13,7 +13,7 @@
                     <li><a href="/admin/book-controller/view-dashbord">Acceuil</a></li>
                     <li><a href="/admin/book-controller/redirection">Gestion des oeuvres</a></li>
                     <li><a href="/admin/book-controller/view-gestion-users">Gestion des users</a></li>
-                    <li><a href="/admin/receive/create-book">Publier une oeuvre</a></li>
+                    <li><a href="/admin/book-controller/create-book-admin">Publier une oeuvre</a></li>
                     <li><a href="/admin/book-controller/create-chapter-admin">Publier un chapitre</a></li>
                 </ul>
             </nav>
@@ -30,7 +30,7 @@
 
         <form class="basis" action="/update-book-controller/update-book" method="post" enctype="multipart/form-data">
             <div class="flex button">
-                <button><a href="/admin/receive/gestion">Annuler la modification</a></button>
+                <button><a href="/book-controller/redirection">Annuler la modification</a></button>
                 <button type="submit" name="validate">Modifier l'oeuvre</button>
             </div>
             <div class="flex radio">
@@ -73,6 +73,7 @@
     </div>
 
     <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
+    <button class="click_button"><i class="fa fa-arrow-left"></i></a></button>
 </main>
 
 

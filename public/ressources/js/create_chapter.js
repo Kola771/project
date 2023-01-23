@@ -24,6 +24,8 @@ let image = document.querySelector(".img");
 
 let nota_biem = document.querySelector(".nota_biem");
 
+let click_button = document.querySelector(".click_button");
+
 document.addEventListener("DOMContentLoaded", function() {
 
     soumettre.addEventListener("click", (e) => {
@@ -102,5 +104,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 x=0
                 break;
         }
+    })
+    
+    click_button.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.history.back();
     })
 })

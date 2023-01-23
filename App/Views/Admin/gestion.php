@@ -14,9 +14,9 @@
             <nav class="bloc-task">
                 <ul>
                     <li><a href="/admin/book-controller/view-dashbord">Acceuil</a></li>
-                    <li><a href="/admin/book-controller/redirection">Gestion des oeuvres</a></li>
+                    <li class="active"><a href="/admin/book-controller/redirection">Gestion des oeuvres</a></li>
                     <li><a href="/admin/book-controller/view-gestion-users">Gestion des users</a></li>
-                    <li><a href="/admin/receive/create-book">Publier une oeuvre</a></li>
+                    <li><a href="/admin/book-controller/create-book-admin">Publier une oeuvre</a></li>
                     <li><a href="/admin/book-controller/create-chapter-admin">Publier un chapitre</a></li>
                 </ul>
             </nav>
@@ -27,7 +27,7 @@
                     <input list="browsers" type="text" id="search" placeholder="Recherche le nom..">
                 </form>
 
-                <button type="submit"><a href="/admin/receive/create-book">Publier une oeuvre</a></button>
+                <button type="submit"><a href="/admin/book-controller/create-book-admin">Publier une oeuvre</a></button>
             </div>
             <table id="myTable">
                 <thead class="thead-dark">
@@ -57,17 +57,17 @@
                                 
                                 <?php endif; ?>
                                 <button type="submit" class="danger supprimer" value = "<?= $values["book_id"] ?>">Supprimer l'oeuvre</button>
-                                <button class="update white watch" value = "<?= $values["book_id"] ?>">Plus de détails</button>
+                                <button class="blue white watch" value = "<?= $values["book_id"] ?>">Plus de détails</button>
                                 <a class="update" href="/book-controller/<?= $values["book_id"] ?>/view-update-book">Modifier l'oeuvre</a>
-                                <a class="update" href="/book-controller/<?= $values["book_id"] ?>/view-show-admin">Voir les chapîtres</a>
+                                <a class="blue" href="/book-controller/<?= $values["book_id"] ?>/view-show-admin">Voir les chapîtres</a>
 
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>  
-            <form action="/book-controller/redirection" method="post">
-                <?php for($i=0; $i<$division; $i++) : ?>
+            <form action="/book-controller/redirection" class="form-next" method="post">
+                <?php for($i=0; $i<$int; $i++) : ?>
                     <button class="next" value="<?= $i ?>" name="next"><?= $i+1 ?></button> 
                 <?php endfor; ?>
             </form>
@@ -142,6 +142,7 @@
     <?php endforeach; ?>
 
     <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
+    <button class="click_button"><i class="fa fa-arrow-left"></i></a></button>
 </main>
 
 

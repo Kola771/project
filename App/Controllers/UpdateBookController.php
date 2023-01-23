@@ -120,7 +120,7 @@ class UpdateBookController {
                                         unlink("../public/ressources/assets/Medias-book/$this->image");
 
                                         $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
-                                        header("Location: /admin/book-controller/view-gestion");
+                                        header("Location: /book-controller/redirection");
                                         exit();
                                     }
                                     else {
@@ -134,7 +134,7 @@ class UpdateBookController {
                                         unlink("sources/assets/Medias-book/$this->image");
                                         
                                         $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
-                                        header("Location: /admin/book-controller/view-gestion");
+                                        header("Location: /book-controller/redirection");
                                         exit();
                                     }
                             } else {
@@ -155,7 +155,7 @@ class UpdateBookController {
                                 unlink("../public/ressources/assets/Medias-book/$this->image");
 
                                 $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
-                                header("Location: /admin/book-controller/view-gestion");
+                                header("Location: /book-controller/redirection");
                                 exit();
                             } else {
                                  
@@ -168,7 +168,7 @@ class UpdateBookController {
                                 unlink("../public/ressources/assets/Medias-book/$this->image");
 
                                 $this->bookmodel->updateBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $id);
-                                header("Location: /admin/book-controller/view-gestion");
+                                header("Location: /book-controller/redirection");
                                 exit();
                             }
                         

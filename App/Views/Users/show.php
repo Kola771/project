@@ -63,7 +63,7 @@
 
         <?php endif; ?>
 
-        <section class="chapter chapter_media">
+        <section class="chapter chapter_media z-index">
             <div class="flex">
                 <button class="chapter_icon"><i class="fa fa-bars"></i></button>
                 <h3>Chapitres</h3>
@@ -77,7 +77,8 @@
 
     </div>
 
-    <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
+    <div class="top z-index"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
+    <button class="click_button z-index"><i class="fa fa-arrow-left"></i></a></button>
 </main>
 
     <script src="/ressources/js/show.js"></script>

@@ -58,71 +58,73 @@ require "header.php";
             <?php endforeach; ?>
 
             <div class="comments">
-                <h2 class="click">Voir les commentaires <button class="button_comment"><i class="fas fa-comment-dots"></i></button></h2>
+                <div class="container_article">
+                    <h2 class="click">Voir les commentaires <button class="button_comment"><i class="fas fa-comment-dots"></i></button></h2>
 
-                <?php foreach($array0 as $key => $values): ?>
-                    <?php if($values["book_id"] == $array[0]["book_id"]): ?>
+                    <?php foreach($array0 as $key => $values): ?>
+                        <?php if($values["book_id"] == $array[0]["book_id"]): ?>
 
-                    <article class="flex article">
+                        <article class="flex article">
 
-                        <!-- Affichage de tout les commentaires portant sur cet article -->
+                            <!-- Affichage de tout les commentaires portant sur cet article -->
 
-                        <img src="/ressources/assets/medias-users/<?= $values["user_image"] ?>" alt="Account"> 
+                            <img src="/ressources/assets/medias-users/<?= $values["user_image"] ?>" alt="Account"> 
 
-                        <div>
+                            <div>
 
-                            <?php if($values["user_role"] == 0) : ?>
+                                <?php if($values["user_role"] == 0) : ?>
 
-                                <h4 class="flex">Administrator</h4>
+                                    <h4 class="flex">Administrator</h4>
 
-                            <?php else : ?>
+                                <?php else : ?>
 
-                                <h4 class="flex"><?= $values["user_username"] ?></h4>
-
-                            <?php endif; ?>
-
-                            <p><?= $values["comment_comment"] ?></p>
-
-                            <p>Publié le <?= $values["created_at"] ?></p>
-    
-                            <!-- Ce code permet à l'utilisateur connecté de supprimer son commentaire -->
-                            <?php if((isset($_SESSION['username'])) && $_SESSION['username'] == $values["user_username"]) : ?>
-
-                                <form action="/comment-controller/delete-comment" method="post">
-
-                                    <input type="hidden" name="comment_id" value="<?= $values["comment_id"] ?>">
-
-                                    <input type="hidden" name="book_id" value="<?= $array[0]["book_id"] ?>">
-
-                                    <button type="submit" class="danger" name="validate">Supprimer le commentaire</button>
-                                    
-                                </form>
-                            <?php endif; ?>
-
-                                <?php if((isset($_SESSION['user_role'])) && $_SESSION['user_role'] == 0) : ?>
-
-                                    <?php if((isset($_SESSION['username'])) && $_SESSION['username'] != $values["user_username"]) : ?>
-
-                                        <form action="/comment-controller/delete-comment" method="post">
-
-                                            <input type="hidden" name="comment_id" value="<?= $values["comment_id"] ?>">
-
-                                            <input type="hidden" name="book_id" value="<?= $array[0]["book_id"] ?>">
-
-                                            <button type="submit" class="danger" name="validate">Supprimer le commentaire de cet utilisateur</button>
-
-                                        </form>
-
-                                    <?php endif; ?>
+                                    <h4 class="flex"><?= $values["user_username"] ?></h4>
 
                                 <?php endif; ?>
-                        </div>
 
-                    </article>
+                                <p><?= $values["comment_comment"] ?></p>
 
-                    <?php endif; ?>
+                                <p>Publié le <?= $values["created_at"] ?></p>
+        
+                                <!-- Ce code permet à l'utilisateur connecté de supprimer son commentaire -->
+                                <?php if((isset($_SESSION['username'])) && $_SESSION['username'] == $values["user_username"]) : ?>
 
-                <?php endforeach; ?>
+                                    <form action="/comment-controller/delete-comment" method="post">
+
+                                        <input type="hidden" name="comment_id" value="<?= $values["comment_id"] ?>">
+
+                                        <input type="hidden" name="book_id" value="<?= $array[0]["book_id"] ?>">
+
+                                        <button type="submit" class="danger" name="validate">Supprimer le commentaire</button>
+                                        
+                                    </form>
+                                <?php endif; ?>
+
+                                    <?php if((isset($_SESSION['user_role'])) && $_SESSION['user_role'] == 0) : ?>
+
+                                        <?php if((isset($_SESSION['username'])) && $_SESSION['username'] != $values["user_username"]) : ?>
+
+                                            <form action="/comment-controller/delete-comment" method="post">
+
+                                                <input type="hidden" name="comment_id" value="<?= $values["comment_id"] ?>">
+
+                                                <input type="hidden" name="book_id" value="<?= $array[0]["book_id"] ?>">
+
+                                                <button type="submit" class="danger" name="validate">Supprimer le commentaire de cet utilisateur</button>
+
+                                            </form>
+
+                                        <?php endif; ?>
+
+                                    <?php endif; ?>
+                            </div>
+
+                        </article>
+
+                        <?php endif; ?>
+
+                    <?php endforeach; ?>
+                </div>
 
                 <?php if(isset($_SESSION["username"])): ?>
 
@@ -194,6 +196,7 @@ require "header.php";
     </div>
 
     <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
+    <button class="click_button"><i class="fa fa-arrow-left"></i></a></button>
 </main>
 
 <script src="/ressources/js/comments.js"></script>

@@ -36,7 +36,7 @@
     </section>
     
     <div class="container">
-        <form action="#" method="post">
+        <form class="action_form" action="#" method="post">
             <input type="text" id="search" placeholder="Recherche le nom..">
         </form>
         
@@ -52,9 +52,13 @@
     </div>
 
     <div class="top"><a href="#top"><i class="fa fa-arrow-up"></i></a></div>
+    <button class="click_button"><i class="fa fa-arrow-left"></i></a></button>
+
+
 </main>
 
 <script src="/ressources/js/source.js"></script>
+
 <?php
     require "footer.php";
 ?>

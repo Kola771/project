@@ -49,7 +49,7 @@ class BookController {
     public function emptyInputs() {
 
         if(empty($this->name_book) || empty($this->ref_book) || empty($this->desc_book)){
-            header("Location:/admin/receive/create-book?msg_empty=emptyinput&name_book=$this->name_book&ref_book=$this->ref_book");
+            header("Location:/book-controller/create-book-admin?msg_empty=emptyinput&name_book=$this->name_book&ref_book=$this->ref_book");
             exit();
         } 
             else{
@@ -102,12 +102,12 @@ class BookController {
             $name = $array[0]["book_name"];
             $reference = $array[0]["book_id"];
             if(preg_match("/$name/i", $this->name_book)) {
-                header("Location:/admin/receive/create-book?msg_book_name_exist& name_book=$this->name_book&ref_book=$this->ref_book");
+                header("Location:/book-controller/create-book-admin?msg_book_name_exist& name_book=$this->name_book&ref_book=$this->ref_book");
                 exit();
             }
 
             if(preg_match("/$reference/i", $this->ref_book)) {
-                header("Location:/admin/receive/create-book?msg_book_ref_exist& name_book=$this->name_book&ref_book=$this->ref_book");
+                header("Location:/book-controller/create-book-admin?msg_book_ref_exist& name_book=$this->name_book&ref_book=$this->ref_book");
                 exit();
             }
 
@@ -133,7 +133,7 @@ class BookController {
 
                     $this->bookmodel->insertBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $this->created_at);
 
-                    header("Location:/admin/book-controller/view-gestion");
+                    header("Location:/book-controller/redirection");
                     exit();
                    
                 } 
@@ -165,12 +165,12 @@ class BookController {
         if(preg_match("/^mangas-/i", $data) || preg_match("/^comics-/i", $data) || preg_match("/^books-/i", $data)) {
 
             if(preg_match("/\d+/i", $data)) {
-                header("Location: /admin/receive/create-book?format_error_num&name_book=$this->name_book&ref_book=$this->ref_book");
+                header("Location: /book-controller/create-book-admin?format_error_num&name_book=$this->name_book&ref_book=$this->ref_book");
                 exit();
             }
 
             if(preg_match("/\@/i", $data)) {
-                header("Location: /admin/receive/create-book?format_error_char&name_book=$this->name_book&ref_book=$this->ref_book");
+                header("Location: /book-controller/create-book-admin?format_error_char&name_book=$this->name_book&ref_book=$this->ref_book");
                 exit();
             }
 
@@ -179,7 +179,7 @@ class BookController {
             return $data;
         }
         else {
-            header("Location:/admin/receive/create-book?msg_format_error& name_book=$this->name_book&ref_book=$this->ref_book");
+            header("Location:/book-controller/create-book-admin?msg_format_error& name_book=$this->name_book&ref_book=$this->ref_book");
             exit();
         }
 
@@ -240,8 +240,9 @@ class BookController {
         if(preg_match("/(?<id>\d+)/", $url, $match)) {
 
             $id = $match["id"];
+            $number = 10 * $id;
             $this->bookmodel = new BookModel();
-            $array = $this->bookmodel->verifyLimitOffsetBook($id);
+            $array = $this->bookmodel->verifyLimitOffsetBook($number);
             return $array;
         } 
         else {
@@ -289,11 +290,8 @@ class BookController {
         $book_id = $matches["book_id"];
         $this->chaptermodel = new ChapterModel();
         $array = $this->chaptermodel->verifyAllDistinctChapter($book_id);
-        if(count($array)>0) {
+        
             return $array;
-        } else {
-            return $array = [];
-        }
 
     }
 
@@ -304,11 +302,8 @@ class BookController {
 
         $this->chaptermodel = new ChapterModel();
         $array = $this->chaptermodel->verifyAllDistinctChapters();
-        if(count($array)>0) {
+        
             return $array;
-        } else {
-            return $array = [];
-        }
 
     }
 
@@ -390,7 +385,7 @@ class BookController {
         if(count($array)>0) {
             return $array;
         } else {
-            header("Location:/receive/home");
+            header("Location:/book-controller/view-home");
             exit();
         }
 
@@ -417,7 +412,7 @@ class BookController {
             $this->bookmodel = new BookModel();
             $this->bookmodel->updateStatusRemove($book_id);
             
-            header("Location:/admin/book-controller/view-gestion");
+            header("Location:/book-controller/redirection");
             exit();
         }
 
@@ -426,7 +421,7 @@ class BookController {
             $this->bookmodel = new BookModel();
             $this->bookmodel->updateStatusInside($book_id);
             
-            header("Location:/admin/book-controller/view-gestion");
+            header("Location:/book-controller/redirection");
             exit();
         }
 
@@ -435,7 +430,7 @@ class BookController {
             $this->bookmodel = new BookModel();
             $this->bookmodel->updateStatusInside($book_id);
             
-            header("Location:/admin/book-controller/view-gestion");
+            header("Location:/book-controller/redirection");
             exit();
         }
 
@@ -479,7 +474,7 @@ class BookController {
 
             $this->chaptermodel->deleteBook($book_id);
 
-            header("Location:/admin/book-controller/view-gestion");
+            header("Location:/book-controller/redirection");
             exit();
         }
     }
@@ -529,10 +524,7 @@ class BookController {
         $this->bookmodel = new BookModel();
 
         $array = $this->bookmodel->verifyLikesBook($likes);
-        $count = count($array);
-        if($count>0) {
-            return $array;
-        } 
+        return $array;
     }
 
     /**
@@ -667,8 +659,18 @@ class BookController {
 
         $array3 = $this->commentCount();
 
-        $division = round($this->bookmodel->division());
-        $division = (int) $division;
+        $division = $this->bookmodel->division();
+
+        $int = (int) $division;
+
+        $diff = $division - $int;
+
+        if($diff>0) {
+            $int = $int + 1;
+        } else {
+            $int = $int;
+        }
+
         require_once("../App/Views/Admin/gestion.php");
 
     }
@@ -723,6 +725,18 @@ class BookController {
 
         require_once("../App/Views/Admin/show.php");
 
+    }
+
+    /**
+     * createBookAdmin()
+     */
+    public function createBookAdmin() { 
+
+        $array2 = $this->verifyAllDesc();
+
+        $array3 = $this->commentCount();
+
+        require_once("../App/Views/Admin/create-book.php");
     }
 
     /**

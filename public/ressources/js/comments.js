@@ -26,6 +26,8 @@ for(i=0; i<article.length; i++) {
     }
 }
 
+let click_button = document.querySelector(".click_button");
+
 document.addEventListener("DOMContentLoaded", () => {
     click.addEventListener("click", (e) => {
         e.preventDefault();
@@ -94,5 +96,10 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             topul2.className = "topul flex list";
         }
+    })
+
+    click_button.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.history.back();
     })
 })

@@ -175,7 +175,7 @@ class Bookmodel extends Connexion {
         /**
          * $sql, pour les requêtes vers la base de données
          */
-        $sql = "SELECT * FROM `books` LIMIT 5 OFFSET $number";
+        $sql = "SELECT * FROM `books` ORDER BY created_at DESC LIMIT 10 OFFSET $number";
 
         /**
          * $stmt, pour recupérer la requête préparée
@@ -202,7 +202,7 @@ class Bookmodel extends Connexion {
          */
         $stmt = $conn->query($sql);
         $result = $stmt->fetchAll();
-        $result = count($result)/5;
+        $result = count($result)/10;
         return $result;
     }
     
@@ -350,5 +350,6 @@ class Bookmodel extends Connexion {
     }
 
 }
+
 
 ?>

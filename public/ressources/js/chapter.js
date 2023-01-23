@@ -4,6 +4,7 @@ let chapter = document.querySelector(".chapter_icon");
 let chapter_ul = document.querySelector(".chapter>ul");
 let z = 0;
 
+let click_button = document.querySelector(".click_button");
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -20,5 +21,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 z=0
                 break;
         }
+    })
+    
+    click_button.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.history.back();
     })
 })

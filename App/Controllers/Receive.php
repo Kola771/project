@@ -22,10 +22,6 @@ class Receive {
     public function forget() {
         require "../App/Views/Users/forget.php";
     }
-
-    public function createBook() {
-        require "../App/Views/Admin/create-book.php";
-    }
     
     public function updatePassword() {
         require "../App/Views/Users/update-password.php";

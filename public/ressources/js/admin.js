@@ -9,6 +9,7 @@ let bloc_task = document.querySelector('.bloc-task');
 
 let y = 0;
 
+let click_button = document.querySelector(".click_button");
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -38,4 +39,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     })
 
+    click_button.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.history.back();
+    })
 })

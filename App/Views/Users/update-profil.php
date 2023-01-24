@@ -7,6 +7,14 @@
 <main>
         <form class="form flex" action="/update-profil-controller/update-user-info" method="post" enctype="multipart/form-data">
 
+            <?php if(isset($_GET["user_exist"]) || isset($_GET["msg_lastname"]) || isset($_GET["msg_email"])): ?>
+                 <h3 class="danger">Un utilisateur du site a déjà ces attributs !!!</h3>
+            <?php endif; ?>
+
+            <?php if(isset($_GET["user_email_exist"]) || isset($_GET["msg_lastname"]) || isset($_GET["msg_email"])): ?>
+                 <h3 class="danger">Un utilisateur du site utilise déjà cet email !!!</h3>
+            <?php endif; ?>
+
             <?php if(isset($_GET["msg_firstname"]) || isset($_GET["msg_lastname"]) || isset($_GET["msg_email"])): ?>
                  <h3 class="danger">Ne laissez aucun champ vide !!!</h3>
             <?php endif; ?>

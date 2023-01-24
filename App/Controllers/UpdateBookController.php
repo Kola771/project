@@ -99,8 +99,10 @@ class UpdateBookController {
                         $this->bookmodel = new BookModel();
 
                         $array = $this->bookmodel->verify($this->ref_book);
-
+                        
                         $array0 = $this->bookmodel->verify($ref_book0);
+                        
+                        $book_id = $array0[0]["book_id"];
 
                         $id = $array0[0]["book_id"];
 
@@ -138,7 +140,7 @@ class UpdateBookController {
                                         exit();
                                     }
                             } else {
-                                echo "Vous ne pouvez pas faire cette modification";
+                                header("Location:/book-controller/$book_id/view-update-book?book_exist");
                                 exit();
                             }
 

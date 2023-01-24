@@ -81,20 +81,30 @@
     <button class="click_button z-index"><i class="fa fa-arrow-left"></i></a></button>
 </main>
 
-    <script src="/ressources/js/show.js"></script>
+    <?php if($data =="mangas" || $data == "comics"): ?>
+
+        <script src="/ressources/js/show.js"></script>
+        
+    <?php endif; ?>
+
     <script src="/ressources/js/chapter.js"></script>
 
 
-<?php
-    require "footer.php";
-?>
+<?php require "footer.php"; ?>
+
 <?php else: ?>
 
-<h2>Cet article n'est pas disponible actuellement !!!</h2>
+    <main>
+        <h2>Cet article n'est pas disponible actuellement !!!</h2>
+        <button class="click_button z-index"><i class="fa fa-arrow-left"></i></a></button>
+    </main>
+
+    <script src="/ressources/js/task.js"></script>
 
 <?php endif; ?> 
-<?php else: ?>
 
-<?php header("Location:/book-controller/view-home"); ?>
+    <?php else: ?>
 
-<?php endif; ?>
+    <?php header("Location:/book-controller/view-home"); ?>
+
+    <?php endif; ?>

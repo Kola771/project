@@ -49,7 +49,7 @@
             <?php endif; ?>
             
             <div class="flex button">
-                <button><a href="/book-controller/redirection">Annuler la modification</a></button>
+                <a href="/book-controller/redirection">Annuler la publication</a>
                 <button type="submit" name="validate">Valider la publication</button>
             </div>
             <div class="flex radio">

@@ -134,12 +134,6 @@ class UpdateProfilController {
 
         $this->userName($this->user_username);
         
-        session_start();
-        $_SESSION["firstname"] = $this->firstname;
-        $_SESSION["lastname"] = $this->lastname;
-        $_SESSION["email"] = $this->email;
-        $_SESSION["username"] = $this->user_username;
-        
         $tabExtension = pathinfo($this->picture_name, PATHINFO_EXTENSION);
         $extension = strtolower($tabExtension);
         $extensions = ['jpg', 'png', 'jpeg', 'gif'];
@@ -160,6 +154,8 @@ class UpdateProfilController {
                     $this->usermodel = new UserModel();
                     
                     $array = $this->usermodel->verifyUserId($this->user_id);
+                    $username = $array[0]["user_username"];
+                    
                     $array1 = $this->usermodel->verifyAccount($this->email);
                     $array2 = $this->usermodel->verifyUsername($this->user_username);
 
@@ -170,9 +166,14 @@ class UpdateProfilController {
                         if($array[0]["user_email"] === $array1[0]["user_email"]) {
                             if($lenght1>0) {
 
-                                if($array[0]["user_username"] === $array2[0]["user_username"]) {
+                                if($username === $array2[0]["user_username"]) {
                                     
                                     if($this->image == "account.jpg") {
+                                        session_start();
+                                        $_SESSION["firstname"] = $this->firstname;
+                                        $_SESSION["lastname"] = $this->lastname;
+                                        $_SESSION["email"] = $this->email;
+                                        $_SESSION["username"] = $this->user_username;
 
                                         move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
 
@@ -184,6 +185,11 @@ class UpdateProfilController {
                                         header("Location:/book-controller/view-profil");
                                         exit();
                                     } else {
+                                        session_start();
+                                        $_SESSION["firstname"] = $this->firstname;
+                                        $_SESSION["lastname"] = $this->lastname;
+                                        $_SESSION["email"] = $this->email;
+                                        $_SESSION["username"] = $this->user_username;
 
                                         move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
 
@@ -198,16 +204,20 @@ class UpdateProfilController {
                                         exit();
 
                                     }
-
-                                 } else {
-
-                                    echo "Vous ne pouvez pas faire cette modification car il existe déjà quelqu'un ayant déjà ce nom d'utilisateur que vous venez d'entrer !!!";
+                                    
+                                } else {
+                                     header("Location:/login-controller/$username/update-profil?user_exist");
                                     exit();
 
                                  }
                             } else {
                                   
                                     if($this->image == "account.jpg") {
+                                        session_start();
+                                        $_SESSION["firstname"] = $this->firstname;
+                                        $_SESSION["lastname"] = $this->lastname;
+                                        $_SESSION["email"] = $this->email;
+                                        $_SESSION["username"] = $this->user_username;
 
                                         move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
 
@@ -220,6 +230,11 @@ class UpdateProfilController {
                                         exit();
 
                                     } else {
+                                        session_start();
+                                        $_SESSION["firstname"] = $this->firstname;
+                                        $_SESSION["lastname"] = $this->lastname;
+                                        $_SESSION["email"] = $this->email;
+                                        $_SESSION["username"] = $this->user_username;
 
                                         move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
 
@@ -236,7 +251,7 @@ class UpdateProfilController {
                                     }
                              }
                         } else {
-
+                            header("Location:/login-controller/$username/update-profil?user_email_exist");
                             echo "Email existant !!!";
                             exit();
 
@@ -247,9 +262,14 @@ class UpdateProfilController {
 
                         if($array[0]["user_email"] === $array2[0]["user_email"]) {
 
-                            if($array[0]["user_username"] === $array2[0]["user_username"]) {
+                            if($username === $array2[0]["user_username"]) {
                                  
                                 if($this->image == "account.jpg") {
+                                    session_start();
+                                    $_SESSION["firstname"] = $this->firstname;
+                                    $_SESSION["lastname"] = $this->lastname;
+                                    $_SESSION["email"] = $this->email;
+                                    $_SESSION["username"] = $this->user_username;
 
                                     move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
                                     
@@ -262,6 +282,11 @@ class UpdateProfilController {
                                     exit();
 
                                 } else {
+                                    session_start();
+                                    $_SESSION["firstname"] = $this->firstname;
+                                    $_SESSION["lastname"] = $this->lastname;
+                                    $_SESSION["email"] = $this->email;
+                                    $_SESSION["username"] = $this->user_username;
 
                                     move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
 
@@ -276,19 +301,24 @@ class UpdateProfilController {
                                     exit();
 
                                 }
-
-                             } else {
-                                echo "Vous ne pouvez pas faire cette modification car il existe déjà quelqu'un ayant déjà ce nom d'utilisateur que vous venez d'entrer !!!";
+                                
+                            } else {
+                                 header("Location:/login-controller/$username/update-profil?user_exist");
                                 exit();
-                             }
+                            }
                         } else {
-                            echo "Vous ne pouvez pas faire cette modification car il existe déjà quelqu'un ayant déjà ces informations !!!";
+                            header("Location:/login-controller/$username/update-profil?user_exist");
                             exit();
                         }
                     } 
                     else {
                          
                         if($this->image == "account.jpg") {
+                            session_start();
+                            $_SESSION["firstname"] = $this->firstname;
+                            $_SESSION["lastname"] = $this->lastname;
+                            $_SESSION["email"] = $this->email;
+                            $_SESSION["username"] = $this->user_username;
 
                             move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
 
@@ -301,6 +331,11 @@ class UpdateProfilController {
                             exit();
 
                         } else {
+                            session_start();
+                            $_SESSION["firstname"] = $this->firstname;
+                            $_SESSION["lastname"] = $this->lastname;
+                            $_SESSION["email"] = $this->email;
+                            $_SESSION["username"] = $this->user_username;
 
                             move_uploaded_file($this->picture_tmpname, '../public/ressources/assets/medias-users/'.$file);
 

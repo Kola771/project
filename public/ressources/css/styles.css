@@ -223,6 +223,7 @@ body {
     padding: var(--pd_8-);
     background-color: var(--blnuitcl-);
     color: var(--white-);
+    cursor: pointer;
 }
 
 /* Header du site complet */
@@ -656,6 +657,7 @@ header {
     font-weight: bold;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .left {
@@ -882,14 +884,14 @@ header {
 }
 
 .form-search>form>input,
-.form-search>button {
+.form-search>a {
     border-radius: var(--pd_3-);
     padding: var(--px10-) var(--px12-);
     background-color: var(--eee-);
     font-size: var(--px16-);
 }
 
-.form-search>button {
+.form-search>a {
     width: 20%;
     border: none;
     background-color: var(--blnuitcl-);
@@ -925,8 +927,13 @@ header {
     align-items: center;
 }
 
+.recherche4>div>div>div>h4 {
+    flex-basis: 30%;
+}
+
 .recherche4>div>div>div>p {
     flex-basis: 70%;
+    text-align: right;
 }
 
 .recherche4>div>div>img {
@@ -969,7 +976,7 @@ header {
 }
 
 .remove>div>form>button:last-child,
-.button>button:first-child {
+.button>a {
     border: none;
     background-color: var(--red-);
     border: 2px solid var(--red-);
@@ -1113,7 +1120,7 @@ header {
     flex-basis: 20%;
 }
 
-.button>button:first-child,
+.button>a,
 .button>button:last-child {
     padding: var(--px10-) var(--px12-);
     color: var(--white-);
@@ -1468,7 +1475,12 @@ footer>p {
         display: block;
      }
 
+     /**** Main gestion ****/
      
+    .form-search>a {
+        flex-basis: 30%;
+    }
+
     #myTable td:last-child {
         display: flex;
         flex-wrap: wrap;
@@ -1517,6 +1529,10 @@ footer>p {
 
     /****Main home*****/
 
+    .section {
+        background-size: cover;
+    }
+
     .action_form {
         display: flex;
         justify-content: center;
@@ -1537,8 +1553,40 @@ footer>p {
         flex-basis: 95%;
     }
 
+    .order1 {
+        flex-basis: 5%;
+    }
+
     .order2 {
         flex-basis: 60%;
     }
 
+}
+
+@media screen and (max-width: 580px) {
+    
+    /**** Main book ****/
+    .road>a {
+        font-size: var(--px14-);
+    }
+
+    .order1 {
+        flex-basis: 100%;
+        height: 50vh;
+    }
+
+    .order2 {
+        flex-basis: 100%;
+    }
+
+    /**** Main show ****/
+    .relative,
+    .absolute,
+    .absolute>img {
+        border-radius: var(--pd_2-);
+        height: 500px;
+    }
+
+    /**** Main gestion ****/
+    
 }

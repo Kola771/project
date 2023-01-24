@@ -34,7 +34,7 @@
            <form action="#" method="post" class="add-mc" enctype="multipart/form-data">
             <h4 class="nota_biem">NB: Vous ne pouvez insérez pas plus de 20 images par chapître !!!</h4>
             <div class="flex button">
-                <button type="reset">Annuler la publication</button>
+                <a href="/book-controller/redirection">Annuler la publication</a>
                 <button type="submit" name="validate">Valider la publication</button>
             </div>
             <div class="label flex">

@@ -1,10 +1,5 @@
-
 let left = document.querySelector(".left");
 let right = document.querySelector(".right");
-
-let topnav0 = document.querySelector(".topnav0");
-let hidden = document.querySelector(".hidden");
-let x = 0;
 
 let show = 1;
 Slides(show);
@@ -38,20 +33,6 @@ document.addEventListener("DOMContentLoaded", function() {
     right.addEventListener("click", (e) => {
         e.preventDefault();
         solute(1);
-    })
-    
-
-    hidden.addEventListener("click", (e) => {
-        switch(x) {
-            case 0:
-                topnav0.style="display:block";
-                x++;
-                break;
-            case 1:
-                topnav0.style="display:none";
-                x=0
-                break;
-        }
     })
 
 })

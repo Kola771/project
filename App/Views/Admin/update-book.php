@@ -19,20 +19,28 @@
             </nav>
 
         <div class="data flex">
+            
+            <form class="basis" action="/update-book-controller/update-book" method="post" enctype="multipart/form-data">
+
+            <?php if(isset($_GET["book_exist"])): ?>
+                    <h3 class="danger">Une oeuvre a déjà ces attributs !!!</h3>
+            <?php endif; ?>
 
             <?php if(isset($_GET["msg_empty"])): ?>
-                 <h3 class="danger">Remplissez tout les champs !!!</h3>
+                    <h3 class="danger">Remplissez tout les champs !!!</h3>
             <?php endif; ?>
             
             <?php if(isset($_GET["format_error"])): ?>
-                 <h3 class="danger">Le format pré-requis pour le dimunitif n'est pas respecté !!! Les genres de format que nous acceptons sont : mangas-dimunitif ou book-dimunitif ou comics-dimunitif.</h3>
+                    <h3 class="danger">Le format pré-requis pour le dimunitif n'est pas respecté !!! Les genres de format que nous acceptons sont : mangas-dimunitif ou book-dimunitif ou comics-dimunitif.</h3>
             <?php endif; ?>
 
-        <form class="basis" action="/update-book-controller/update-book" method="post" enctype="multipart/form-data">
             <div class="flex button">
-                <button><a href="/book-controller/redirection">Annuler la modification</a></button>
+
+                <a href="/book-controller/redirection">Annuler la modification</a>
                 <button type="submit" name="validate">Modifier l'oeuvre</button>
+                
             </div>
+
             <div class="flex radio">
                 <div>Statuts</div>
                 <div class="flex_radio">

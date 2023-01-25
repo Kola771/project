@@ -28,7 +28,43 @@ for(i=0; i<article.length; i++) {
 
 let click_button = document.querySelector(".click_button");
 
+let input = document.querySelectorAll(".like>form>input");
+let forms = document.querySelector("#like_form");
+let response = document.querySelector("#response");
+let like = document.querySelector(".like>form>.like_div>button");
+
+function likes() {
+    let arrayLike = [];
+    let requete;
+    input.forEach(el => {
+        arrayLike.push(el.name+ "=" +el.value)
+    })
+    requete = arrayLike.join("&");
+    return requete;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+
+    forms.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let xmlhttp = new XMLHttpRequest();
+        let param = likes();
+
+
+        xmlhttp.open("POST", "/like-controller/insert-likes", true);
+
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+        xmlhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            
+             response.innerHTML = this.responseText;
+          }
+        };
+        xmlhttp.send(param);
+    })
+
     click.addEventListener("click", (e) => {
         e.preventDefault();
         

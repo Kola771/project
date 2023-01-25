@@ -53,14 +53,34 @@ require "header.php";
                     <h2><?= $values["book_name"] ?></h2>
                     <p><?= $values["book_description"] ?></p>
                 </div>
-                <img class="order1" src="/ressources/assets/medias-book/<?= $values["book_image"] ?>" alt="<?= $values["book_name"] ?>">
+                <div class="order1">
+                    <img src="/ressources/assets/medias-book/<?= $values["book_image"] ?>" alt="<?= $values["book_name"] ?>">
+                    <div class="like">
+                        <form id="like_form">
+                            <input type="hidden" name="book_id" value="<?= $values["book_id"] ?>">
+                            <input type="hidden" name="user_id" value="<?= $_SESSION["user_id"] ??  "" ?>">
+                            <div class="like_div">
+                                <button type="submit" name="submit">
+                                    
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="black" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                                </svg>
+    
+                                </button>
+                                <p>+<span id="response"><?=$count[0][0]?></span></p>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+                    
 
             <?php endforeach; ?>
 
             <div class="comments">
                 <div class="container_article">
                     <h2 class="click">Voir les commentaires <button class="button_comment"><i class="fas fa-comment-dots"></i></button></h2>
-
+                    
                     <?php foreach($array0 as $key => $values): ?>
                         <?php if($values["book_id"] == $array[0]["book_id"]): ?>
 

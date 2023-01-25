@@ -1,22 +1,37 @@
-
-
 function myFunction() {
     let input, filter, ul, li, a, i, inputValue;
+
     input = document.getElementById("search");
+
     filter = input.value.toUpperCase();
+
     ul = document.getElementById("search_ul");
+
     li = ul.getElementsByTagName("li");
+
     for (i = 0; i < li.length; i++) {
+
         a = li[i].getElementsByTagName("a")[0];
+
         if (a) {
+
             inputValue = a.textContent || a.innerText;
+
             if (inputValue.toUpperCase().indexOf(filter) > -1) {
+
                 li[i].style.display = "";
-            } else {
+                
+            } 
+            else {
+                
                 li[i].style.display = "none";
+
             }
+
         }
+
     }
+
 }
 
 let topul2 = document.getElementById("topul2");

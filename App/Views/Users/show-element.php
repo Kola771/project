@@ -32,14 +32,16 @@
     </section>
     
     <div class="container">
-        <form action="#" method="post">
+        <form class="action_form" action="#" method="post">
             <input type="text" id="search" placeholder="Recherche le nom..">
         </form>
         
         <ul class="list pad0" id="search_ul">
             <?php for($i=0, $max=count($array); $i<$max;$i++): ?>
                 <?php if($array[$i]["book_status"] == "En ligne") : ?>
-                    <li><a href="/book-controller/<?= $array[$i]["book_id"] ?>/view-book"><?= $array[$i]["book_name"] ?></a></li>
+                    <li><a href="/book-controller/<?= $array[$i]["book_id"] ?>/view-book"><?= $array[$i]["book_name"] ?></a>
+                    <p>Publié le <?= $array[$i]["created_at"] ?></p>
+                    </li>
                 <?php endif; ?>
             <?php endfor; ?>
         </ul>

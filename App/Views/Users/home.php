@@ -44,7 +44,9 @@
 
             <?php for($i=0, $max=count($array); $i<$max;$i++): ?>
 
-                <li><a href="/book-controller/<?= $array[$i]["book_id"] ?>/view-book"><?= $array[$i]["book_name"] ?></a></li>
+                <li><a href="/book-controller/<?= $array[$i]["book_id"] ?>/view-book"><?= $array[$i]["book_name"] ?></a>
+                    <p>Publié le <?= $array[$i]["created_at"] ?></p>
+                </li>
             
             <?php endfor; ?>
         

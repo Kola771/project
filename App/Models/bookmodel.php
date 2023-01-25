@@ -125,16 +125,36 @@ class Bookmodel extends Connexion {
     }
 
     /**
-     * verifyAllDesc(), affiche tous les livres de la bd du plus grand au plus petit 
+     * verifyAllDescLigne(), affiche tous les livres de la bd ayant le status en ligne en les triants par ordre décroissant via leurs dates de création.
      */
-    public function verifyAllDesc() {
+    public function verifyAllDescLigne() {
 
         $conn = $this->connect();
 
         /**
          * $sql, pour les requêtes vers la base de données
          */
-        $sql = "SELECT * FROM `freek`.books ORDER BY created_at DESC LIMIT 5";
+        $sql = "SELECT * FROM `freek`.books WHERE book_status = 'En ligne' ORDER BY created_at DESC LIMIT 5";
+
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->query($sql);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+
+    /**
+     * verifyAllDescAttente(), affiche tous les livres de la bd ayant le status en attente en les triants par ordre décroissant via leurs dates de création.
+     */
+    public function verifyAllDescAttente() {
+
+        $conn = $this->connect();
+
+        /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "SELECT * FROM `freek`.books WHERE book_status = 'En attente' ORDER BY created_at DESC LIMIT 5";
 
         /**
          * $stmt, pour recupérer la requête préparée

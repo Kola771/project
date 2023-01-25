@@ -37,6 +37,7 @@ html {
     --fefefe-: #fefefe;
     --ccc-: #ccc;
     --ddd-: #ddd;
+    --dd_d-: rgb(183, 179, 179);
     --c33-: #333;
     --eee-: #eee;
     --white-: white;
@@ -245,6 +246,16 @@ header {
 }
 
 /* Main Home */
+
+.topnav0>.topul>li:hover {
+    background-color: var(--dd_d-);
+    padding: var(--pd_2-);
+}
+
+.topnav0>.topul>li>a:hover {
+    color: var(--black-);
+}
+
 .topul {
     gap: .5em;
     padding: 0;
@@ -352,6 +363,11 @@ header {
 
 #search_ul>li>a {
     font-size: var(--px20-);
+}
+
+#search_ul>li>p {
+    color: var(--white-);
+    margin-block: var(--px10-);
 }
 
 
@@ -488,6 +504,40 @@ header {
 
 .order1 {
     order: 1;
+    position: relative;
+}
+
+.like {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    color: var(--black-);
+    font-size: var(--px30-);
+    width: 40px;
+}
+
+.like>form>.like_div {
+    position: relative;
+}
+
+.like>form>.like_div>button {
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.like>form>.like_div>p {
+    position: absolute;
+    top: -25px;
+    font-size: var(--px15-);
+    font-weight: bold;
+    color: var(--red-);
+    right: 0px;
+    background-color: var(--white-);
+    border-radius: var(--pd_5-);
+}
+
+.order1>img {
     width: 200px;
     height: 300px;
 }
@@ -733,6 +783,7 @@ header {
 .task {
     display: none;
     position: fixed;
+    cursor: pointer;
     top: 50%;
     left: 0;
     background-color: var(--c33-);
@@ -1294,10 +1345,18 @@ footer>p {
     .topnav0>.topul {
         flex-direction: column;
     }
+
+    .topnav0>.topul>li {
+        text-align: center;
+    }
     
     .topnav>.topul li.icon0,
     .hidden {
         display: block;
+    }
+    
+    .hidden {
+        margin-right: var(--px20-);
     }
 
     .header{
@@ -1565,6 +1624,11 @@ footer>p {
 
 @media screen and (max-width: 580px) {
     
+    /**** Main home ****/
+    #search_ul>li {
+        flex-basis: 90%;
+    }
+
     /**** Main book ****/
     .road>a {
         font-size: var(--px14-);
@@ -1572,6 +1636,10 @@ footer>p {
 
     .order1 {
         flex-basis: 100%;
+    }
+
+    .order1>img {
+        width: 100%;
         height: 50vh;
     }
 

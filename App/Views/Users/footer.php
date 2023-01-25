@@ -7,9 +7,7 @@
             <ul class="flex flex-ul">
                 <?php foreach($array2 as $key => $values) : ?>
 
-                    <?php if($values["book_status"] == "En ligne") : ?>
                         <li><?= $values["book_name"] ?> <span class="span">New</span></li>
-                    <?php endif; ?>
                     
                 <?php endforeach; ?>
             </ul>
@@ -35,11 +33,9 @@
             <h3>Inédits</h3>
 
             <ul class="flex flex-ul">
-                <?php foreach($array2 as $key => $values) : ?>
+                <?php foreach($array4 as $key => $values) : ?>
 
-                    <?php if($values["book_status"] == "En attente") : ?>
                         <li><?= $values["book_name"] ?> <span class="inedit">Inédit</span></li>
-                    <?php endif; ?>
                     
                 <?php endforeach; ?>
             </ul>

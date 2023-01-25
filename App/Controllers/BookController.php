@@ -5,6 +5,7 @@ require "../App/Models/BookModel.php";
 require "../App/Models/UserModel.php";
 require "../App/Models/ChapterModel.php";
 require "../App/Models/CommentModel.php";
+require "../App/Models/LikesModel.php";
 
 class BookController {
 
@@ -22,6 +23,11 @@ class BookController {
      * $usermodel; on va utiliser cette variable pour instancier la classe UserModel dans le controller
      */
     public $usermodel;
+
+    /**
+     * $likemodel; on va utiliser cette variable pour instancier la classe LikesModel dans le controller
+     */
+    public $likemodel;
 
     //déclaration des variables
     public $status;
@@ -196,12 +202,22 @@ class BookController {
     }
 
     /**
-     * verifyAllDesc(), affiche tous les livres de la bd du plus grand au plus petit 
+     * verifyAllDescLigne(), affiche tous les livres de la bd ayant le status en ligne en les triants par ordre décroissant via leurs dates de création.
      */
-    public function verifyAllDesc() {
+    public function verifyAllDescLigne() {
         
         $this->bookmodel = new BookModel();
-        $array = $this->bookmodel->verifyAllDesc();
+        $array = $this->bookmodel->verifyAllDescLigne();
+        return $array;
+    }
+
+    /**
+     * verifyAllDescAttente(), affiche tous les livres de la bd ayant le status en attente en les triants par ordre décroissant via leurs dates de création.
+     */
+    public function verifyAllDescAttente() {
+        
+        $this->bookmodel = new BookModel();
+        $array = $this->bookmodel->verifyAllDescAttente();
         return $array;
     }
 
@@ -493,11 +509,14 @@ class BookController {
      */
     public function searchBook() {
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["recherche"])) {
-            $name_book =  $_POST["search"];
+            $name_book =  htmlspecialchars($_POST["search"]);
+
+            $name_book = preg_replace("/\'/", "\'", $name_book);
             
             $this->bookmodel = new BookModel();
 
             $array = $this->bookmodel->verifyName($name_book);
+
             $count = count($array);
             if($count>0) {
                 $book_id = $array[0]["book_id"];
@@ -540,6 +559,22 @@ class BookController {
     }
 
     /**
+     * countLikes(), pour compter le nombre de likes a une oeuvre
+     */
+    public function countLikes() {
+        
+        $url = $_SERVER["QUERY_STRING"];
+        preg_match("/\/(?<book_id>[a-zA-Z-\-]+)\//i", $url, $matches);
+        $book_id = $matches["book_id"];
+
+        $this->likemodel = new LikesModel();
+        
+        $count = $this->likemodel->selectCount($book_id);
+
+        return $count;
+    }
+
+    /**
      * viewBook(), pour l'affichage des livres, commentaires et chapitres par rapport à ses livres dans la vue book.php
      */
     public function viewBook() {
@@ -547,9 +582,12 @@ class BookController {
         $array0 = $this->selectAllComment();
         $array1 = $this->verifyAllDistinctChapter();
 
-        $array2 = $this->verifyAllDesc();
-        $array3 = $this->commentCount();
+        $array2 = $this->verifyAllDescLigne();
+
+        $count = $this->countLikes();
         
+        $array3 = $this->commentCount();
+        $array4 = $this->verifyAllDescAttente();
         $array5 = $this->verifyAll();
 
         require_once("../App/Views/Users/book.php");
@@ -561,9 +599,11 @@ class BookController {
     public function viewHome() {
         $array = $this->verifyAll();
 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
 
         require_once("../App/Views/Users/home.php");
     }
@@ -576,9 +616,11 @@ class BookController {
         $array = $this->verifyAllChapter();
         $array1 = $this->verifyAllDistinctChapter();
                 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
     
         $data = $array[0]["book_id"];
         if(preg_match("/^mangas/i", $data, $match) || preg_match("/^comics/i", $data, $match) || preg_match("/^books/i", $data, $match)) {
@@ -595,9 +637,11 @@ class BookController {
 
         $array0 = $this->selectAllComment();
                 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
         
         require_once("../App/Views/Users/profil.php");
     }
@@ -609,9 +653,11 @@ class BookController {
 
         $array = $this->verifyLikesBook();
                 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
 
         require_once('../App/Views/Users/show-element.php');
     }
@@ -641,9 +687,11 @@ class BookController {
         $count_one = count($array_one);
         $count_two = count($array_two);
                 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
 
         require_once('../App/Views/Admin/index.php');
     }
@@ -655,9 +703,11 @@ class BookController {
         
         $array = $this->limitLess();
                 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
 
         $division = $this->bookmodel->division();
 
@@ -682,9 +732,11 @@ class BookController {
         
         $array = $this->verifyAllUsers();
                 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
 
         require_once("../App/Views/Admin/gestion-users.php");
 
@@ -703,9 +755,11 @@ class BookController {
         //remplacement des balises <br/> en vide
         $text = preg_replace("/\<br\s\/\>/", "", $text);
 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
 
         require_once("../App/Views/Admin/update-book.php");
     }
@@ -719,9 +773,11 @@ class BookController {
 
         $array0 = $this->verifyAllChapters();
 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
 
         require_once("../App/Views/Admin/show.php");
 
@@ -732,9 +788,11 @@ class BookController {
      */
     public function createBookAdmin() { 
 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
 
         require_once("../App/Views/Admin/create-book.php");
     }
@@ -746,9 +804,11 @@ class BookController {
 
         $array = $this->verifyAllBook();  
 
-        $array2 = $this->verifyAllDesc();
+        $array2 = $this->verifyAllDescLigne();
 
         $array3 = $this->commentCount();
+        
+        $array4 = $this->verifyAllDescAttente();
 
         require_once("../App/Views/Admin/create-chapter.php");
     }

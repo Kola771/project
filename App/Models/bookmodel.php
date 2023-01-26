@@ -10,6 +10,7 @@ class Bookmodel extends Connexion {
     public $conn;
 
     public $ref_book;
+    public $user_id;
     public $name_book;
     public $book_image;
     public $desc_book;
@@ -114,7 +115,7 @@ class Bookmodel extends Connexion {
         /**
          * $sql, pour les requêtes vers la base de données
          */
-        $sql = "SELECT * FROM `freek`.books WHERE book_status = 'En ligne'";
+        $sql = "SELECT * FROM `freek`.books, `freek`.users WHERE book_status = 'En ligne' AND `books`.user_id = `users`.user_id";
 
         /**
          * $stmt, pour recupérer la requête préparée
@@ -195,7 +196,7 @@ class Bookmodel extends Connexion {
         /**
          * $sql, pour les requêtes vers la base de données
          */
-        $sql = "SELECT * FROM `books` ORDER BY created_at DESC LIMIT 10 OFFSET $number";
+        $sql = "SELECT * FROM `books` ORDER BY created_at DESC LIMIT 50 OFFSET $number";
 
         /**
          * $stmt, pour recupérer la requête préparée
@@ -222,18 +223,19 @@ class Bookmodel extends Connexion {
          */
         $stmt = $conn->query($sql);
         $result = $stmt->fetchAll();
-        $result = count($result)/10;
+        $result = count($result)/50;
         return $result;
     }
     
     /**
      * insertBook(), pour insérer dans la bd des livres
      */
-    public function insertBook($ref_book, $name_book, $book_image, $desc_book, $status, $created_at) {
+    public function insertBook($ref_book, $name_book, $book_image, $desc_book, $status, $user_id, $created_at) {
 
         $conn = $this->connect();
   
         $this->ref_book = $ref_book;
+        $this->user_id = $user_id;
         $this->name_book = $name_book;
         $this->book_image = $book_image;
         $this->desc_book = $desc_book;
@@ -243,7 +245,7 @@ class Bookmodel extends Connexion {
         /**
          * $sql, pour les requêtes vers la base de données
          */
-        $sql = "INSERT INTO `freek`.books VALUES(:reference, :name, :image, :desc_book, :status, :created_at)";
+        $sql = "INSERT INTO `freek`.books VALUES(:reference, :name, :image, :desc_book, :status, :user_id, :created_at)";
         
         /**
          * $stmt, pour recupérer la requête préparée
@@ -251,6 +253,7 @@ class Bookmodel extends Connexion {
         $stmt = $conn->prepare($sql);
         $stmt->execute([
             ":reference" => $this->ref_book,
+            ":user_id" => $this->user_id,
             ":name" => $this->name_book,
             ":image" => $this->book_image,
             ":desc_book" => $this->desc_book,

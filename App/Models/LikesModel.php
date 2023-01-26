@@ -57,6 +57,9 @@ class LikesModel extends Connexion {
       return $result;
     }
 
+    /**
+     * selectCount(), pour compter le nombre de personnes ayant aimé une oeuvre
+     */
     public function selectCount($book_id) {
         $conn = $this->connect();
 
@@ -76,6 +79,9 @@ class LikesModel extends Connexion {
       return $result;
     }
 
+    /**
+     * deleteLikes(), pour supprimer le like qu'un utilisateur a mis pour une oeuvre
+     */
     public function deleteLikes($book_id, $user_id) {
         $conn = $this->connect();
 
@@ -93,6 +99,27 @@ class LikesModel extends Connexion {
       
        $stmt = $conn->prepare($sql);
        $stmt->execute([$this->book_id, $this->user_id]);
+    }
+
+    /**
+     * deleteLikesBook(), pour supprimer une oeuvre ayant un like
+     */
+    public function deleteLikesBook($book_id) {
+      $conn = $this->connect();
+
+      $this->book_id = $book_id;
+    
+    /**
+     * $sql, pour les requêtes vers la base de données
+     */
+    $sql = "DELETE FROM `likes` WHERE book_id = ?";
+      
+    /**
+     * $stmt, pour recupérer la requête préparée
+     */
+    
+     $stmt = $conn->prepare($sql);
+     $stmt->execute([$this->book_id]);
     }
 
 }

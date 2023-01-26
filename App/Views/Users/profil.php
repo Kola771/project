@@ -27,35 +27,36 @@
 
             <p>Date de création du compte : <strong><?php echo $_SESSION["created_at"];?></strong></p>
 
+            <h2 class="border click">Tout vos commentaires <i class="fas fa-comment-dots"></i></h2>
+            
             <div class="container_article">
-                
-            <article class="article">
 
-            <h4 class="border click">Tout vos commentaires <i class="fas fa-comment-dots"></i></h4>
+                <article class="article">
 
-            <?php foreach($array0 as $key => $values) : ?>
+                <?php foreach($array0 as $key => $values) : ?>
 
-                <?php if($values["book_status"] == "En ligne"): ?>
+                    <?php if($values["book_status"] == "En ligne"): ?>
 
-                    <?php if($values["user_username"] == $_SESSION["username"]) : ?>
+                        <?php if($values["user_username"] == $_SESSION["username"]) : ?>
 
-                    <div class="padding">
+                        <div class="padding">
+                            <h4><?= $values["book_name"] ?></h4>
 
-                        <p><?= $values["comment_comment"] ?></p>
+                            <p><?= $values["comment_comment"] ?></p>
 
-                        <p>Publié le <?= $values["created_at"] ?></p>
+                            <p>Fait le <?= $values["created_at"] ?></p>
 
-                        <a href="/book-controller/<?= $values["book_id"] ?>/view-book" class="primary">Voir article</a>
+                            <a href="/book-controller/<?= $values["book_id"] ?>/view-book" class="primary">Voir article</a>
 
-                    </div>
+                        </div>
+
+                        <?php endif; ?>
 
                     <?php endif; ?>
 
-                <?php endif; ?>
+                <?php endforeach; ?>
 
-            <?php endforeach; ?>
-
-            </article>
+                </article>
             
             </div>
         </section>

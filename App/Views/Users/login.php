@@ -6,7 +6,7 @@
         <form class="form flex" action="/login-controller/login" method="post">
 
             <?php if(isset($_GET["msg_email_empty"])): ?>
-                 <h3 class="danger">Mettez votre email !!!</h3>
+                 <h3 class="danger">Mettez votre email ou votre nom d'utilisateur !!!</h3>
             <?php endif; ?>
 
             <?php if(isset($_GET["msg_password_empty"])): ?>
@@ -21,7 +21,7 @@
                  <h3 class="danger">Mot de passe incorrect !!!</h3>
             <?php endif; ?>
 
-            <input type="email" placeholder="Addresse électronique" name="email" value ="<?= $_GET["email"] ?? "" ?>">
+            <input type="text" placeholder="Addresse électronique ou nom d'utilisateur" name="email" value ="<?= $_GET["email"] ?? "" ?>">
             <input type="password" placeholder="Password" maxlength="14" name="password">
             <div class="remember">
                 <input type="checkbox" name="" id="" checked required>Se rappeler de moi

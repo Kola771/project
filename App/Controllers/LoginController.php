@@ -22,7 +22,6 @@ class LoginController {
         $this->email = $this->sanitaze($_POST["email"]);
         $this->password = $this->sanitaze($_POST["password"]);
         $this->emptyInputs();
-        $this->verifyEmail();
         $this->verifyAccount();
         }
     }
@@ -32,7 +31,7 @@ class LoginController {
      */
     public function verifyAccount() {
         $this->usermodel = new UserModel();
-        $res = $this->usermodel->verifyAccount($this->email);
+        $res = $this->usermodel->verifyEmailOrName($this->email);
         $count = count($res);
          if($count>0) {
             $password = password_verify($this->password, $res[0]["user_password"]);
@@ -93,17 +92,6 @@ class LoginController {
             else{
             return false;
         }
-    }
-
-    /**
-     * verifyEmail(), pour vérifiez si l'email suis les normes pré-requises
-     */
-    public function verifyEmail() {
-        if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
-            header("Location:/receive/login?msg=email_error&email=$this->email");
-            exit();
-        }
-        return false;
     }
 
     /**

@@ -26,6 +26,7 @@
                     <input list="browsers" type="text" id="search" placeholder="Recherche le nom d'emprunt">
                 </form>
             </div>
+            <div class="overflow_table">
             <table id="myTable">
                 <thead class="thead-dark">
                     <tr>
@@ -47,7 +48,7 @@
                             <td><?= $values["user_username"] ?></td>
                             <td>
 
-                                <button type="submit" class="danger supprimer" value = "<?= $values["user_id"] ?>">Supprimer l'utilisateur</button>
+                                <button type="submit" class="danger supprimer" value = "<?= $values["user_id"] ?>"><i class="fa fa-trash"></i> Supprimer l'utilisateur</button>
                                 <button class="update white watch" value = "<?= $values["user_id"] ?>">Plus de détails</button>
 
                             </td>
@@ -55,6 +56,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>   
+            </div>
         </div>
     </div>
 

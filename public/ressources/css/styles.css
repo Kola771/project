@@ -21,7 +21,7 @@ html {
 
 :root {
     --reddark-: rgb(107, 9, 9);
-    --blnuitcl-: #245583;
+    --blnuitcl-: #275387;
     --rgb-blue-: rgb(83, 114, 218);
     --orange-: rgb(255, 132, 0);
     --orangepur-: #f50;
@@ -147,6 +147,11 @@ body {
     color: var(--black-);
 }
 
+.bold {
+    font-weight: bold;
+    color: var(--reddark-);
+}
+
 .dark {
     background-color: var(--c33-);
 }
@@ -227,6 +232,7 @@ body {
     cursor: pointer;
 }
 
+
 /* Header du site complet */
 
 a {
@@ -247,12 +253,9 @@ header {
 
 /* Main Home */
 
-.topnav0>.topul>li:hover {
+.topnav0>.topul>li>a:hover {
     background-color: var(--dd_d-);
     padding: var(--pd_2-);
-}
-
-.topnav0>.topul>li>a:hover {
     color: var(--black-);
 }
 
@@ -262,7 +265,7 @@ header {
 }
 
 .topul>li>a {
-    font-size: var(--px16-);
+    font-size: var(--px18-);
 }
 
 .topnav {
@@ -363,6 +366,7 @@ header {
 
 #search_ul>li>a {
     font-size: var(--px20-);
+    text-decoration: underline;
 }
 
 #search_ul>li>p {
@@ -377,11 +381,10 @@ header {
 */
 .form {
     position: relative;
-    max-width: 350px;
-    margin: 0 auto;
+    max-width: 400px;
+    margin: 10% auto;
     padding: var(--pd_8-);
     border-radius: var(--pd_2-);
-    margin-block: var(--px50-);
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
@@ -481,7 +484,7 @@ header {
 }
 
 .section-background {
-    background-image: url(../assets/la_rosée_de_la_nuit\ -\ Copie.jpg);
+    background-image: url(../assets/livre.jpg);
 }
 
 .section-book {
@@ -509,7 +512,7 @@ header {
 
 .like {
     position: absolute;
-    bottom: -20px;
+    bottom: 0;
     right: -20px;
     color: var(--black-);
     font-size: var(--px30-);
@@ -524,6 +527,7 @@ header {
     border: none;
     border-radius: 50%;
     cursor: pointer;
+    width: var(--px35-);
 }
 
 .like>form>.like_div>p {
@@ -535,6 +539,16 @@ header {
     right: 0px;
     background-color: var(--white-);
     border-radius: var(--pd_5-);
+}
+
+.red {
+    background-color: var(--red-);
+    display: flex;
+    justify-content: center;
+}
+
+.red>svg {
+    width: var(--px30-);
 }
 
 .order1>img {
@@ -853,6 +867,12 @@ header {
 /* Main administrateur
  * gestion
 */
+.overflow_table {
+    max-width: 90%;
+    margin: 2% auto;
+    height: 100vh;
+    overflow: scroll;
+}
 
 #myTable {
     width: 100%;
@@ -918,7 +938,8 @@ header {
 }
 
 .form-search {
-    flex-basis: 98%;
+    max-width: 90%;
+    margin: 0 auto;
     padding: 0;
     justify-content: space-between;
     align-items: center;
@@ -946,6 +967,7 @@ header {
     width: 20%;
     border: none;
     background-color: var(--blnuitcl-);
+    text-align: center;
 }
 
 #recherche0>div,
@@ -1230,7 +1252,7 @@ header {
     width: 50%;
 }
 
-.article>.border {
+.border {
     border-top: 1px solid var(--black-);
     color: var(--black-);
 }
@@ -1318,6 +1340,11 @@ footer>p {
 @media screen and (max-width: 960px) {
 
     .container_article {
+        max-width: 90%;
+        margin: 0 auto;
+    }
+
+    h2.click {
         max-width: 90%;
         margin: 0 auto;
     }
@@ -1442,6 +1469,10 @@ footer>p {
         justify-content: center;
     }
 
+    .order1>img {
+        border-radius: var(--px10-);
+    }
+
     .order2 {
         flex-basis: 50%;
     }
@@ -1535,9 +1566,18 @@ footer>p {
      }
 
      /**** Main gestion ****/
+
+     .form-search {
+        max-width: 100%;
+     }
      
     .form-search>a {
         flex-basis: 30%;
+    }
+    
+    .overflow_table {
+        max-width: 100%;
+        margin: var(--px10-) 0;
     }
 
     #myTable td:last-child {
@@ -1620,6 +1660,27 @@ footer>p {
         flex-basis: 60%;
     }
 
+    /**** Main gestion ****/
+    #recherche0>div,
+    #recherche1>div,
+    #recherche2>div,
+    #recherche3>div {
+        max-width: 70%;
+        margin: 25% auto 0;
+    }
+    #recherche0>div>form,
+    #recherche1>div>form,
+    #recherche2>div>form,
+    #recherche3>div>form {
+        flex-wrap: wrap;
+        gap: .2em;
+    }
+
+    .remove>div>form>button:last-child,
+    .inside>div>form>button:last-child,
+    .put>div>form>button:last-child{
+        flex-basis: 70%;
+    }
 }
 
 @media screen and (max-width: 580px) {
@@ -1635,7 +1696,8 @@ footer>p {
     }
 
     .order1 {
-        flex-basis: 100%;
+        flex-basis: 90%;
+        margin: 0 auto;
     }
 
     .order1>img {
@@ -1655,6 +1717,13 @@ footer>p {
         height: 500px;
     }
 
-    /**** Main gestion ****/
-    
+    /**** Main index ****/
+    .article-book {
+        flex-basis: 80%;
+    }
+
+    .article-book>img {
+        height: 70%;
+    }
+
 }

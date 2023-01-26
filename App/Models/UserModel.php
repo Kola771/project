@@ -50,9 +50,9 @@ class UserModel extends Connexion {
     /**
      * verifyEmailOrName(), pour vérifier si il y a un utilisateur dans la bd ayant déjà ce genre d'email ou de nom d'utilisateur
      */
-    public function verifyEmailOrName($email, $user_username) {
-        $this->email = $email;
-        $this->user_username = $user_username;
+    public function verifyEmailOrName($params) {
+        $this->email = $params;
+        $this->user_username = $params;
 
         $conn = $this->connect();
 

@@ -21,16 +21,16 @@
             <nav class="topnav0">
                 <ul class="topul flex list" id="topul">
 
-                    <li><a href="/book-controller/view-home">Home</a></li>
+                    <li><a href="/book-controller/view-home"><i class="fa fa-home"></i> Home</a></li>
 
                     <?php if(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 0): ?>
                         <li><a href="/admin/book-controller/view-dashbord">Dashbord</a></li>
-                        <li><a href="/book-controller/view-profil"><i class="fa fa-account"></i>Profil</a></li>
-                        <li><a href="/receive/logout">Deconnexion</a></li>
+                        <li><a href="/book-controller/view-profil"><i class="fa fa-user"></i> Profil</a></li>
+                        <li><a href="/receive/logout">Deconnexion<i class="fas fa-arrow-alt-circle-right"></i></a></li>
 
                     <?php elseif(isset($_SESSION["user_role"]) && $_SESSION["user_role"] == 1): ?>
-                        <li><a href="/book-controller/view-profil"><i class="fa fa-account"></i>Profil</a></li>
-                        <li><a href="/receive/logout">Deconnexion</a></li>
+                        <li><a href="/book-controller/view-profil"><i class="fa fa-user"></i> Profil</a></li>
+                        <li><a href="/receive/logout">Deconnexion<i class="fas fa-arrow-alt-circle-right"></i></a></li>
                     <?php else: ?>
                         
                         <li><a href="/receive/login">Login</a></li>

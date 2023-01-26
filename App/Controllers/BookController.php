@@ -31,6 +31,7 @@ class BookController {
 
     //déclaration des variables
     public $status;
+    public $user_id;
     public $name_book;
     public $ref_book;
     public $image_book;
@@ -78,6 +79,7 @@ class BookController {
         
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["validate"])) {
         $this->status = $_POST["status"];
+        $this->user_id = $_POST["user_id"];
         $this->name_book = $this->sanitaze($_POST["name_book"]);
         $this->ref_book = $_POST["ref_book"];
 
@@ -137,7 +139,7 @@ class BookController {
                     $file = $uniqueName.".".$extension;
                     move_uploaded_file($this->image_book_tmpname, '../public/ressources/assets/Medias-book/'.$file);
 
-                    $this->bookmodel->insertBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $this->created_at);
+                    $this->bookmodel->insertBook($this->ref_book, $this->name_book, $file, $this->desc_book, $this->status, $this->user_id, $this->created_at);
 
                     header("Location:/book-controller/redirection");
                     exit();
@@ -256,7 +258,7 @@ class BookController {
         if(preg_match("/(?<id>\d+)/", $url, $match)) {
 
             $id = $match["id"];
-            $number = 10 * $id;
+            $number = 50 * $id;
             $this->bookmodel = new BookModel();
             $array = $this->bookmodel->verifyLimitOffsetBook($number);
             return $array;
@@ -462,6 +464,7 @@ class BookController {
             $this->bookmodel = new BookModel();
             $this->commentmodel = new CommentModel();
             $this->chaptermodel = new ChapterModel();
+            $this->likemodel = new LikesModel();
 
             $array = $this->bookmodel->verify($book_id);
 
@@ -489,6 +492,8 @@ class BookController {
             $this->commentmodel->deleteCommentBook($book_id);
 
             $this->chaptermodel->deleteBook($book_id);
+            
+            $this->likemodel->deleteLikesBook($book_id);
 
             header("Location:/book-controller/redirection");
             exit();

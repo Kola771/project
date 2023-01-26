@@ -29,6 +29,7 @@
 
                 <a href="/admin/book-controller/create-book-admin">Publier une oeuvre</a>
             </div>
+            <div class="overflow_table">
             <table id="myTable">
                 <thead class="thead-dark">
                     <tr>
@@ -49,23 +50,24 @@
 
                                 <?php elseif($values["book_status"] == "En attente") : ?>
 
-                                <button type="submit" class="success ligne" value = "<?= $values["book_id"] ?>" >Mettre en ligne</button>
+                                <button type="submit" class="success ligne" value = "<?= $values["book_id"] ?>" ><i class="fas fa-share-alt"></i> Publier</button>
 
                                 <?php else : ?>
 
                                 <button type="submit" class="primary mettre" value = "<?= $values["book_id"] ?>" >Remettre</button>
                                 
                                 <?php endif; ?>
-                                <button type="submit" class="danger supprimer" value = "<?= $values["book_id"] ?>">Supprimer l'oeuvre</button>
+                                <button type="submit" class="danger supprimer" value = "<?= $values["book_id"] ?>"><i class="fa fa-trash"></i> Supprimer l'oeuvre</button>
                                 <button class="blue white watch" value = "<?= $values["book_id"] ?>">Plus de détails</button>
-                                <a class="update" href="/book-controller/<?= $values["book_id"] ?>/view-update-book">Modifier l'oeuvre</a>
+                                <a class="update" href="/book-controller/<?= $values["book_id"] ?>/view-update-book"><i class="fa fa-pencil"></i> Modifier l'oeuvre</a>
                                 <a class="blue" href="/book-controller/<?= $values["book_id"] ?>/view-show-admin">Voir les chapîtres</a>
 
                             </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-            </table>  
+            </table>
+            </div> 
             <form action="/book-controller/redirection" class="form-next" method="post">
                 <?php for($i=0; $i<$int; $i++) : ?>
                     <button class="next" value="<?= $i ?>" name="next"><?= $i+1 ?></button> 
@@ -106,10 +108,10 @@
 
     <div id="recherche3" class="put modal animate">
                 <div>
-                    Voulez-vous vraiment mettre en ligne cette oeuvre ?
+                    Voulez-vous vraiment publier cette oeuvre ?
                     <form action="/book-controller/update-book-status" method="post" class="flex">
                         <button type="reset" class="danger closes"><i class="fa fa-close"></i> Annuler</button>
-                        <button type="submit" class="attente" name="attente">Mettre en ligne cette oeuvre</button>
+                        <button type="submit" class="attente" name="attente">Publier cette oeuvre</button>
                     </form>
                 </div>
     </div>

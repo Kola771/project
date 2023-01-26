@@ -17,13 +17,19 @@ let z = 0;
 
 let click = document.querySelector('.click');
 let article = document.querySelectorAll('.article');
+let container_article = document.querySelector('.container_article');
 
 let i, control_lenght = 2;
 
-for(i=0; i<article.length; i++) {
-    if(i>=2) {
-        article[i].style = 'display:none';
+if(article.length>0) {
+    for(i=0; i<article.length; i++) {
+        if(i>=2) {
+            article[i].style = 'display:none';
+        }
     }
+} else {
+    container_article.innerHTML = "<h3>Il n'y a pas de commentaires actuellement pour ce poste!!!</h3>"
+    container_article.style = "height:100px; color:red"
 }
 
 let click_button = document.querySelector(".click_button");
@@ -42,6 +48,16 @@ function likes() {
     requete = arrayLike.join("&");
     return requete;
 }
+
+let exp_reg = /@\w+/;
+let article_p = document.querySelectorAll('.article>div>p');
+article_p.forEach(el => {
+    if(el.textContent.match(exp_reg)) {
+        let join = el.textContent.match(exp_reg).join("");
+        let article_new = el.textContent.replace(join, "<span class='bold'>"+join+"</span>")
+        el.innerHTML = article_new;
+    }
+})
 
 document.addEventListener("DOMContentLoaded", () => {
 

@@ -50,7 +50,7 @@
             
             <div class="flex button">
                 <a href="/book-controller/redirection">Annuler la publication</a>
-                <button type="submit" name="validate">Valider la publication</button>
+                <button type="submit" name="validate"><i class="fa fa-save"></i> Valider la publication</button>
             </div>
             <div class="flex radio">
                 <div>Statuts</div>
@@ -69,6 +69,7 @@
                     </div>                
                 </div>
             </div>
+            <input type="hidden" name="user_id" value ="<?= isset($_SESSION["user_id"]) ?? "" ?>">
             <div class="label flex">
                 <label for="name">Nom de l'oeuvre</label>
                 <input type="text" id="name" name="name_book" placeholder="Nom de l'oeuvre" value ="<?= $_GET["name_book"] ?? "" ?>">

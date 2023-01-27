@@ -4,17 +4,18 @@ let right = document.querySelector(".right");
 let show = 1;
 Slides(show);
 
-function solute(n) {
-    Slides(show += n);
+function solute(number) {
+    Slides(show += number);
 }
 
-function Slides(n) {
+//fonction pour faire le carrousel
+function Slides(number) {
     let i;
     let absolute = document.getElementsByClassName('absolute');
-    if(n > absolute.length) {
+    if(number > absolute.length) {
         show = 1
     }
-    if(n < 1) {
+    if(number < 1) {
         show = absolute.length
     }
     for(i = 0; i<absolute.length; i++) {

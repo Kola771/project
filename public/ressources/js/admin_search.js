@@ -1,5 +1,4 @@
-
-
+//fonction permettant de faire la recherche dans un tableau(une colonne spécifique d'un tableau)
 function myFunction() {
     let input, filter, table, tr, td, i, inputValue;
     input = document.getElementById("search");
@@ -19,8 +18,10 @@ function myFunction() {
     }
 }
 
+//pour les recherches dans un tableau
 let input = document.querySelector("#search");
 
+//pour les modals
 let mettre = document.querySelectorAll('.mettre');
 let remettre = document.querySelector('.remettre');
 
@@ -47,13 +48,14 @@ let topnav0 = document.querySelector(".topnav0");
 let hidden = document.querySelector(".hidden");
 let x = 0;
 
-
+//nav partie administrateur
 let task = document.querySelector('.task');
 
 let bloc_task = document.querySelector('.bloc-task');
 
 let y = 0;
 
+//pour voir le modal contenant les informations des oeuvres
 let watch = document.querySelectorAll('.watch');
 let modal = document.querySelectorAll('.recherche4');
 

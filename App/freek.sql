@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : jeu. 26 jan. 2023 à 17:08
+-- Généré le : ven. 27 jan. 2023 à 17:49
 -- Version du serveur : 5.7.33
 -- Version de PHP : 8.1.12
 
@@ -47,6 +47,7 @@ INSERT INTO `books` (`book_id`, `book_name`, `book_image`, `book_description`, `
 ('books-LNuit', 'La Nuit Ne Porte Pas Souvent Conseil', 'book-image-63c8fa327704a2.57683356.jpg', 'La nuit ne porte pas souvent conseil', 'Retirer', 1, '2023-01-19 07:07:14'),
 ('books-LRose', 'La Rosée De La Nuit', 'book-image-63c7f9765a91f0.69642685.jpg', 'Lorem..', 'En ligne', 1, '2023-01-18 00:31:07'),
 ('books-name', 'Un Nom Sur La Liste', 'book-image-63c802c803fc13.52386163.jpg', 'La liste noire❤❤😍', 'En ligne', 1, '2023-01-18 01:31:35'),
+('books-once', 'Il était Une Fois', 'book-image-63d40d76827729.09537872.jpg', 'Il était une fois...', 'En attente', 1, '2023-01-27 04:44:22'),
 ('books-story', 'Love Story', 'book-image-63c8fc240ca926.39271778.jpg', 'Deux jeunes tourtereaux...', 'Retirer', 1, '2023-01-19 07:15:32'),
 ('books-VBS', 'La Vérité Blesse Seulement Si Tu La Crois', 'book-image-63c7fea904add9.57247628.jpg', 'Parfois on souffre inutilement pour pleins de raisons mais souvent c&#039;est de notre faute!!', 'En ligne', 1, '2023-01-18 01:10:23'),
 ('comics-angel', 'Angelo La Débrouille', 'book-image-63c801c5f24ed2.45382553.jpg', 'Un petit intello qui a toujours un plan pour s&#039;en sortir de n&#039;importe quelle situation avec ses potes...', 'En ligne', 1, '2023-01-18 01:27:17'),
@@ -271,28 +272,18 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`comment_id`, `comment_comment`, `user_id`, `book_id`, `created_at`) VALUES
-(1, '👌...cool les chapitres!!', 1, 'mangas-Exi', '2023-01-18 00:29:56'),
-(4, 'J&#039;ai hâte de lire les chapitres!!!😎😎', 2, 'books-VBS', '2023-01-18 02:44:58'),
-(10, 'Super cette oeuvre', 1, 'comics-angel', '2023-01-18 06:54:22'),
-(11, 'Le petit est trop intelligent', 1, 'comics-angel', '2023-01-18 06:54:40'),
-(16, 'Bonjour !!!<br />\r\nLa suite svp !!', 13, 'books-VBS', '2023-01-19 09:58:04'),
-(17, 'Ah l&#039;amour!!!<br />\r\n🤦‍♂️❤❤', 13, 'books-InPeace', '2023-01-19 09:58:48'),
-(18, 'La suite😍😍✨', 13, 'books-name', '2023-01-19 10:00:59'),
-(19, 'ça doit être vraiment interessant!!!', 11, 'books-VBS', '2023-01-19 10:02:45'),
-(20, 'Gojo Satoru !!!', 11, 'mangas-JNK', '2023-01-19 10:10:15'),
-(21, 'Le plus fort de tous les exorcites du manga😍✨', 12, 'mangas-JNK', '2023-01-19 10:11:17'),
-(22, 'N&#039;ayez pas inquiétudes chers lecteurs', 1, 'books-VBS', '2023-01-19 10:46:18'),
-(23, 'Ils sont très comiques 😂😂', 1, 'books-InPeace', '2023-01-19 00:12:26'),
-(24, 'Vous devez impérativement suivre ce livre!!', 1, 'books-InPeace', '2023-01-19 00:13:16'),
-(25, '😂😂😂', 12, 'books-InPeace', '2023-01-19 01:42:53'),
-(26, 'La tête de la meuf😂😂🤣', 12, 'books-InPeace', '2023-01-19 01:43:22'),
-(27, 'Pas souvent...', 1, 'books-LNuit', '2023-01-21 09:31:14'),
-(30, 'Super ce livre😜😜', 1, 'books-VBS', '2023-01-23 01:57:16'),
-(33, 'Gojooooo!!!!', 16, 'mangas-JNK', '2023-01-23 03:06:22'),
-(35, 'Les chapitres suivant @administrator!!', 1, 'books-LRose', '2023-01-26 00:29:20'),
-(37, '@administrator les chapitres!!😥', 10, 'comics-impoli', '2023-01-26 02:22:51'),
-(38, '@amour002 come here😍😎', 10, 'mangas-JNK', '2023-01-26 03:26:10'),
-(39, 'super @thelo007', 10, 'mangas-JNK', '2023-01-26 03:28:14');
+(1, 'Gojo Satoru!!<br />\r\n<br />\r\n@administrator svp la suite!!!🙌', 2, 'mangas-JNK', '2023-01-27 07:56:13'),
+(2, '@thelo007 come here😎', 2, 'mangas-JNK', '2023-01-27 09:06:06'),
+(3, 'La suite svp!!!', 2, 'books-LRose', '2023-01-27 08:07:56'),
+(4, 'cool ce livre @defunkt002...<br />\nTu devrais le lire!!!', 16, 'books-LRose', '2023-01-27 09:13:15'),
+(5, 'J&#039;aime bien le titre😘', 16, 'books-VBS', '2023-01-27 08:12:00'),
+(6, 'Ca doit être très intéressant', 16, 'mangas-WDD', '2023-01-27 08:12:41'),
+(7, '@thelo007 ok d&#039;accord', 10, 'books-LRose', '2023-01-27 08:14:55'),
+(8, 'Par contre j&#039;aime bien ce livre @amour022 @thelo007', 10, 'comics-impoli', '2023-01-27 08:16:50'),
+(9, '@tous allez ce livre les gars!!', 1, 'books-name', '2023-01-27 16:17:13'),
+(10, '@administrator la suite!!', 2, 'comics-angel', '2023-01-27 03:27:52'),
+(11, 'Venez apprécier cette oeuvre😊....@tous!!', 2, 'comics-angel', '2023-01-27 03:28:53'),
+(12, '@asdepic002...', 16, 'books-LRose', '2023-01-27 04:34:06');
 
 -- --------------------------------------------------------
 
@@ -311,9 +302,13 @@ CREATE TABLE `likes` (
 --
 
 INSERT INTO `likes` (`like_id`, `book_id`, `user_id`) VALUES
-(1, 'books-InPeace', 2),
+(1, 'books-LRose', 2),
 (2, 'mangas-JNK', 2),
-(7, 'books-VBS', 1);
+(3, 'books-LRose', 16),
+(4, 'books-VBS', 16),
+(5, 'mangas-WDD', 16),
+(6, 'comics-impoli', 10),
+(7, 'books-VBS', 10);
 
 -- --------------------------------------------------------
 
@@ -339,7 +334,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_firstname`, `user_lastname`, `user_username`, `user_email`, `user_password`, `user_image`, `user_wordkey`, `user_role`, `created_at`) VALUES
-(1, 'Koladé Moussè', 'ABOUDOU', 'Asdepic002', 'kola444@gmail.com', '$2y$10$hbmIKVztus4Q/ofCV8mHlOBpYSdoBddRDicbVlsGv2dfoG5XX1.hq', 'img-63cffa5948c3e0.03703329.jpg', 'asdepic001', '0', '2023-01-18 00:12:55'),
+(1, 'Koladé Moussè', 'ABOUDOU', 'Asdepic002', 'kola444@gmail.com', '$2y$10$hbmIKVztus4Q/ofCV8mHlOBpYSdoBddRDicbVlsGv2dfoG5XX1.hq', 'img-63d39110c877a7.92358932.jpg', 'asdepic001', '0', '2023-01-18 00:12:55'),
 (2, 'Amour Nassara', 'DAHOU', 'Amour022', 'dahou@gmail.com', '$2y$10$.Zvib3vmPJz..tN6tOfwwuzZ81oFJWfD6hd9FgLi2k/SflVaFvIjG', 'img-63c82bd4e5da16.54698824.jpg', 'amournassara', '1', '2023-01-18 00:16:02'),
 (10, 'Mathéos', 'DODJINOU', 'Defunkt002', 'math@gmail.com', '$2y$10$L5/vN0TIoyTFikO7.ZzG3OkZE1dCghxT57otDpxSAMwZYQEqgwUJq', 'img-63c91daa0c5154.91875243.jpg', 'defunkt002', '1', '2023-01-19 09:30:00'),
 (11, 'Donald', 'AHOSSI', 'Mojombo11', 'ahossi@gmail.com', '$2y$10$FP7EHsCXr5g7hNPTZdRfneoCJNs4L90uqdSNzQScSDzbPrntiI3mK', 'img-63c92328a71371.97298227.jpg', 'monjombo11', '1', '2023-01-19 09:40:02'),
@@ -405,7 +400,7 @@ ALTER TABLE `chapters`
 -- AUTO_INCREMENT pour la table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `likes`
@@ -418,6 +413,16 @@ ALTER TABLE `likes`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `books`
+--
+ALTER TABLE `books`
+  ADD CONSTRAINT `books_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1016,7 +1016,6 @@ header {
 
 .closes {
     color: var(--reddark-);
-    /* float: right; */
 }
 
 .modal {
@@ -1237,7 +1236,6 @@ header {
 
 .flex_section {
     flex-basis: 73%;
-    border-left: 1px solid var(--black-);
     padding: var(--pd_2-);
 }
 
@@ -1252,17 +1250,54 @@ header {
     width: 50%;
 }
 
-.border {
+.recap {
     border-top: 1px solid var(--black-);
-    color: var(--black-);
+    justify-content: space-between;
+}
+
+.notification {
+    cursor: pointer;
+}
+
+.notif {
+    display: none;
+    margin-top: var(--px50-);
 }
 
 .article>.padding {
     padding: var(--pd_8-);
+    max-width: 95%;
+    margin: 0 auto;
+    cursor: pointer;
 }
 
-.article>.padding>p:nth-of-type(2) {
-    margin-bottom: var(--px20-);
+.padding_notif {
+    max-width: 95%;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.padding:hover,
+.padding_notif:hover {
+    background-color: var(--c33-);
+    color: var(--white-);
+}
+
+.padding_notif>p {
+    display: flex;
+    gap: .2em;
+    align-items: center;
+}
+
+.padding_notif>p>img {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    width: var(--px50-);
+}
+
+.padding:not(:first-child),
+.padding_notif:not(:first-child) {
+    margin-top: var(--px20-);
 }
 
 
@@ -1339,14 +1374,14 @@ footer>p {
 
 @media screen and (max-width: 960px) {
 
-    .container_article {
+    .container_article,
+    .recap {
         max-width: 90%;
         margin: 0 auto;
     }
 
-    h2.click {
-        max-width: 90%;
-        margin: 0 auto;
+    div.notif {
+        margin: 5% auto;
     }
 
     .z-index {
@@ -1725,5 +1760,6 @@ footer>p {
     .article-book>img {
         height: 70%;
     }
+
 
 }

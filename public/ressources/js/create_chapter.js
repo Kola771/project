@@ -12,6 +12,7 @@ let y = 0;
 let select = document.querySelector("#select");
 let choose = document.querySelector("#choose");
 
+//pour vérifier la catégorie d'oeuvre que l'utilisateur à choisir
 let soumettre = document.querySelector(".soumettre");
 let add_mc = document.querySelector(".add-mc");
 
@@ -77,7 +78,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 select.style="display:none";     
             break;
         }
-        // console.log(choose.value);
     })
 
     task.addEventListener("click", (e) => {

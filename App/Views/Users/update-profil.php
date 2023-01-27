@@ -32,7 +32,7 @@
             <input type="hidden" name="image" value ="<?= $tableau[0]["user_image"] ?>">
             <button class="white" type="submit" name="validate">Modifier votre profil</button>
             <div class="info flex">
-                <a href="/receive/profil">Retourner sur votre profil</a>
+                <a href="/book-controller/view-profil">Retourner sur votre profil</a>
             </div>
             <div class="style"></div>
         </form>

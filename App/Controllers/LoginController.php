@@ -100,10 +100,10 @@ class LoginController {
     public function displayUrlInfo() {
         $url = $_SERVER["QUERY_STRING"];
         
-        preg_match("/\/(?<username>[a-zA-Z-\-]+\d+)\//i", $url, $matches);
-        $username = $matches["username"];
+        preg_match("/\/(?<user_id>\d+)\//i", $url, $matches);
+        $user_id = $matches["user_id"];
         $this->usermodel = new UserModel();
-        $array = $this->usermodel->verifyUsername($username);
+        $array = $this->usermodel->verifyUserId($user_id);
         if(count($array)>0) {
             return $array;
         } else {

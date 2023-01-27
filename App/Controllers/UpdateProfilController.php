@@ -79,23 +79,19 @@ class UpdateProfilController {
     public function emptyInputs() {
 
         $this->user_id = $_POST["user_id"];
-        $this->usermodel = new UserModel();
-        
-        $empty = $this->usermodel->verifyUserId($this->user_id);
-        $this->user = $empty[0]["user_username"];
 
         if(empty($this->firstname)) {
-            header("location:/login-controller/$this->user/update-profil?msg_firstname=error firstname");
+            header("location:/login-controller/$this->user_id/update-profil?msg_firstname=error firstname");
             exit();
         } 
 
         if(empty($this->lastname)) {
-            header("location:/login-controller/$this->user/update-profil?msg_lastname=error lastname");
+            header("location:/login-controller/$this->user_id/update-profil?msg_lastname=error lastname");
             exit();
         } 
 
         if(empty($this->email)) {
-            header("location:/login-controller/$this->user/update-profil?msg_email=error email");
+            header("location:/login-controller/$this->user_id/update-profil?msg_email=error email");
             exit();
         } 
         else {
@@ -206,7 +202,7 @@ class UpdateProfilController {
                                     }
                                     
                                 } else {
-                                     header("Location:/login-controller/$username/update-profil?user_exist");
+                                     header("Location:/login-controller/$this->user_id/update-profil?user_exist");
                                     exit();
 
                                  }
@@ -251,7 +247,7 @@ class UpdateProfilController {
                                     }
                              }
                         } else {
-                            header("Location:/login-controller/$username/update-profil?user_email_exist");
+                            header("Location:/login-controller/$this->user_id/update-profil?user_email_exist");
                             echo "Email existant !!!";
                             exit();
 
@@ -303,11 +299,11 @@ class UpdateProfilController {
                                 }
                                 
                             } else {
-                                 header("Location:/login-controller/$username/update-profil?user_exist");
+                                 header("Location:/login-controller/$this->user_id/update-profil?user_exist");
                                 exit();
                             }
                         } else {
-                            header("Location:/login-controller/$username/update-profil?user_exist");
+                            header("Location:/login-controller/$this->user_id/update-profil?user_exist");
                             exit();
                         }
                     } 

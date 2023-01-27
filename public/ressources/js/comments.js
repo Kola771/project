@@ -9,16 +9,16 @@ let fermer = document.querySelector(".fermer");
 let form = document.querySelector(".none");
 let y= 0;
 
-
+//pour les chapitres (au cas où les chapitres seront de trop)
 let chapter_media = document.querySelector(".chapter_media");
 let chapter = document.querySelector(".chapter_icon");
 let chapter_ul = document.querySelector(".chapter>ul");
 let z = 0;
 
+//pour afficher un nombre donné de commentaires suite à un click
 let click = document.querySelector('.click');
 let article = document.querySelectorAll('.article');
 let container_article = document.querySelector('.container_article');
-
 let i, control_lenght = 2;
 
 if(article.length>0) {
@@ -32,8 +32,12 @@ if(article.length>0) {
     container_article.style = "height:100px; color:red"
 }
 
+
+//pour aller sur l'avant dernière page qu'un utilisateur a parcourri
 let click_button = document.querySelector(".click_button");
 
+//pour les likes que les utilisateurs font sur les oeuvres
+//utilisation de l'ajax
 let input = document.querySelectorAll(".like>form>input");
 let forms = document.querySelector("#like_form");
 let response = document.querySelector("#response");
@@ -49,13 +53,18 @@ function likes() {
     return requete;
 }
 
+// pour mettre en gras les mots contenant un @
 let exp_reg = /@\w+/;
 let article_p = document.querySelectorAll('.article>div>p');
 article_p.forEach(el => {
     if(el.textContent.match(exp_reg)) {
         let join = el.textContent.match(exp_reg).join("");
-        let article_new = el.textContent.replace(join, "<span class='bold'>"+join+"</span>")
-        el.innerHTML = article_new;
+        let article_new = el.textContent.replace(join, "<span class='bold'>"+join+"</span>");
+        let text = '<pre>' + article_new + '</pre>';
+        el.innerHTML = text;
+    }
+    else {
+        el.innerHTML = '<pre>' + el.textContent + '</pre>';
     }
 })
 
@@ -67,14 +76,12 @@ document.addEventListener("DOMContentLoaded", () => {
         let xmlhttp = new XMLHttpRequest();
         let param = likes();
 
-
         xmlhttp.open("POST", "/like-controller/insert-likes", true);
 
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         xmlhttp.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
-            
              response.innerHTML = this.responseText;
           }
         };

@@ -510,6 +510,29 @@ class BookController {
     }
 
     /**
+     * searchPersonComment(), pour selectionner de la bdd tous les commentaires qui ont lien avec à un user
+     */
+    public function searchPersonComment() {
+        $array = $this->selectAllComment();
+        $array_push = [];
+        for($i=0; $i<count($array); $i++) {
+            $username = $_SESSION["username"];
+            if(preg_match("/$username/i", $array[$i]["comment_comment"], $matches)) {
+                array_push($array_push, $array[$i]);
+            }
+            if(preg_match("/@administrator/i", $array[$i]["comment_comment"], $matches)) {
+                if($_SESSION["user_role"] == 0) {
+                    array_push($array_push, $array[$i]); 
+                }
+            }
+            if(preg_match("/@tous/i", $array[$i]["comment_comment"], $matches)) {
+                array_push($array_push, $array[$i]);
+            }
+        }
+        return $array_push;
+    }
+
+    /**
      * searchBook(), pour recherche une oeuvre à partir de son nom
      */
     public function searchBook() {
@@ -639,7 +662,7 @@ class BookController {
      * viewProfil(), pour l'affichage des informations des users dans la vue profil.php
      */
     public function viewProfil() {
-
+        session_start();
         $array0 = $this->selectAllComment();
                 
         $array2 = $this->verifyAllDescLigne();
@@ -647,6 +670,8 @@ class BookController {
         $array3 = $this->commentCount();
         
         $array4 = $this->verifyAllDescAttente();
+
+        $tableau = $this->searchPersonComment();
         
         require_once("../App/Views/Users/profil.php");
     }

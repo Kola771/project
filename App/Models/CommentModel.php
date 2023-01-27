@@ -6,6 +6,7 @@
 class CommentModel extends Connexion {
 
     public $comment;
+    public $name;
     public $comment_id;
     public $user_id;
     public $book_id;

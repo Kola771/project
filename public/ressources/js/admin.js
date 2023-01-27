@@ -1,4 +1,3 @@
-
 let topnav0 = document.querySelector(".topnav0");
 let hidden = document.querySelector(".hidden");
 let x = 0;

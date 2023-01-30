@@ -253,7 +253,7 @@ class UserModel extends Connexion {
           ":email" => $this->email,
           ":user_image" => $this->user_image,
           ":password" => password_hash($this->password, PASSWORD_DEFAULT),
-          ":wordkey" => $this->wordkey,
+          ":wordkey" => password_hash($this->wordkey, PASSWORD_DEFAULT),
           ":user_role" => $this->user_role,
           ":timesdate" => $this->timestamps
       ]);

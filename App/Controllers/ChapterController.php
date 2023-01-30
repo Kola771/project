@@ -70,8 +70,6 @@ class ChapterController {
         $array = $this->chaptermodel->verify($this->name);
         $lenght = count($array);
 
-
-        
         if($lenght>0) {
                 echo "Un chapître portant ce nom existe déjà !!!";
                 exit;
@@ -93,7 +91,7 @@ class ChapterController {
                             $tabExtension = pathinfo($this->file_name[$i], PATHINFO_EXTENSION);
                             $extension = strtolower($tabExtension);
                             $extensions = ['jpg', 'png', 'jpeg', 'gif'];
-                            $maxSize = 4000000;
+                            $maxSize = 8000000;
                             
                             if(in_array($extension, $extensions)) {
     
@@ -163,8 +161,6 @@ class ChapterController {
         $array = $this->chaptermodel->verify($this->name);
         $lenght = count($array);
 
-
-        
         if($lenght>0) {
                 echo "Un chapître portant ce nom existe déjà !!!";
                 exit;
@@ -187,7 +183,7 @@ class ChapterController {
                         $tabExtension = pathinfo($this->file_name[$i], PATHINFO_EXTENSION);
                         $extension = strtolower($tabExtension);
                         $extensions = ['jpg', 'png', 'jpeg', 'gif'];
-                        $maxSize = 4000000;
+                        $maxSize = 8000000;
 
                         if(in_array($extension, $extensions)) {
                             
@@ -280,7 +276,7 @@ class ChapterController {
     public function deleteChapter() {
         if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["delete"])) {
             $id = $_POST["id"];
-            $title = $_POST["delete"];
+            $title = htmlspecialchars($_POST["delete"]);
 
             $this->chaptermodel = new ChapterModel();
             $this->chaptermodel->deleteChapter($title);

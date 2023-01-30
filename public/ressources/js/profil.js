@@ -17,7 +17,7 @@ for(i=0; i<padding.length; i++) {
     }
 } 
 }else {
-    article_one.innerHTML = "<h3>Vous n'avez pas de commentaires !!!</h3>"
+    article_one.innerHTML = "<h3>Vous n'avez fait pas de commentaires !!!</h3>"
     article_one.style = "color:red"
 }
 
@@ -41,6 +41,37 @@ else {
     article_two.style = "color:red"
 }
 
+let date = document.querySelectorAll(".date");
+
+padding_notif.forEach(el => {
+    let date = document.querySelectorAll(".date");
+    date.forEach(element => {
+        let el_p = el.querySelector(".date").textContent;
+        let split = element.textContent.split(" ");
+        //vérification du contenu de chaque élément pour savoir s'il y a une corcondance
+        if (el_p == element.textContent) {
+            let last = split[split.length-2];
+            let last_reverse = last.split("-").reverse();
+            //conversion en numéric d'un string
+            let last_day = Number(last_reverse[0]);
+            let date = new Date();
+            let date_array = date.toLocaleDateString().split("/");
+            //conversion en numéric d'un string
+            let day = Number(date_array[0]);
+            //différence entre la date d'aujourd'hui et la date du commentaire
+            let diff = day - last_day;
+            if(diff > 0) {
+                el.style = "background-color: rgb(37, 37, 37);color:white;"
+            } else {
+                let p = document.querySelector(".point>p");
+                p.classList.add("p_color")
+                p.innerHTML = padding_notif.length;
+            }
+        } 
+       
+    })
+})
+
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -59,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     })
     
+    //pour ouvrir une page lors d'un clique sur un portant la classe padding_notif
     padding_notif.forEach(el => {
             el.addEventListener("click", (e) => {
                 let el_split = el.className.split(" ");
@@ -67,6 +99,7 @@ document.addEventListener("DOMContentLoaded", function() {
             })
     })
 
+    //pour ouvrir une page lors d'un clique sur un portant la classe padding
     padding.forEach(el => {
         el.addEventListener("click", (e) => {
             let el_split = el.className.split(" ");
@@ -107,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
     })
     
+    //au clique, on repart sur la page précédente
     click_button.addEventListener("click", (e) => {
         e.preventDefault();
         window.history.back();

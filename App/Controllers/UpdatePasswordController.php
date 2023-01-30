@@ -56,7 +56,7 @@ class UpdatePasswordController {
 
         $this->usermodel = new UserModel();
         $res = $this->usermodel->verifyAccount($this->email);
-        $this->result = $res[0]["user_username"];
+        $this->result = $res[0]["user_id"];
 
         $count = count($res);
          if($count>0) {
@@ -84,10 +84,8 @@ class UpdatePasswordController {
 
         $this->usermodel = new UserModel();
         
-        $user = $this->usermodel->verifyUserId($this->user_id);
-        $user = $user[0]["user_username"];
-        
-        $wordkey = $this->usermodel->verifyWordkey($this->wordkey);
+        $users = $this->usermodel->verifyUserId($this->user_id);
+        $user = $users[0]["user_id"];
         
         $this->emptyInput();
         
@@ -96,8 +94,9 @@ class UpdatePasswordController {
         
         $this->verifyPass();
 
-        if(count($wordkey)>0) {
-            if($wordkey[0]["user_id"] == $this->user_id) {
+        if(count($users)>0) {
+            $word = password_verify($this->wordkey, $users[0]["user_wordkey"]);
+            if($word === true) {
                 $this->usermodel->updatePasswordUser($this->password, $this->user_id);
                 header("Location:/receive/login");
                 exit();
@@ -130,7 +129,7 @@ class UpdatePasswordController {
     public function emptyInput() {
         
         $empty = $this->usermodel->verifyUserId($this->user_id);
-        $this->user = $empty[0]["user_username"];
+        $this->user = $empty[0]["user_id"];
 
         if(empty($this->password) || empty($this->confirm_password)){
             header("Location:/login-controller/$this->user/view-pass?password_empty");
@@ -152,7 +151,7 @@ class UpdatePasswordController {
     public function passWord($data) {
 
         $empty = $this->usermodel->verifyUserId($this->user_id);
-        $this->user = $empty[0]["user_username"];
+        $this->user = $empty[0]["user_id"];
 
         if(preg_match("/^[a-zA-Z-\@]+/i", $data) && strlen($data) >= 8) {
             return true;

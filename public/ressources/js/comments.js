@@ -70,6 +70,7 @@ article_p.forEach(el => {
 
 document.addEventListener("DOMContentLoaded", () => {
 
+    //au clique, des requêtes vers la bd seront effectuées
     forms.addEventListener("submit", (e) => {
         e.preventDefault();
 
@@ -88,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
         xmlhttp.send(param);
     })
 
+    //au clique de l'élément certains commentaires commenceront à s'afficher
     click.addEventListener("click", (e) => {
         e.preventDefault();
         
@@ -133,6 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
+    //au clique, non seulement on affiche les chapitres qu'il dans cette oeuvre mais on donne aussi une taille à l'élément qui contient ces chapitres
     chapter.addEventListener("click", (e) => {
         switch(z) {
             case 0:
@@ -157,6 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     })
 
+    //au clique, on repart sur la page précédente
     click_button.addEventListener("click", (e) => {
         e.preventDefault();
         window.history.back();

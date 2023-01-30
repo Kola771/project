@@ -62,7 +62,7 @@ html {
     --px55-: 55px;
     --px80-: 80px;
     --px100-: 100px;
-
+    
     /* padding */
     --pd_2-: .2em;
     --pd_3-: .3em;
@@ -624,6 +624,7 @@ header {
     color: white;
     padding: var(--px10-) var(--px14-);
     background-color: var(--orange-);
+    cursor: pointer;
 }
 
 .chapter_icon {
@@ -1181,6 +1182,7 @@ header {
     border: none;
     color: var(--white-);
     background-color: var(--bgc-rgb-);
+    cursor: pointer;
 }
 
 .button {
@@ -1248,6 +1250,22 @@ header {
     aspect-ratio: 1;
     border-radius: 50%;
     width: 50%;
+}
+
+.point {
+    position: relative;
+}
+
+.p_color {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: -10px;
+    right: -10px;
+    border-radius: 50%;
+    width: var(--px20-);
+    background-color: #f50;
+    color: var(--white-);
 }
 
 .recap {

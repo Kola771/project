@@ -40,7 +40,12 @@
             <?php for($i=0, $max=count($array); $i<$max;$i++): ?>
                 <?php if($array[$i]["book_status"] == "En ligne") : ?>
                     <li><a href="/book-controller/<?= $array[$i]["book_id"] ?>/view-book"><?= $array[$i]["book_name"] ?></a>
-                    <p>Publié le <?= $array[$i]["created_at"] ?></p>
+                        <?php if($array[$i]["user_role"] == 0) : ?>
+                            <p>Publié par l'Administrator</p>
+                        <?php else : ?>
+                            <p>Publié par <?= $array[$i]["user_username"] ?></p>
+                        <?php endif; ?>
+                        <p>Le <?= $array[$i]["created_at"] ?></p>
                     </li>
                 <?php endif; ?>
             <?php endfor; ?>

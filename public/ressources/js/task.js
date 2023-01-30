@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     })
 
+    //au clique, on repart sur la page précédente
     click_button.addEventListener("click", (e) => {
         e.preventDefault();
         window.history.back();

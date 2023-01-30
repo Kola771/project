@@ -29,7 +29,10 @@
 
             <div class="recap flex">
                 <h2 class="border click">Tout vos commentaires <i class="fas fa-comment-dots"></i></h2>
-                <h3 class="notification">Notifications <i class="fas fa-bell"></i></h3>
+                <div class="point">
+                    <h3 class="notification">Notifications<i class="fas fa-bell"></i></h3>
+                    <p></p>
+                </div>
             </div>
             
             <div class="container_article">
@@ -71,10 +74,10 @@
                                 </p>
                             <?php else : ?>
                                 <p>
-                                    <img src="/ressources/assets/medias-users/<?= $tableau[$i]["user_image"] ?>" alt="<?= $tableau[$i]["user_username"] ?>">L'utilisateur <?= $tableau[$i]["user_username"] ?> vous a mentionné dans son commentaire.
+                                    <img src="/ressources/assets/medias-users/<?= $tableau[$i]["user_image"] ?>" alt="<?= $tableau[$i]["user_username"] ?>"><?= $tableau[$i]["user_username"] ?> vous a mentionné dans son commentaire.
                                 </p>
                             <?php endif; ?>
-                            <p>Le <?= $tableau[$i]["created_at"] ?></p>
+                            <p class="date">Le <?= $tableau[$i]["created_at"] ?></p>
                         </div>
                         <?php endfor; ?>
                 </article>

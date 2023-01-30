@@ -24,7 +24,7 @@
             <form action="#" method="post" id="select">
                 <h3>Veuillez bien choisir le type du livre sur lequel vous voulez publier un chapitre</h3>
                 <select id="choose">
-                    <option disabled>Selectionnre le type du livre</option>
+                    <option disabled selected>Selectionnre le type du livre</option>
                     <option value="mangas">Mangas</option>
                     <option value="comics">Comics</option>
                     <option value="books">Books</option>
@@ -49,7 +49,7 @@
                 <label for="reference">Nom du livre</label>
 
                     <select name="name_mangas" class="mangas" id="reference" required>
-                        <option disabled>Sélectionner le livre</option>
+                        <option disabled selected>Sélectionner le livre</option>
                         <?php foreach($array as $key => $values) : ?>
                             <?php if(preg_match_all("/^mangas-/i", $values["book_id"])) : ?>
                                 <option value="<?= $values["book_id"] ?>"><?= $values["book_name"] ?></option>
@@ -58,7 +58,7 @@
                     </select>
 
                     <select name="name_comics" class="comics" id="reference" required>
-                        <option disabled>Sélectionner le livre</option>
+                        <option disabled selected>Sélectionner le livre</option>
                         <?php foreach($array as $key => $values) : ?>
                             <?php if(preg_match_all("/^comics-/i", $values["book_id"])) : ?>
                                 <option value="<?= $values["book_id"] ?>"><?= $values["book_name"] ?></option>
@@ -67,7 +67,7 @@
                     </select>
 
                     <select name="name_books"  class="books" id="reference" required>
-                        <option disabled>Sélectionner le livre</option>
+                        <option disabled selected>Sélectionner le livre</option>
                         <?php foreach($array as $key => $values) : ?>
                             <?php if(preg_match_all("/^books-/i", $values["book_id"])) : ?>
                                 <option value="<?= $values["book_id"] ?>"><?= $values["book_name"] ?></option>

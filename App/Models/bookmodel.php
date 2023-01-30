@@ -50,7 +50,7 @@ class Bookmodel extends Connexion {
         /**
          * $sql, pour les requêtes vers la base de données
          */
-        $sql = "SELECT * FROM `books` WHERE book_id like '$this->ref_book%'";
+        $sql = "SELECT * FROM `books`, `users` WHERE book_id like '$this->ref_book%' AND `books`.user_id = `users`.user_id";
 
         /**
          * $stmt, pour recupérer la requête préparée

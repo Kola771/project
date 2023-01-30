@@ -80,10 +80,6 @@
                                     <p><?= $values["user_email"] ?></p>
                                 </div>
                                 <div>
-                                    <h4>Mot clé :</h4>
-                                    <p><?= $values["user_wordkey"] ?></p>
-                                </div>
-                                <div>
                                     <h4>Status :</h4>
                                     <?php if($values["user_role"] == 0) : ?>
 
@@ -120,3 +116,4 @@
 <?php header("Location:/receive/page-error"); ?>
 
 <?php endif; ?>
+

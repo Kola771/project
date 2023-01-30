@@ -76,11 +76,13 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     })
 
+    //au moment où on entre des caractères, la fonction myFunction() s'exécute en recherchant tout les mots comportants ces caractères
     input.addEventListener("keyup", (e) => {
         e.preventDefault();
         myFunction();
     })
 
+    //au clique, la valeur qui était dans le premier bouton sera transmise à un autre bouton pour valider l'action qu'il doit faire
     retirer.forEach((el) => {
         el.addEventListener('click', (e) => {
                 search1.style = 'display:block';
@@ -91,6 +93,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     })
 
+    //au clique, la valeur qui était dans le premier bouton sera transmise à un autre bouton pour valider l'action qu'il doit faire
     mettre.forEach((el) => {
         el.addEventListener('click', (e) => {
                 search2.style = 'display:block';
@@ -101,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     })
 
+    //au clique, la valeur qui était dans le premier bouton sera transmise à un autre bouton pour valider l'action qu'il doit faire
     ligne.forEach((el) => {
         el.addEventListener('click', (e) => {
                 search3.style = 'display:block';
@@ -111,6 +115,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     })
 
+    //au clique, la valeur qui était dans le premier bouton sera transmise à un autre bouton pour valider l'action qu'il doit faire
     supprimer.forEach((el) => {
         el.addEventListener('click', (e) => {
                 search0.style = 'display:block';
@@ -121,6 +126,7 @@ document.addEventListener("DOMContentLoaded", function() {
         })
     })
 
+    //au clique d'un bouton ayant pour classe watch, on affiche les informations liées à une oeuvre précise
     watch.forEach((element) => {
         element.addEventListener('click', (e) => {
                 element_value = element.value

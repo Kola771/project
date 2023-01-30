@@ -21,6 +21,7 @@
             <div class="data">
                 <?php if($array !== []) : ?>
                 <h2 class="all">All chapters of <span><?= $array[0]["book_name"] ?></span></h2>
+                <p class="gras">Il y a <?= count($array) ?> chapitre(s).</p class="gras">
                 <ul>
                     <?php foreach($array as $key => $values) : ?>
                         <li><?= $values["chapter_title"] ?>

@@ -29,6 +29,7 @@ let click_button = document.querySelector(".click_button");
 
 document.addEventListener("DOMContentLoaded", function() {
 
+    //au clique, je vérifie si la valeur actuelle respecte une des conditions
     soumettre.addEventListener("click", (e) => {
         e.preventDefault()
         switch(choose.value) {

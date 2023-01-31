@@ -487,18 +487,20 @@ class BookController {
 
             }
 
-            $this->bookmodel->deleteBook($book_id);
+            $this->likemodel->deleteLikesBook($book_id);
             
             $this->commentmodel->deleteCommentBook($book_id);
 
             $this->chaptermodel->deleteBook($book_id);
-            
-            $this->likemodel->deleteLikesBook($book_id);
 
+            $this->bookmodel->deleteBook($book_id);
+            
             header("Location:/book-controller/redirection");
             exit();
         }
     }
+
+    
 
     /**
      * selectAllComment(), pour afficher tous les commentaires des utilisateurs

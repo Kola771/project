@@ -2,12 +2,24 @@
 <?php
 require "../App/Controllers/Connexion.php";
 require "../App/Models/UserModel.php";
+require "../App/Models/BookModel.php";
+require "../App/Models/LikesModel.php";
 class LoginController {
 
     /**
      * $usermodel; on va utiliser cette variable pour instancier la classe UserModel dans le controller
      */
     public $usermodel;
+
+    /**
+     * $bookmodel; on va utiliser cette variable pour instancier la classe BookModel dans le controller
+     */
+    public $bookmodel;
+    
+    /**
+     * $likemodel; on va utiliser cette variable pour instancier la classe Likesmodel dans le controller
+     */
+    public $likemodel;
 
     public $email;
     public $password;
@@ -140,6 +152,8 @@ class LoginController {
             $user_id = $_POST["delete"];
 
             $this->usermodel = new UserModel();
+            $this->bookmodel = new BookModel();
+            $this->likemodel = new LikesModel();
 
             $array = $this->usermodel->verifyUserId($user_id);
 
@@ -149,8 +163,10 @@ class LoginController {
 
             }
 
-            $this->usermodel->deleteUsers($user_id);
+            $this->likemodel->deleteLikesUser($user_id);
+            $this->bookmodel->deleteUser($user_id);
             $this->usermodel->deleteCommentUser($user_id);
+            $this->usermodel->deleteUsers($user_id);
 
             header("Location: /admin/book-controller/view-gestion-users");
             exit();

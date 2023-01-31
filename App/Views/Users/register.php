@@ -30,7 +30,7 @@
             <?php endif; ?>
 
             <?php if(isset($_GET["msg_password"])): ?>
-                 <h3 class="danger">Mot de passe incorrect !!! Veuillez entrez un mot de passe correct et de préférence éviter les espaces inutiles.<br> NB: Ce mot de passe doit commencer par une lettre et pas d'accent. Minimum 8 à 14 caractères !!! Ex: Password@2002B </h3>
+                 <h3 class="danger">Mot de passe incorrect !!! Veuillez entrez un mot de passe correct et éviter les espaces inutiles.<br> NB: Ce mot de passe doit commencer par une lettre et pas d'accent. Minimum 8 à 14 caractères !!! Ex: Password2002B </h3>
             <?php endif; ?>
 
             <?php if(isset($_GET["msg_password_error"])): ?>

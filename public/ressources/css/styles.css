@@ -71,9 +71,12 @@ html {
     --pd1-: 1em;
 
     /* rem */
+    --rem8-: .8rem;
     --rem1-: 1rem;
+    --rem3-: 1.3rem;
     --rem1_5-: 1.5rem;
     --rem2-: 2rem;
+    --rem4-: 4rem;
 }
 
 /*  */
@@ -374,13 +377,13 @@ header {
 }
 
 #search_ul>li>a {
-    font-size: var(--px20-);
+    font-size: var(--rem3-);
     text-decoration: underline;
 }
 
 #search_ul>li>p {
     color: var(--white-);
-    margin-block: var(--px10-);
+    margin-block: var(--rem8-);
 }
 
 
@@ -423,7 +426,7 @@ header {
 .label>input,
 .label>select,
 .form>.password>input {
-    padding: var(--px10-) var(--px14-);
+    padding: var(--rem8-) var(--px14-);
 }
 
 .form>button {
@@ -466,8 +469,6 @@ header {
     background-color: var(--white-);
 }
 
-
-
 /* 
     *Main Register
     *Form Register
@@ -489,7 +490,7 @@ header {
 /* Main Book */
 .bloc {
     gap: .8em;
-    margin-block: var(--px50-);
+    margin-block: var(--rem4-);
 }
 
 .section-background {
@@ -599,7 +600,7 @@ header {
 }
 
 .article>div>p {
-    margin-block: var(--px10-);
+    margin-block: var(--rem8-);
 }
 
 .article>img {
@@ -632,7 +633,7 @@ header {
     width: 100%;
     border: none;
     color: white;
-    padding: var(--px10-) var(--px14-);
+    padding: var(--rem8-) var(--px14-);
     background-color: var(--orange-);
     cursor: pointer;
 }
@@ -642,21 +643,21 @@ header {
     border: none;
     background-color: var(--c33-);
     color: var(--white-);
-    font-size: var(--px20-);
+    font-size: var(--rem3-);
     cursor: pointer;
 }
 
 .chapter>div {
-    gap: var(--px10-);
+    gap: var(--rem8-);
     align-items: center;
 }
 
 .chapter>p {
-    margin-block: var(--px10-);
+    margin-block: var(--rem8-);
 }
 
 .chapter>p>a {
-    font-size: var(--px20-);
+    font-size: var(--rem3-);
 }
 
 .chapter>ul {
@@ -687,7 +688,7 @@ header {
 /* Main Show */
 
 .road {
-    margin: var(--px20-) auto var(--px20-);
+    margin: var(--rem3-) auto var(--rem3-);
     max-width: 1300px;
     gap: var(--pd_3-);
 }
@@ -728,7 +729,7 @@ header {
     width: 45px;
     background-color: var(--bgc-rgb-);
     color: var(--white-);
-    font-size: var(--px20-);
+    font-size: var(--rem3-);
     font-weight: bold;
     justify-content: center;
     align-items: center;
@@ -754,8 +755,6 @@ header {
     border-left: none;
     border-left: 4px solid var(--orange-);
 }
-
-
 
 /* Main administrateur
  * dashbord
@@ -790,7 +789,7 @@ header {
     background-color: var(--ccc-);
     border-top-left-radius: var(--pd1-);
     border-bottom-left-radius: var(--pd1-);
-    font-size: var(--px20-);
+    font-size: var(--rem3-);
 }
 
 .active>a {
@@ -816,7 +815,7 @@ header {
     padding: var(--pd_8-);
     text-align: center;
     color: var(--white-);
-    font-size: var(--px20-);
+    font-size: var(--rem3-);
 }
 
 .data {
@@ -833,7 +832,7 @@ header {
 }
 
 .history:not(:first-child) {
-    margin-top: var(--px20-);
+    margin-top: var(--rem3-);
 }
 
 .history>h2 {
@@ -887,7 +886,7 @@ header {
 
 #myTable {
     width: 100%;
-    margin-top: var(--px20-);
+    margin-top: var(--rem3-);
 }
 
 .thead-dark {
@@ -901,7 +900,7 @@ header {
     border: 1px solid var(--eee-);
     border-collapse: collapse;
     text-align: center;
-    padding: var(--px10-);
+    padding: var(--rem8-);
     font-weight: bold;
 }
 
@@ -969,7 +968,7 @@ header {
 .form-search>form>input,
 .form-search>a {
     border-radius: var(--pd_3-);
-    padding: var(--px10-) var(--px12-);
+    padding: var(--rem8-) var(--px12-);
     background-color: var(--eee-);
     font-size: var(--px16-);
 }
@@ -1045,7 +1044,7 @@ header {
 #recherche1>div>form,
 #recherche2>div>form,
 #recherche3>div>form {
-    padding: var(--px12-) var(--px20-);
+    padding: var(--px12-) var(--rem3-);
     border-top: 1px solid var(--black-);
     justify-content: space-between;
 }
@@ -1183,7 +1182,7 @@ header {
 
 #select>select,
 #select>button {
-    padding: var(--px10-) var(--px12-);
+    padding: var(--rem8-) var(--px12-);
     border-radius: var(--pd_5-);
 }
 
@@ -1197,7 +1196,7 @@ header {
 
 .button {
     justify-content: space-between;
-    margin-bottom: var(--px20-);
+    margin-bottom: var(--rem3-);
 }
 
 .button>button:last-child {
@@ -1206,7 +1205,7 @@ header {
 
 .button>a,
 .button>button:last-child {
-    padding: var(--px10-) var(--px12-);
+    padding: var(--rem8-) var(--px12-);
     color: var(--white-);
 }
 
@@ -1220,7 +1219,7 @@ header {
 }
 
 .label:not(:first-child) {
-    margin-top: var(--px30-);
+    margin-top: var(--rem1_5-);
 }
 
 .radio>div:nth-of-type(1),
@@ -1273,7 +1272,7 @@ header {
     top: -10px;
     right: -10px;
     border-radius: 50%;
-    width: var(--px20-);
+    width: var(--rem3-);
     background-color: #f50;
     color: var(--white-);
 }
@@ -1289,7 +1288,7 @@ header {
 
 .notif {
     display: none;
-    margin-top: var(--px50-);
+    margin-top: var(--rem4-);
 }
 
 .article>.padding {
@@ -1320,12 +1319,12 @@ header {
 .padding_notif>p>img {
     aspect-ratio: 1;
     border-radius: 50%;
-    width: var(--px50-);
+    width: var(--rem4-);
 }
 
 .padding:not(:first-child),
 .padding_notif:not(:first-child) {
-    margin-top: var(--px20-);
+    margin-top: var(--rem3-);
 }
 
 
@@ -1343,8 +1342,7 @@ footer>div {
 
 footer>div>section {
     flex-basis: 30%;
-    margin-bottom: 10px;
-    /* text-align: center; */
+    margin-bottom: var(--rem8-);
 }
 
 .flex-ul {
@@ -1450,7 +1448,7 @@ footer>p {
     }
     
     .hidden {
-        margin-right: var(--px20-);
+        margin-right: var(--rem3-);
     }
 
     .header{
@@ -1537,7 +1535,7 @@ footer>p {
     }
 
     .order1>img {
-        border-radius: var(--px10-);
+        border-radius: var(--rem8-);
     }
 
     .order2 {
@@ -1644,14 +1642,13 @@ footer>p {
     
     .overflow_table {
         max-width: 100%;
-        margin: var(--px10-) 0;
+        margin: var(--rem8-) 0;
     }
 
     #myTable td:last-child {
         display: flex;
         flex-wrap: wrap;
         gap: .5em;
-        /* flex-direction: column; */
         justify-content: center;
         align-items: center;
     }
@@ -1748,6 +1745,14 @@ footer>p {
     .put>div>form>button:last-child{
         flex-basis: 70%;
     }
+    /**** Main index ****/
+    .article-book {
+        flex-basis: 80%;
+    }
+
+    .article-book>img {
+        height: 70%;
+    }
 }
 
 @media screen and (max-width: 580px) {
@@ -1759,7 +1764,7 @@ footer>p {
 
     /**** Main book ****/
     .road>a {
-        font-size: var(--px14-);
+        font-size: var(--rem1-);
     }
 
     .order1 {
@@ -1769,7 +1774,7 @@ footer>p {
 
     .order1>img {
         width: 100%;
-        height: 50vh;
+        height: 65vh;
     }
 
     .order2 {
@@ -1800,15 +1805,5 @@ footer>p {
         border-radius: var(--pd_2-);
         height: 500px;
     }
-
-    /**** Main index ****/
-    .article-book {
-        flex-basis: 80%;
-    }
-
-    .article-book>img {
-        height: 70%;
-    }
-
 
 }

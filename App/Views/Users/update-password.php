@@ -9,11 +9,15 @@
             <?php endif; ?>
             
             <?php if(isset($_GET["not_format"])): ?>
-                 <h3 class="danger">Mot de passe incorrect !!! Veuillez entrez un mot de passe correct et de préférence éviter les espaces inutiles.<br> NB: Ce mot de passe doit commencer par une lettre et pas d'accent. Minimum 8 à 14 caractères !!! Ex: Password@2002B | Password@amgmt | passwordmotcle</h3>
+                 <h3 class="danger">Mot de passe incorrect !!! Veuillez entrez un mot de passe correct et éviter les espaces inutiles.<br> NB: Ce mot de passe doit commencer par une lettre et pas d'accent. Minimum 8 à 14 caractères !!! Ex: Password2002B | Passwordamgmt | passwordmotcle</h3>
             <?php endif; ?>
             
             <?php if(isset($_GET["password_empty"])): ?>
                  <h3 class="danger">Remplissez tous les champs !!!</h3>
+            <?php endif; ?>
+            
+            <?php if(isset($_GET["wordkey_incorrect"])): ?>
+                 <h3 class="danger">Le mot clé ne correspond pas !!!</h3>
             <?php endif; ?>
             
             <?php if(isset($_GET["wordkey_error"])): ?>

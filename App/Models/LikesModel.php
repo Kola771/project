@@ -122,4 +122,25 @@ class LikesModel extends Connexion {
      $stmt->execute([$this->book_id]);
     }
 
+    /**
+     * deleteLikesUser(), pour supprimer un utilisateur ayant fait des likes
+     */
+    public function deleteLikesUser($user_id) {
+      $conn = $this->connect();
+
+      $this->user_id = $user_id;
+    
+    /**
+     * $sql, pour les requêtes vers la base de données
+     */
+    $sql = "DELETE FROM `likes` WHERE user_id = ?";
+      
+    /**
+     * $stmt, pour recupérer la requête préparée
+     */
+    
+     $stmt = $conn->prepare($sql);
+     $stmt->execute([$this->user_id]);
+    }
+
 }

@@ -100,7 +100,10 @@ class UpdatePasswordController {
                 $this->usermodel->updatePasswordUser($this->password, $this->user_id);
                 header("Location:/receive/login");
                 exit();
-            } 
+            } else {
+                header("Location:/login-controller/$user/view-pass?wordkey_incorrect");
+                exit();
+            }
         }else {
             header("Location:/login-controller/$user/view-pass?wordkey_error");
             exit();

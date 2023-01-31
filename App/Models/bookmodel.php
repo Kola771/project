@@ -367,7 +367,31 @@ class Bookmodel extends Connexion {
          */
         $stmt = $conn->prepare($sql);
         $stmt->execute([
-            ":reference" => $this->ref_book
+            ":reference" => $this->ref_book,
+        ]);
+  
+    }
+
+    /**
+     * deleteUser(), pour supprimer un utilisateur qui a publié un livre
+     */
+    public function deleteUser($user_id) {
+
+        $conn = $this->connect();
+  
+        $this->user_id = $user_id;
+
+         /**
+         * $sql, pour les requêtes vers la base de données
+         */
+        $sql = "DELETE FROM `books` WHERE `books`.user_id = :user_id;";
+        
+        /**
+         * $stmt, pour recupérer la requête préparée
+         */
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ":user_id" => $this->user_id,
         ]);
   
     }

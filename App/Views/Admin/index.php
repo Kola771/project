@@ -30,7 +30,7 @@
                 </article>
 
                 <article class="article-book flex">
-                    <img src="/ressources/assets/Medias-book/livre.jpg" alt="Image de l'oeuvre">
+                    <img src="/ressources/assets/Medias-book/oeuvre.jpg" alt="Image de l'oeuvre">
                     <h3>Nombre d'oeuvres publiées dans ce mois</h3>
                     <span><?= $count_three ?></span>
                 </article>
@@ -53,7 +53,7 @@
                 </article>
 
                 <article class="article-book flex">
-                    <img src="/ressources/assets/Medias-book/livre.jpg" alt="Image de l'oeuvre">
+                    <img src="/ressources/assets/Medias-book/oeuvre.jpg" alt="Image de l'oeuvre">
                     <h3>Nombre d'oeuvres publiées qu'il y avait</h3>
                     <span><?= $count_four ?></span>
                 </article>
